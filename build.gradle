@@ -1,6 +1,8 @@
 group 'com.uksf.tim'
 version '0.1'
 
+task assemble{}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.12'
 }
