@@ -1,9 +1,7 @@
 <component name="libraryTable">
-  <library name="lib">
+  <library name="miglayout-core-5.1-20160312.230016-352">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/miglayout-core-5.1-20160312.230016-352.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/miglayout-swing-5.1-20160312.230028-352.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

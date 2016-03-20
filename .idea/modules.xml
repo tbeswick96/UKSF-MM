@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/UKSF-MM.iml" filepath="$PROJECT_DIR$/.idea/modules/UKSF-MM.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UKSF-MM_main.iml" filepath="$PROJECT_DIR$/.idea/modules/UKSF-MM_main.iml" group="UKSF-MM" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UKSF-MM_test.iml" filepath="$PROJECT_DIR$/.idea/modules/UKSF-MM_test.iml" group="UKSF-MM" />
     </modules>
   </component>
 </project>
