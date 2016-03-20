@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/tbeswick96/UKSF-MM/blob/master/rsc/assets/logos/uksfSource.png" width="256">
+    <img src="https://github.com/tbeswick96/UKSF-MM/blob/develop/src/main/resources/assets/logos/uksfSource.png" width="256">
 </p>
 <p align="center">
     <a href="https://github.com/tbeswick96/UKSF-MM/releases">
@@ -13,6 +13,9 @@
     </a>
     <a href="https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
+    </a>
+    <a href="https://travis-ci.org/tbeswick96/UKSF-MM">
+        <img src="https://img.shields.io/travis/tbeswick96/UKSF-MM.svg?style=flat-square&label=Build" alt="Build Status">
     </a>
 </p>
 # UKSF Mission Manager
