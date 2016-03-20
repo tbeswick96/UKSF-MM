@@ -3,10 +3,10 @@
 </p>
 <p align="center">
     <a href="https://github.com/tbeswick96/UKSF-MM/releases">
-        <img src="https://img.shields.io/badge/Version-0.1-yellow.svg?style=flat-square" alt="UKSF-MM Version">
+        <img src="https://img.shields.io/badge/Version-0.1-yellow.svg?style=flat-square" alt="Version">
     </a>
     <a href="https://github.com/tbeswick96/UKSF-MM/issues">
-        <img src="https://img.shields.io/github/issues/tbeswick96/UKSF-MM.svg?style=flat-square&label=Issues" alt="UKSF-MM Issues">
+        <img src="https://img.shields.io/github/issues/tbeswick96/UKSF-MM.svg?style=flat-square&label=Issues" alt="Issues">
     </a>
     <a href="">
         <img src="https://img.shields.io/badge/BIF-Thread-lightgrey.svg?style=flat-square" alt="BIF Thread">
