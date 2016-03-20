@@ -6,3 +6,6 @@ mainClassName = 'com.uksf.tim.Run'
 task wrapper(type: Wrapper) {
     gradleVersion = '2.12'
 }
+dependencies {
+    compile fileTree(dir: 'lib', include: '*.jar')
+}
