@@ -1,6 +1,7 @@
 group 'com.uksf.tim'
 version '0.1'
 
+mainClassName = 'Run'
 apply plugin: 'application'
 task wrapper(type: Wrapper) {
     gradleVersion = '2.12'
