@@ -1,9 +1,9 @@
 package com.uksf.tim.gui;
 
 
-import com.uksf.tim.gui.components.BottomPanel;
-import com.uksf.tim.gui.components.MainPanel;
-import com.uksf.tim.gui.components.SettingsPanel;
+import com.uksf.tim.gui.components.panels.BottomPanel;
+import com.uksf.tim.gui.components.panels.MainPanel;
+import com.uksf.tim.gui.components.panels.SettingsPanel;
 
 class ComponentCreator {
 

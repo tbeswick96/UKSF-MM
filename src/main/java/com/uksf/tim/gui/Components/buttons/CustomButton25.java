@@ -1,6 +1,7 @@
 package com.uksf.tim.gui.components.buttons;
 
 
+import com.uksf.tim.gui.components.CustomToolTip;
 import com.uksf.tim.utility.Invokable;
 
 import javax.swing.*;
@@ -32,20 +33,32 @@ public class CustomButton25 extends JPanel implements MouseListener {
     private String toCall;
 
     /**
-     * Create custom button
-     * @param ic base icon
-     * @param ic_hovered hover icon
-     * @param method method name to call
+     * Tooltip text to display on hover
      */
-    public CustomButton25(Image ic, Image ic_hovered, String method) {
+    private String tooltipText;
+
+    /**
+     * Tooltip component
+     */
+    private CustomToolTip tooltip;
+
+    /**
+     * Create custom button
+     * @param icon base icon
+     * @param icon_hovered hover icon
+     * @param toCall method name to call
+     */
+    public CustomButton25(Image icon, Image icon_hovered, String toCall, String tooltipText) {
+        this.icon = icon;
+        this.icon_hovered = icon_hovered;
+        this.toCall = toCall;
+        this.tooltipText = tooltipText;
+
         setSize(getPreferredSize());
         setBorder(null);
         setOpaque(false);
         addMouseListener(this);
-
-        icon = ic;
-        icon_hovered = ic_hovered;
-        toCall = method;
+        setToolTipText(tooltipText);
     }
 
     /**
@@ -53,14 +66,14 @@ public class CustomButton25 extends JPanel implements MouseListener {
      * @return dimension 27x27
      */
     @Override public Dimension getPreferredSize() {
-        return new Dimension(getX() + 27, getY() + 27);
+        return new Dimension(27, 27);
     }
 
     /**
      * Set size to 27x27
      * @return dimension 27x27
      */
-    @Override public Dimension getMaximumSize() { return new Dimension(getX() + 27, getY() + 27); }
+    @Override public Dimension getMaximumSize() { return new Dimension(27, 27); }
 
     /**
      * Paints button with custom icons
@@ -73,12 +86,19 @@ public class CustomButton25 extends JPanel implements MouseListener {
 
         g.setColor(COLOUR_TRANSPARENT);
         g.fillRect(0, 0, 27, 27);
-
         if(hovered) {
             g.drawImage(icon_hovered, 0, 0, 27, 27, null);
         } else {
             g.drawImage(icon, 1, 1, 25, 25, null);
         }
+    }
+
+    @Override public JToolTip createToolTip() {
+        if(tooltip == null) {
+            tooltip = new CustomToolTip();
+            tooltip.setComponent(this);
+        }
+        return tooltip;
     }
 
     /**

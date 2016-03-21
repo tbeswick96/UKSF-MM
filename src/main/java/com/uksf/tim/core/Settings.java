@@ -66,16 +66,37 @@ public class Settings {
      * @param key setting key
      * @param value new value
      */
-    public static void setBool(String key, boolean value) {
-        preferences.putBoolean(key, value);
+    public static void set(String key, Object value) {
+        if(value instanceof String) {
+            preferences.put(key, (String) value);
+        } else if(value instanceof Boolean) {
+            preferences.putBoolean(key, (boolean) value);
+        }
         getSettings();
     }
 
-    public static void setString(String key, String value) {
-        preferences.put(key, value);
+    /**
+     * Sets multiple settings from key and value arrays
+     * @param keys array of setting keys
+     * @param values array of new settings values
+     */
+    public static void setMultiple(String keys[], Object values[]) {
+        for(int i = 0; i < keys.length; i++) {
+            String key = keys[i];
+            Object value = values[i];
+            if(value instanceof Boolean) {
+                preferences.putBoolean(key, (boolean) value);
+            } else if(value instanceof String) {
+                preferences.put(key, (String) value);
+            }
+        }
         getSettings();
     }
 
+    /**
+     * Calculates a date and time 7 days in the future
+     * @return date 7 days in the future as string
+     */
     public static String weekAhead() {
         String date = DATEFORMAT.format(DATE);
         Calendar calendar = Calendar.getInstance();

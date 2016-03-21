@@ -23,11 +23,16 @@ public class Info {
     public static String UPDATE_TIME;
 
     //Colours
+    public static final Color COLOUR_WHITE = new Color(255, 255, 255);
+    public static final Color COLOUR_TRANSPARENT = new Color(0, 0, 0, 0);
+    public static final Color COLOUR_BACKGROUND_LIGHT = new Color(65, 65, 65);
+    public static final Color COLOUR_BACKGROUND_LIGHTER = new Color(55, 55, 55);
     public static final Color COLOUR_BACKGROUND = new Color(45, 45, 45);
     public static final Color COLOUR_BACKGROUND_DARKER = new Color(40, 40, 40);
     public static final Color COLOUR_BACKGROUND_DARK = new Color(35, 35, 35);
-    public static final Color COLOUR_WHITE = new Color(255, 255, 255);
-    public static final Color COLOUR_TRANSPARENT = new Color(0, 0, 0, 0);
+
+    public static final Color COLOUR_FOREGROUND = new Color(222, 154, 37);
+    public static final Color COLOUR_FOREGROUND_DARK = new Color(222, 106, 20);
 
     //Window settings
     public static final Dimension WINDOW_SIZE = new Dimension(1240, 640);
@@ -46,6 +51,10 @@ public class Info {
     public static final ImageIcon ICON_HOME_HOVER = new ImageIcon("src\\main\\resources\\assets\\icons\\home_hover.png");
     public static final ImageIcon ICON_SETTINGS = new ImageIcon("src\\main\\resources\\assets\\icons\\settings.png");
     public static final ImageIcon ICON_SETTINGS_HOVER = new ImageIcon("src\\main\\resources\\assets\\icons\\settings_hover.png");
+
+    //Fonts
+    public static Font HELVETICAROMAN;
+    public static Font HELVETICATOOLTIP;
 
     //Date
     public static DateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd__hh-mm-ss");

@@ -1,4 +1,4 @@
-package com.uksf.tim.gui.components;
+package com.uksf.tim.gui.components.panels;
 
 import net.miginfocom.swing.MigLayout;
 

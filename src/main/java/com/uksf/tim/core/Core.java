@@ -2,10 +2,12 @@ package com.uksf.tim.core;
 
 
 import com.uksf.tim.gui.UI;
+import com.uksf.tim.utility.FontLoad;
 import com.uksf.tim.utility.LogHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.text.ParseException;
 
 import static com.uksf.tim.utility.Info.*;
@@ -33,11 +35,12 @@ public class Core {
 
         LogHandler.logSeverity(INFO, "Started");
 
-        //Set look and feel to OS default
+        //Set look and feel to OS default, and load fonts
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             LogHandler.logSeverity(INFO, "Look & Feel set to " + UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            FontLoad.loadFonts();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | FontFormatException | IOException e) {
             error(e);
         }
 

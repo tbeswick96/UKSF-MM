@@ -10,14 +10,15 @@ import java.util.Scanner;
 import static com.uksf.tim.utility.Info.*;
 import static com.uksf.tim.utility.LogHandler.Severity.INFO;
 
-class Update {
+public class Update {
 
     /**
      * Run update check
      */
-    static void run() {
-        Settings.setString("update_time", Settings.weekAhead());
+    public static void run() {
+        Settings.set("update_time", Settings.weekAhead());
         if(versionCheck()) {
+            LogHandler.logNoTime(HASHSPACE);
             LogHandler.logSeverity(INFO, "Update is available. Current version: '" + VERSION + "' Latest version: '" + VERSION_LATEST + "'");
             update();
         }
@@ -102,6 +103,6 @@ class Update {
      * Sets update setting to not show again
      */
     private static void stopShow() {
-        Settings.setBool("update_check", false);
+        Settings.set("update_check", false);
     }
 }

@@ -1,6 +1,9 @@
 package com.uksf.tim.utility;
 
 import com.uksf.tim.core.Core;
+import com.uksf.tim.core.Update;
+
+import static com.uksf.tim.utility.LogHandler.Severity.INFO;
 
 public class Invokable {
 
@@ -10,9 +13,25 @@ public class Invokable {
     public static Invokable instance = new Invokable();
 
     /**
-     * displays settings page, state 50
+     * Displays settings page, state 50
      */
     public void showSettings() {
+        LogHandler.logSeverity(INFO, "Invokable showSettings called");
         Core.getInstanceUI().changeState(50);
     }
+
+    /**
+     * Displays home page, state 0
+     */
+    public void showHome() {
+        LogHandler.logSeverity(INFO, "Invokable showHome called");
+        Core.getInstanceUI().changeState(0);
+    }
+
+    /**
+     * Runs update
+     */
+    public void updateNow() {
+        LogHandler.logSeverity(INFO, "Invokable updateNow called");
+        Update.run(); }
 }

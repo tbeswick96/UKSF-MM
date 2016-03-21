@@ -1,7 +1,8 @@
-package com.uksf.tim.gui.components;
+package com.uksf.tim.gui.components.panels;
 
 
 import com.uksf.tim.core.Settings;
+import com.uksf.tim.gui.components.buttons.CustomButtonText;
 import com.uksf.tim.gui.components.buttons.CustomRadioButton;
 import net.miginfocom.swing.MigLayout;
 
@@ -12,6 +13,7 @@ import static com.uksf.tim.utility.Info.*;
 public class SettingsPanel extends JPanel {
 
     private CustomRadioButton checkOnLaunch, checkWeekly, checkNever;
+    private CustomButtonText updateNow;
 
     /**
      * Creates settings panel
@@ -34,12 +36,15 @@ public class SettingsPanel extends JPanel {
         checkOnLaunch = new CustomRadioButton("On Launch"); checkOnLaunch.setSelected(UPDATE_CHECK);
         checkWeekly = new CustomRadioButton("Weekly"); checkWeekly.setSelected(UPDATE_WEEK);
         checkNever = new CustomRadioButton("Never"); checkNever.setSelected(!UPDATE_CHECK);
+        updateNow = new CustomButtonText("Update Now", HELVETICAROMAN, 14, "updateNow");
 
         group.add(checkOnLaunch); group.add(checkWeekly); group.add(checkNever);
-        GenericPanel updateButtons = new GenericPanel("", "0[]0[]0[]0", "0[]0", false, COLOUR_TRANSPARENT);
+        GenericPanel updateButtons = new GenericPanel("", "0[]0[]0[]5[]10[]0", "0[]0", false, COLOUR_TRANSPARENT);
         updateButtons.add(checkOnLaunch, "shrink, cell 1 0");
         updateButtons.add(checkWeekly, "shrink, cell 2 0");
         updateButtons.add(checkNever, "shrink, cell 3 0");
+        updateButtons.add(new JSeparator(JSeparator.VERTICAL), "growy, cell 4 0");
+        updateButtons.add(updateNow, "cell 5 0");
 
         programSettings.add(updateCheck, "shrink, cell 0 0");
         programSettings.add(updateButtons, "shrink, cell 1 0");
@@ -52,14 +57,8 @@ public class SettingsPanel extends JPanel {
     }
 
     private void settingUpdate() {
-        checkOnLaunch.addActionListener(e -> Settings.setBool("update_check", true));
-        checkWeekly.addActionListener(e -> {
-            Settings.setBool("update_week", true);
-            Settings.setString("update_time", Settings.weekAhead());
-        });
-        checkNever.addActionListener(e -> {
-            Settings.setBool("update_check", false);
-            Settings.setBool("update_week", false);
-        });
+        checkOnLaunch.addActionListener(e -> Settings.set("update_check", true));
+        checkWeekly.addActionListener(e -> Settings.setMultiple(new String[]{"update_week", "update_time"}, new Object[]{true, Settings.weekAhead()}));
+        checkNever.addActionListener(e -> Settings.setMultiple(new String[]{"update_check", "update_week"}, new Object[]{false, false}));
     }
 }
