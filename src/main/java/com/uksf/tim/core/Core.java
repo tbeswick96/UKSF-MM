@@ -1,12 +1,18 @@
-package main.java.com.uksf.tim.core;
+package com.uksf.tim.core;
 
-import main.java.com.uksf.tim.gui.UI;
-import main.java.com.uksf.tim.utility.Invokable;
+
+import com.uksf.tim.gui.UI;
+import com.uksf.tim.utility.LogHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.ParseException;
 
-import static main.java.com.uksf.tim.Info.UPDATE_CHECK;
+import static com.uksf.tim.utility.Info.*;
+import static com.uksf.tim.utility.Info.DATE;
+import static com.uksf.tim.utility.Info.DATEFORMAT;
+import static com.uksf.tim.utility.LogHandler.Severity.ERROR;
+import static com.uksf.tim.utility.LogHandler.Severity.INFO;
 
 public class Core {
 
@@ -14,6 +20,9 @@ public class Core {
      * Program instance
      */
     private static Core instance;
+    /**
+     * UI Instance
+     */
     private static UI instanceUI;
 
     /**
@@ -22,9 +31,12 @@ public class Core {
     public Core() {
         instance = this;
 
+        LogHandler.logSeverity(INFO, "Started");
+
         //Set look and feel to OS default
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            LogHandler.logSeverity(INFO, "Look & Feel set to " + UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             error(e);
         }
@@ -40,19 +52,30 @@ public class Core {
         //Get program settings
         Settings.init();
 
-        new Invokable();
-
         //Create UI
         try {
             SwingUtilities.invokeLater(() -> instanceUI = new UI());
+            LogHandler.logSeverity(INFO, "UI Started");
         } catch(Exception exception) {
             error(exception);
         }
 
+        LogHandler.logSeverity(INFO, "Update check running");
         //Run update check
-        if(UPDATE_CHECK){
+        if(UPDATE_CHECK || (UPDATE_WEEK && isWeekAhead())){
             Update.run();
         }
+    }
+
+    private boolean isWeekAhead() {
+        try {
+            if(DATEFORMAT.parse(UPDATE_TIME).before(DATEFORMAT.parse(DATEFORMAT.format(DATE)))) {
+                return true;
+            }
+        } catch(ParseException e) {
+            error(e);
+        }
+        return false;
     }
 
     /**
@@ -63,6 +86,10 @@ public class Core {
         return Core.instance;
     }
 
+    /**
+     * Get instance of UI
+     * @return UI Instance
+     */
     public static UI getInstanceUI() {
         return Core.instanceUI;
     }
@@ -87,6 +114,7 @@ public class Core {
             }
         };
         JOptionPane.showMessageDialog(null, print, "Error", JOptionPane.ERROR_MESSAGE);
+        LogHandler.logSeverity(ERROR, builder.toString());
         System.exit(0);
     }
 }

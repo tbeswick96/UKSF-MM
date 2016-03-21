@@ -1,19 +1,24 @@
-package main.java.com.uksf.tim.core;
+package com.uksf.tim.core;
+
+import com.uksf.tim.utility.LogHandler;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
-import static main.java.com.uksf.tim.Info.*;
+import static com.uksf.tim.utility.Info.*;
+import static com.uksf.tim.utility.LogHandler.Severity.INFO;
 
 class Update {
 
     /**
      * Run update check
      */
-    public static void run() {
+    static void run() {
+        Settings.setString("update_time", Settings.weekAhead());
         if(versionCheck()) {
+            LogHandler.logSeverity(INFO, "Update is available. Current version: '" + VERSION + "' Latest version: '" + VERSION_LATEST + "'");
             update();
         }
     }
@@ -71,6 +76,10 @@ class Update {
         handleInput(input);
     }
 
+    /**
+     * Handles input from dialog
+     * @param input state of input (ok, cancel)
+     */
     private static void handleInput(int input) {
         switch(input) {
             case JOptionPane.OK_OPTION:
@@ -82,11 +91,17 @@ class Update {
         }
     }
 
+    /**
+     * Runs update tasks
+     */
     private static void runUpdate() {
 
     }
 
+    /**
+     * Sets update setting to not show again
+     */
     private static void stopShow() {
-        Settings.set("update_check", false);
+        Settings.setBool("update_check", false);
     }
 }

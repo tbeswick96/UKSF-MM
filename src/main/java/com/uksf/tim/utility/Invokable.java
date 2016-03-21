@@ -1,16 +1,18 @@
-package main.java.com.uksf.tim.utility;
+package com.uksf.tim.utility;
 
-import main.java.com.uksf.tim.core.Core;
+import com.uksf.tim.core.Core;
 
 public class Invokable {
 
-    public static Invokable instance;
+    /**
+     * Invokable instance
+     */
+    public static Invokable instance = new Invokable();
 
-    public Invokable() {
-        instance = this;
-    }
-
-    public void openSettings() {
+    /**
+     * displays settings page, state 50
+     */
+    public void showSettings() {
         Core.getInstanceUI().changeState(50);
     }
 }
