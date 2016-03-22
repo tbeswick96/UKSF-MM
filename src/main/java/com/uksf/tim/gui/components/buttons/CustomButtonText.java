@@ -38,10 +38,9 @@ public class CustomButtonText extends JPanel implements MouseListener {
     private String toCall;
 
     /**
-     * Button width, height and x, y
+     * Button width and height
      */
-    private float width = 10;
-    private float height = 10;
+    private int width, height;
 
     /**
      * Create custom button with text
@@ -66,7 +65,7 @@ public class CustomButtonText extends JPanel implements MouseListener {
      * @return dimension width x height
      */
     @Override public Dimension getPreferredSize() {
-        return new Dimension((int) (width), (int) (height));
+        return new Dimension(width, height);
     }
 
     /**
@@ -74,7 +73,7 @@ public class CustomButtonText extends JPanel implements MouseListener {
      * @return dimension width x height
      */
     @Override public Dimension getMaximumSize() {
-        return new Dimension((int) (width), (int) (height));
+        return new Dimension(width, height);
     }
 
     /**
@@ -85,26 +84,26 @@ public class CustomButtonText extends JPanel implements MouseListener {
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         Graphics2D g = (Graphics2D) graphics;
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(font);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        double stringWidth = StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getWidth();
-        double stringHeight = StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getHeight();
-        width = (float) (stringWidth * 1.2);
-        height = (float) (stringHeight * 1.5);
-        float x = (float) ((width / 2) - (stringWidth / 2));
-        float y = (float) ((height - stringHeight) * 2);
-        setSize((int) width, (int) height);
+        int stringWidth = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getWidth();
+        int stringHeight = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getHeight();
+        width = (int) (stringWidth * 1.2);
+        height = (int) (stringHeight * 1.5);
+        int x = (width / 2) - (stringWidth / 2);
+        int y = (height - stringHeight) * 2;
+        setSize(width, height);
         revalidate();
 
         if(hovered) {
             g.setColor(COLOUR_FOREGROUND_DARK);
-            g.fillRect(0, 0, (int) width, (int) height);
+            g.fillRect(0, 0, width, height);
             g.setColor(COLOUR_BACKGROUND_DARK);
             g.drawString(text, x, y);
         } else {
             g.setColor(COLOUR_FOREGROUND);
-            g.fillRect(1, 1, (int) width - 2, (int) height - 2);
+            g.fillRect(1, 1, width - 2, height - 2);
             g.setColor(COLOUR_BACKGROUND_DARK);
             g.drawString(text, x, y);
         }

@@ -36,7 +36,7 @@ public class SettingsPanel extends JPanel {
         checkOnLaunch = new CustomRadioButton("On Launch"); checkOnLaunch.setSelected(UPDATE_CHECK);
         checkWeekly = new CustomRadioButton("Weekly"); checkWeekly.setSelected(UPDATE_WEEK);
         checkNever = new CustomRadioButton("Never"); checkNever.setSelected(!UPDATE_CHECK);
-        updateNow = new CustomButtonText("Update Now", HELVETICAROMAN, 14, "updateNow");
+        updateNow = new CustomButtonText("Update Now", FONT_STANDARD, 16, "updateNow");
 
         group.add(checkOnLaunch); group.add(checkWeekly); group.add(checkNever);
         GenericPanel updateButtons = new GenericPanel("", "0[]0[]0[]5[]10[]0", "0[]0", false, COLOUR_TRANSPARENT);

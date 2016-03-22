@@ -1,35 +1,60 @@
 package com.uksf.tim.gui.components;
 
-import com.uksf.tim.gui.components.panels.ToolTipPanel;
-import net.miginfocom.swing.MigLayout;
+import com.uksf.tim.utility.StringMetrics;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CustomToolTip extends JToolTip {
+import static com.uksf.tim.utility.Info.*;
+
+public class CustomToolTip extends JLabel {
 
     /**
-     * Tooltip panel components
+     * Tooltip to display
      */
-    private ToolTipPanel toolTipPanel;
+    private String text;
 
-    public CustomToolTip() {
+    /**
+     * Width, height and string width, height
+     */
+    private int width, height, stringWidth, stringHeight;
+
+    /**
+     * Create custom tooltip
+     * @param text tooltip text to display
+     * @param graphics graphics2D object to get string size with
+     */
+    public CustomToolTip(String text, Graphics2D graphics) {
         super();
-        setBorder(null);
-        toolTipPanel = new ToolTipPanel();
-        setLayout(new MigLayout("fill", "0[]0", "0[]0"));
-        add(toolTipPanel, "grow, cell 0 0");
+        this.text = text;
+        setBackground(COLOUR_WHITE);
+        setFont(FONT_TOOLTIP);
+
+        graphics.setFont(FONT_TOOLTIP);
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        stringWidth = (int) StringMetrics.getBounds(graphics.getFont(), graphics.getFontRenderContext(), text).getWidth();
+        stringHeight = (int) StringMetrics.getBounds(graphics.getFont(), graphics.getFontRenderContext(), text).getHeight();
+        width = (int) (stringWidth * 1.2);
+        height = (int) (stringHeight * 1.5);
+        setPreferredSize(new Dimension(width, height));
     }
 
-    @Override public Dimension getPreferredSize() {
-        return toolTipPanel.getPreferredSize();
-    }
+    /**
+     * Paints button with custom icons
+     * @param graphics graphics object
+     */
+    @Override
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        Graphics2D g = (Graphics2D) graphics;
 
-    @Override public void setTipText(String tipText) {
-        if (tipText != null && !tipText.isEmpty()) {
-            toolTipPanel.setText(tipText);
-        } else {
-            super.setTipText(tipText);
-        }
+        g.setFont(FONT_TOOLTIP);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        int x = (width - stringWidth) / 2;
+        int y = (height - stringHeight) * 2;
+
+        g.setColor(COLOUR_BLACK);
+        g.drawString(text, x, y);
     }
 }

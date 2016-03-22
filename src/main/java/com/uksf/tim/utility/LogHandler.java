@@ -1,6 +1,10 @@
 package com.uksf.tim.utility;
 
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+import org.apache.commons.io.filefilter.FileFileFilter;
+
 import java.io.*;
+import java.util.Arrays;
 
 import static com.uksf.tim.core.Core.error;
 import static com.uksf.tim.utility.Info.*;
@@ -18,15 +22,29 @@ public class LogHandler {
      * Log handler. Prints internal program outputs to log file
      */
     public LogHandler() {
-        logFile = new File(APPDATA + "\\UKSF-MM\\MM__" + DATEFORMAT.format(DATE) + ".log");
-        System.out.println(logFile.getAbsolutePath());
+        createLogFile();
+        logSeverity(INFO, "Log Created");
+        LogHandler.logNoTime(HASHSPACE);
+    }
+
+    /**
+     * First checks if there are already 10 log files, if so, deletes the oldest, then creates the new log file
+     */
+    private void createLogFile() {
+        File directory = new File(APPDATA + "\\UKSF-MM");
+
+        File[] logs = directory.listFiles((FileFilter) FileFileFilter.FILE);
+        Arrays.sort(logs, LastModifiedFileComparator.LASTMODIFIED_COMPARATOR);
+        if(logs.length > 9) {
+            logs[0].delete();
+        }
+        logFile = new File(directory + "\\MM__" + DATEFORMAT.format(DATE) + ".log");
         try {
             logFile.createNewFile();
         } catch(IOException e) {
             error(e);
         }
-        logSeverity(INFO, "Log Created");
-        LogHandler.logNoTime(HASHSPACE);
+        System.out.println(logFile.getAbsolutePath());
     }
 
     /**

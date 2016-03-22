@@ -3,6 +3,7 @@ package com.uksf.tim.gui.components.buttons;
 
 import com.uksf.tim.gui.components.CustomToolTip;
 import com.uksf.tim.utility.Invokable;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.lang.reflect.InvocationTargetException;
 
 import static com.uksf.tim.core.Core.error;
+import static com.uksf.tim.utility.Info.BORDER_STANDARD;
 import static com.uksf.tim.utility.Info.COLOUR_TRANSPARENT;
 import static com.uksf.tim.utility.LogHandler.Severity;
 import static com.uksf.tim.utility.LogHandler.logSeverity;
@@ -38,9 +40,9 @@ public class CustomButton25 extends JPanel implements MouseListener {
     private String tooltipText;
 
     /**
-     * Tooltip component
+     * Graphics object (allows obtaining of string size for tooltip)
      */
-    private CustomToolTip tooltip;
+    private Graphics2D g;
 
     /**
      * Create custom button
@@ -58,7 +60,7 @@ public class CustomButton25 extends JPanel implements MouseListener {
         setBorder(null);
         setOpaque(false);
         addMouseListener(this);
-        setToolTipText(tooltipText);
+        setToolTipText("");
     }
 
     /**
@@ -81,7 +83,7 @@ public class CustomButton25 extends JPanel implements MouseListener {
      */
     @Override
     public void paintComponent(Graphics graphics) {
-        Graphics2D g = (Graphics2D) graphics;
+        g = (Graphics2D) graphics;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g.setColor(COLOUR_TRANSPARENT);
@@ -93,11 +95,19 @@ public class CustomButton25 extends JPanel implements MouseListener {
         }
     }
 
+    /**
+     * Create custom tooltip
+     * @return tooltip object
+     */
     @Override public JToolTip createToolTip() {
-        if(tooltip == null) {
-            tooltip = new CustomToolTip();
-            tooltip.setComponent(this);
-        }
+        JToolTip tooltip = super.createToolTip();
+        tooltip.setBorder(BORDER_STANDARD);
+        tooltip.setLayout(new MigLayout("fill", "0[]0", "0[]0"));
+
+        CustomToolTip label = new CustomToolTip(tooltipText, g);
+        tooltip.setPreferredSize(label.getPreferredSize());
+
+        tooltip.add(label, "grow");
         return tooltip;
     }
 

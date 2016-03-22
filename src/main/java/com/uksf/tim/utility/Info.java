@@ -24,6 +24,7 @@ public class Info {
 
     //Colours
     public static final Color COLOUR_WHITE = new Color(255, 255, 255);
+    public static final Color COLOUR_BLACK = new Color(0, 0, 0);
     public static final Color COLOUR_TRANSPARENT = new Color(0, 0, 0, 0);
     public static final Color COLOUR_BACKGROUND_LIGHT = new Color(65, 65, 65);
     public static final Color COLOUR_BACKGROUND_LIGHTER = new Color(55, 55, 55);
@@ -53,8 +54,9 @@ public class Info {
     public static final ImageIcon ICON_SETTINGS_HOVER = new ImageIcon("src\\main\\resources\\assets\\icons\\settings_hover.png");
 
     //Fonts
-    public static Font HELVETICAROMAN;
-    public static Font HELVETICATOOLTIP;
+    public static Font FONT_STANDARD;
+    public static Font FONT_THIN;
+    public static Font FONT_TOOLTIP;
 
     //Date
     public static DateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd__hh-mm-ss");
