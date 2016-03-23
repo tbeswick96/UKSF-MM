@@ -10,6 +10,9 @@ package com.uksf.tim.gui;
 import com.uksf.tim.gui.components.panels.BottomPanel;
 import com.uksf.tim.gui.components.panels.MainPanel;
 import com.uksf.tim.gui.components.panels.SettingsPanel;
+import com.uksf.tim.gui.components.panels.TopPanel;
+
+import javax.swing.*;
 
 /**
  * @author Tim
@@ -23,6 +26,14 @@ class ComponentCreator {
     static MainPanel mainPanel() {
         return new MainPanel();
     }
+
+	/**
+	 * Creates top panel instance
+	 * @return top panel instance
+	 */
+	static TopPanel topPanel(JFrame parent) {
+		return new TopPanel(parent);
+	}
 
     /**
      * Creates bottom panel instance

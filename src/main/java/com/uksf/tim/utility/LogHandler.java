@@ -46,7 +46,7 @@ public class LogHandler {
 				System.out.println("'" + logs[0].getAbsolutePath() + logs[0].getName() + "' was not deleted.");
 			}
         }
-        logFile = new File(LOGS + "MM__" + DATEFORMAT.format(DATE) + ".log");
+        logFile = new File(LOGS + "\\MM__" + DATEFORMAT.format(DATE) + ".log");
         try {
             if(!logFile.createNewFile()) {
 				throw new IOException("Log file not created at '" + logFile.getAbsolutePath() + "'");

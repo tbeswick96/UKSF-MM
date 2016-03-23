@@ -25,7 +25,7 @@ public class Info {
 
     //Directories
 	static File APPDATA = new File(System.getenv("LOCALAPPDATA"));
-	static File LOGS = new File(APPDATA + "UKSF-MM\\");
+	static File LOGS = new File(APPDATA + "\\UKSF-MM\\");
 	static File ICONS = new File("src\\main\\resources\\assets\\icons\\");
 	static File LOGOS = new File("src\\main\\resources\\assets\\logos\\");
 	static File FONTS = new File("src\\main\\resources\\assets\\fonts\\");
@@ -56,16 +56,22 @@ public class Info {
     public static final Border BORDER_STANDARD = BorderFactory.createLineBorder(COLOUR_BACKGROUND_DARK, 1);
 
     //Logos
-    public static final ImageIcon LOGO_LIGHT_16 = new ImageIcon(LOGOS + "light16.png");
-    public static final ImageIcon LOGO_LIGHT_32 = new ImageIcon(LOGOS + "light32.png");
-    public static final ImageIcon LOGO_LIGHT_64 = new ImageIcon(LOGOS + "light64.png");
-    public static final ImageIcon LOGO_64 = new ImageIcon(LOGOS + "uksf64.png");
+    public static final ImageIcon LOGO_LIGHT_16 = new ImageIcon(LOGOS + "\\light16.png");
+    public static final ImageIcon LOGO_LIGHT_32 = new ImageIcon(LOGOS + "\\light32.png");
+    public static final ImageIcon LOGO_LIGHT_64 = new ImageIcon(LOGOS + "\\light64.png");
+    public static final ImageIcon LOGO_64 = new ImageIcon(LOGOS + "\\uksf64.png");
 
     //Icons
-    public static final ImageIcon ICON_HOME = new ImageIcon(ICONS + "home.png");
-    public static final ImageIcon ICON_HOME_HOVER = new ImageIcon(ICONS + "home_hover.png");
-    public static final ImageIcon ICON_SETTINGS = new ImageIcon(ICONS + "settings.png");
-    public static final ImageIcon ICON_SETTINGS_HOVER = new ImageIcon(ICONS + "settings_hover.png");
+    public static final ImageIcon ICON_HOME = new ImageIcon(ICONS + "\\home.png");
+    public static final ImageIcon ICON_HOME_HOVER = new ImageIcon(ICONS + "\\home_hover.png");
+    public static final ImageIcon ICON_SETTINGS = new ImageIcon(ICONS + "\\settings.png");
+    public static final ImageIcon ICON_SETTINGS_HOVER = new ImageIcon(ICONS + "\\settings_hover.png");
+	public static final ImageIcon ICON_MINIMIZE = new ImageIcon(ICONS + "\\minimize.png");
+	public static final ImageIcon ICON_MINIMIZE_HOVER = new ImageIcon(ICONS + "\\minimize_hover.png");
+	public static final ImageIcon ICON_MAXIMIZE = new ImageIcon(ICONS + "\\maximize.png");
+	public static final ImageIcon ICON_MAXIMIZE_HOVER = new ImageIcon(ICONS + "\\maximize_hover.png");
+	public static final ImageIcon ICON_CLOSE = new ImageIcon(ICONS + "\\close.png");
+	public static final ImageIcon ICON_CLOSE_HOVER = new ImageIcon(ICONS + "\\close_hover.png");
 
     //Fonts
     public static Font FONT_STANDARD;

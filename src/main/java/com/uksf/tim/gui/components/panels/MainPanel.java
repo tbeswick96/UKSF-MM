@@ -19,7 +19,9 @@ public class MainPanel extends JPanel {
      * Creates main panel
      */
     public MainPanel() {
-        setOpaque(false);
+        //setOpaque(true);
+		setOpaque(false);
+		//setBackground(COLOUR_FOREGROUND);
         setLayout(new MigLayout("fill", "", ""));
     }
 }

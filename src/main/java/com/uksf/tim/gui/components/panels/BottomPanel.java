@@ -7,7 +7,7 @@
 package com.uksf.tim.gui.components.panels;
 
 
-import com.uksf.tim.gui.components.buttons.CustomButton25;
+import com.uksf.tim.gui.components.buttons.CustomButton;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -27,8 +27,8 @@ public class BottomPanel extends JPanel {
         setBackground(COLOUR_BACKGROUND_DARKER);
         setLayout(new MigLayout("", "2[]5[]2", "2[]2"));
 
-        CustomButton25 home = new CustomButton25(ICON_HOME.getImage(), ICON_HOME_HOVER.getImage(), "showHome", "Home");
-        CustomButton25 settings = new CustomButton25(ICON_SETTINGS.getImage(), ICON_SETTINGS_HOVER.getImage(), "showSettings", "Settings");
+        CustomButton home = new CustomButton(27, 27, 2, ICON_HOME.getImage(), ICON_HOME_HOVER.getImage(), COLOUR_TRANSPARENT, "showHome", "Home");
+        CustomButton settings = new CustomButton(27, 27, 2, ICON_SETTINGS.getImage(), ICON_SETTINGS_HOVER.getImage(), COLOUR_TRANSPARENT, "showSettings", "Settings");
 
         add(home);
         add(settings);

@@ -21,8 +21,8 @@ public class FontLoad {
     public static void loadFonts() throws IOException, FontFormatException {
         LogHandler.logNoTime(HASHSPACE);
         LogHandler.logSeverity(INFO, "Loading fonts");
-        FONT_STANDARD = Font.createFont(Font.TRUETYPE_FONT, new File(FONTS + "Bariol_Light.otf"));
-        FONT_THIN = Font.createFont(Font.TRUETYPE_FONT, new File(FONTS + "Bariol_Light.otf"));
+        FONT_STANDARD = Font.createFont(Font.TRUETYPE_FONT, new File(FONTS + "\\Bariol_Light.otf"));
+        FONT_THIN = Font.createFont(Font.TRUETYPE_FONT, new File(FONTS + "\\Bariol_Light.otf"));
         FONT_TOOLTIP = new Font(FONT_THIN.getFontName(), FONT_THIN.getStyle(), 16);
         LogHandler.logSeverity(INFO, "Fonts loaded");
     }

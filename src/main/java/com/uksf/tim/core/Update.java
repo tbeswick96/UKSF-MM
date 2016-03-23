@@ -112,6 +112,6 @@ public class Update {
      * Sets update setting to not show again
      */
     private static void stopShow() {
-        Settings.set("update_check", false);
+		Settings.setMultiple(new String[]{"update_check", "update_week"}, new Object[]{false, false});
     }
 }

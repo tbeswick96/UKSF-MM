@@ -26,17 +26,21 @@ import static com.uksf.tim.utility.LogHandler.logSeverity;
 /**
  * @author Tim
  */
-public class CustomButton25 extends JPanel implements MouseListener {
+public class CustomButton extends JPanel implements MouseListener {
 
     /**
      * Hover state. True when hovering, false when not
      */
     private boolean hovered = false;
 
+	private int width, height, hoverOffset;
+
     /**
      * Images for base icon and hover icon
      */
     private Image icon, icon_hovered;
+
+	private Color hoveredColour;
 
     /**
      * Method name to call on click
@@ -53,15 +57,24 @@ public class CustomButton25 extends JPanel implements MouseListener {
      */
     private Graphics2D g;
 
-    /**
-     * Create custom button
-     * @param icon base icon
-     * @param icon_hovered hover icon
-     * @param toCall method name to call
-     */
-    public CustomButton25(Image icon, Image icon_hovered, String toCall, String tooltipText) {
+	/**
+	 * Create custom button
+	 * @param width width of button
+	 * @param height height of button
+	 * @param hoverOffset size change to apply on hover
+	 * @param icon base icon
+	 * @param icon_hovered hover icon
+	 * @param hoveredColour hover icon
+	 * @param toCall method name to call
+	 * @param tooltipText button tooltip text
+	 */
+    public CustomButton(int width, int height, int hoverOffset, Image icon, Image icon_hovered, Color hoveredColour, String toCall, String tooltipText) {
+		this.width = width;
+		this.height = height;
+		this.hoverOffset = hoverOffset;
         this.icon = icon;
         this.icon_hovered = icon_hovered;
+		this.hoveredColour = hoveredColour;
         this.toCall = toCall;
         this.tooltipText = tooltipText;
 
@@ -77,14 +90,14 @@ public class CustomButton25 extends JPanel implements MouseListener {
      * @return dimension 27x27
      */
     @Override public Dimension getPreferredSize() {
-        return new Dimension(27, 27);
+        return new Dimension(width, height);
     }
 
     /**
      * Set size to 27x27
      * @return dimension 27x27
      */
-    @Override public Dimension getMaximumSize() { return new Dimension(27, 27); }
+    @Override public Dimension getMaximumSize() { return new Dimension(width, height); }
 
     /**
      * Paints button with custom icons
@@ -95,12 +108,14 @@ public class CustomButton25 extends JPanel implements MouseListener {
         g = (Graphics2D) graphics;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.setColor(COLOUR_TRANSPARENT);
-        g.fillRect(0, 0, 27, 27);
         if(hovered) {
-            g.drawImage(icon_hovered, 0, 0, 27, 27, null);
+			g.setColor(hoveredColour);
+			g.fillRect(0, 0, width, height);
+            g.drawImage(icon_hovered, 0, 0, width, height, null);
         } else {
-            g.drawImage(icon, 1, 1, 25, 25, null);
+			g.setColor(COLOUR_TRANSPARENT);
+			g.fillRect(0, 0, width, height);
+            g.drawImage(icon, hoverOffset/2, hoverOffset/2, width - hoverOffset, height - hoverOffset, null);
         }
     }
 

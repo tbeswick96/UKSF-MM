@@ -10,6 +10,7 @@ package com.uksf.tim.gui;
 import com.uksf.tim.gui.components.panels.BottomPanel;
 import com.uksf.tim.gui.components.panels.MainPanel;
 import com.uksf.tim.gui.components.panels.SettingsPanel;
+import com.uksf.tim.gui.components.panels.TopPanel;
 import com.uksf.tim.utility.LogHandler;
 import net.miginfocom.swing.MigLayout;
 
@@ -44,18 +45,11 @@ public class UI extends JFrame implements MouseInputListener {
     private int state = 0;
 
     /**
-     * Main panel instance. Holds other content panels
+     * Panel instances
      */
     private MainPanel mainPanel;
-
-    /**
-     * Bottom panel instance. Holds persistent functionality components
-     */
+	private TopPanel topPanel;
     private BottomPanel bottomPanel;
-
-    /**
-     * Settings panel instance. Displays program settings
-     */
     private SettingsPanel settingsPanel;
 
     /**
@@ -63,7 +57,7 @@ public class UI extends JFrame implements MouseInputListener {
      */
     private ArrayList<JPanel> added;
 
-    /**
+	/**
      * Create UI
      */
     public UI() {
@@ -80,7 +74,8 @@ public class UI extends JFrame implements MouseInputListener {
         setSize(WINDOW_SIZE);
         setMinimumSize(WINDOW_SIZE_MIN);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
+		setUndecorated(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         //Add resize mouse listeners
@@ -103,16 +98,17 @@ public class UI extends JFrame implements MouseInputListener {
         //Set layout to miglayout
         setLayout(new MigLayout(
                 "fill", //fill space
-                "2[]2", //column constraints
-                "2[]2[]0" //row constraints
+                "0[]0", //column constraints
+                "0[]0[]0[]0" //row constraints
         ));
 
         //Create components
         createComponents();
 
         //Add components
-        add(mainPanel, "grow, push, cell 0 0");
-        add(bottomPanel, "grow, cell 0 1");
+		add(topPanel, "grow, cell 0 0");
+        add(mainPanel, "grow, push, cell 0 1");
+        add(bottomPanel, "grow, cell 0 2");
         updateFromState();
 
         //Set window to visible
@@ -124,6 +120,7 @@ public class UI extends JFrame implements MouseInputListener {
      */
     private void createComponents() {
         mainPanel = ComponentCreator.mainPanel();
+		topPanel = ComponentCreator.topPanel(this);
         bottomPanel = ComponentCreator.bottomPanel();
         settingsPanel = ComponentCreator.settingsPanel();
     }
@@ -181,20 +178,14 @@ public class UI extends JFrame implements MouseInputListener {
 
     /**
      * Paint event, better resizing
-     * @param g graphics object
+     * @param graphics graphics object
      */
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+    public void paint(Graphics graphics) {
+        super.paint(graphics);
 
         int width = getWidth();
         int height = getHeight();
-
-        g.setColor(COLOUR_FOREGROUND);
-        g.drawLine(width - 7, height, width, height - 7);
-        g.drawLine(width - 11, height, width, height - 11);
-        g.drawLine(width - 15, height, width, height - 15);
-
         gp = new java.awt.geom.GeneralPath();
         gp.moveTo(width - 17, height);
         gp.lineTo(width, height - 17);
@@ -202,7 +193,7 @@ public class UI extends JFrame implements MouseInputListener {
         gp.closePath();
     }
 
-    /**
+	/**
      * Mouse clicked event
      * @param e event
      */
@@ -253,7 +244,6 @@ public class UI extends JFrame implements MouseInputListener {
             int dx = e.getX() + startPos.x;
             int dy = e.getY() + startPos.y;
             setSize(dx, dy);
-            repaint();
         }
     }
 
