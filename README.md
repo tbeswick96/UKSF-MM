@@ -27,3 +27,8 @@
   - Easily re-order units in the lobby
   
 Please use the [Issue Tracker](https://github.com/tbeswick96/UKSF-MM/issues) to report a bug, propose a feature, or suggest changes to existing features.
+
+##TODO
+    - Load missions by map, then name. Store previously loaded mission in settings.
+    - Show unit groups (that would appear in game lobby) as list
+    - Editible mission elements - inside sqm, description.ext
