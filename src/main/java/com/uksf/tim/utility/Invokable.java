@@ -11,6 +11,9 @@ import com.uksf.tim.core.Update;
 
 import static com.uksf.tim.utility.LogHandler.Severity.INFO;
 
+/**
+ * @author Tim
+ */
 public class Invokable {
 
     /**

@@ -7,7 +7,7 @@
 package com.uksf.tim.gui.components.buttons;
 
 
-import com.uksf.tim.gui.components.CustomToolTip;
+import com.uksf.tim.gui.components.labels.CustomToolTip;
 import com.uksf.tim.utility.Invokable;
 import net.miginfocom.swing.MigLayout;
 
@@ -23,6 +23,9 @@ import static com.uksf.tim.utility.Info.COLOUR_TRANSPARENT;
 import static com.uksf.tim.utility.LogHandler.Severity;
 import static com.uksf.tim.utility.LogHandler.logSeverity;
 
+/**
+ * @author Tim
+ */
 public class CustomButton25 extends JPanel implements MouseListener {
 
     /**

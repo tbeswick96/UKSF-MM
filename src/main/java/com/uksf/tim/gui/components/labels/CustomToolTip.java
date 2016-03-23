@@ -4,7 +4,7 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.tim.gui.components;
+package com.uksf.tim.gui.components.labels;
 
 import com.uksf.tim.utility.StringMetrics;
 
@@ -13,6 +13,9 @@ import java.awt.*;
 
 import static com.uksf.tim.utility.Info.*;
 
+/**
+ * @author Tim
+ */
 public class CustomToolTip extends JLabel {
 
     /**

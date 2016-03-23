@@ -16,6 +16,9 @@ import javax.swing.*;
 
 import static com.uksf.tim.utility.Info.*;
 
+/**
+ * @author Tim
+ */
 public class SettingsPanel extends JPanel {
 
     private CustomRadioButton checkOnLaunch, checkWeekly, checkNever;

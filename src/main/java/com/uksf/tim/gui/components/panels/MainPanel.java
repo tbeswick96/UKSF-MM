@@ -10,6 +10,9 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 
+/**
+ * @author Tim
+ */
 public class MainPanel extends JPanel {
 
     /**

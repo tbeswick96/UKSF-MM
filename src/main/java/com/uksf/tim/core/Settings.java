@@ -17,6 +17,9 @@ import static com.uksf.tim.core.Core.error;
 import static com.uksf.tim.utility.Info.*;
 import static com.uksf.tim.utility.LogHandler.Severity.INFO;
 
+/**
+ * @author Tim
+ */
 public class Settings {
 
     /**

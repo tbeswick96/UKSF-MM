@@ -11,6 +11,9 @@ import com.uksf.tim.utility.LogHandler;
 
 import javax.swing.*;
 
+/**
+ * @author Tim
+ */
 public class Run {
     public static void main(String args[]) {
         //If not windows, close

@@ -11,6 +11,9 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Tim
+ */
 class GenericPanel extends JPanel {
 
     /**

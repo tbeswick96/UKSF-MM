@@ -21,6 +21,9 @@ import static com.uksf.tim.utility.Info.*;
 import static com.uksf.tim.utility.LogHandler.Severity;
 import static com.uksf.tim.utility.LogHandler.logSeverity;
 
+/**
+ * @author Tim
+ */
 public class CustomButtonText extends JPanel implements MouseListener {
 
     /**

@@ -11,6 +11,9 @@ import com.uksf.tim.gui.components.panels.BottomPanel;
 import com.uksf.tim.gui.components.panels.MainPanel;
 import com.uksf.tim.gui.components.panels.SettingsPanel;
 
+/**
+ * @author Tim
+ */
 class ComponentCreator {
 
     /**

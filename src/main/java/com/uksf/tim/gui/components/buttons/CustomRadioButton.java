@@ -9,6 +9,9 @@ package com.uksf.tim.gui.components.buttons;
 import javax.swing.*;
 import static com.uksf.tim.utility.Info.*;
 
+/**
+ * @author Tim
+ */
 public class CustomRadioButton extends JRadioButton {
 
     /**

@@ -22,6 +22,9 @@ import static com.uksf.tim.utility.Info.DATEFORMAT;
 import static com.uksf.tim.utility.LogHandler.Severity.ERROR;
 import static com.uksf.tim.utility.LogHandler.Severity.INFO;
 
+/**
+ * @author Tim
+ */
 public class Core {
 
     /**
@@ -76,6 +79,10 @@ public class Core {
         }
     }
 
+	/**
+	 * Checks if current date is later than date in registry
+	 * @return true if current date is younger
+	 */
     private boolean isWeekAhead() {
         try {
             if(DATEFORMAT.parse(UPDATE_TIME).before(DATEFORMAT.parse(DATEFORMAT.format(DATE)))) {

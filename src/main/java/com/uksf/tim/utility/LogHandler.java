@@ -16,7 +16,9 @@ import static com.uksf.tim.core.Core.error;
 import static com.uksf.tim.utility.Info.*;
 import static com.uksf.tim.utility.LogHandler.Severity.INFO;
 
-@SuppressWarnings("ALL")
+/**
+ * @author Tim
+ */
 public class LogHandler {
 
     /**
@@ -37,16 +39,18 @@ public class LogHandler {
      * First checks if there are already 10 log files, if so, deletes the oldest, then creates the new log file
      */
     private void createLogFile() {
-        File directory = new File(APPDATA + "\\UKSF-MM");
-
-        File[] logs = directory.listFiles((FileFilter) FileFileFilter.FILE);
+        File[] logs = LOGS.listFiles((FileFilter) FileFileFilter.FILE);
         Arrays.sort(logs, LastModifiedFileComparator.LASTMODIFIED_COMPARATOR);
         if(logs.length > 9) {
-            logs[0].delete();
+            if(!logs[0].delete()) {
+				System.out.println("'" + logs[0].getAbsolutePath() + logs[0].getName() + "' was not deleted.");
+			}
         }
-        logFile = new File(directory + "\\MM__" + DATEFORMAT.format(DATE) + ".log");
+        logFile = new File(LOGS + "MM__" + DATEFORMAT.format(DATE) + ".log");
         try {
-            logFile.createNewFile();
+            if(!logFile.createNewFile()) {
+				throw new IOException("Log file not created at '" + logFile.getAbsolutePath() + "'");
+			}
         } catch(IOException e) {
             error(e);
         }
@@ -87,11 +91,12 @@ public class LogHandler {
      * Writes to file
      * @param log formatted message to write
      */
-    private static void toFile(String log) {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+	private static void toFile(String log) {
         try {
             logFile.setWritable(true);
             Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile, true)));
-            writer.append(log + "\n");
+            writer.append(log).append("\n");
             writer.close();
             logFile.setReadOnly();
         } catch(IOException e) {
@@ -102,7 +107,8 @@ public class LogHandler {
     /**
      * Closes log
      */
-    public static void closeLog() {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+	public static void closeLog() {
         LogHandler.logNoTime(HASHSPACE);
         logSeverity(INFO, "Log Closing");
         logFile.setWritable(true);

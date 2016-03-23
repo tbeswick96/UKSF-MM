@@ -14,6 +14,9 @@ import javax.swing.*;
 
 import static com.uksf.tim.utility.Info.*;
 
+/**
+ * @author Tim
+ */
 public class BottomPanel extends JPanel {
 
     /**

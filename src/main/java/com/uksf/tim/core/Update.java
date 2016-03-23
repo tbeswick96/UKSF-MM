@@ -16,6 +16,9 @@ import java.util.Scanner;
 import static com.uksf.tim.utility.Info.*;
 import static com.uksf.tim.utility.LogHandler.Severity.INFO;
 
+/**
+ * @author Tim
+ */
 public class Update {
 
     /**

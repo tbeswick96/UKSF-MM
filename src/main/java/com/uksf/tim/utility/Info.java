@@ -14,13 +14,21 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Tim
+ */
+@SuppressWarnings("ALL")
 public class Info {
     //Program settings
     public static final String VERSION = "0.1";
     public static String VERSION_LATEST = "0.1";
 
     //Directories
-    static File APPDATA = new File(System.getenv("LOCALAPPDATA"));
+	static File APPDATA = new File(System.getenv("LOCALAPPDATA"));
+	static File LOGS = new File(APPDATA + "UKSF-MM\\");
+	static File ICONS = new File("src\\main\\resources\\assets\\icons\\");
+	static File LOGOS = new File("src\\main\\resources\\assets\\logos\\");
+	static File FONTS = new File("src\\main\\resources\\assets\\fonts\\");
 
     //User Settings
     public static boolean HAS_SETUP;
@@ -48,16 +56,16 @@ public class Info {
     public static final Border BORDER_STANDARD = BorderFactory.createLineBorder(COLOUR_BACKGROUND_DARK, 1);
 
     //Logos
-    public static final ImageIcon LOGO_LIGHT_16 = new ImageIcon("src\\main\\resources\\assets\\logos\\light16.png");
-    public static final ImageIcon LOGO_LIGHT_32 = new ImageIcon("src\\main\\resources\\assets\\logos\\light32.png");
-    public static final ImageIcon LOGO_LIGHT_64 = new ImageIcon("src\\main\\resources\\assets\\logos\\light64.png");
-    public static final ImageIcon LOGO_64 = new ImageIcon("src\\main\\resources\\assets\\logos\\uksf64.png");
+    public static final ImageIcon LOGO_LIGHT_16 = new ImageIcon(LOGOS + "light16.png");
+    public static final ImageIcon LOGO_LIGHT_32 = new ImageIcon(LOGOS + "light32.png");
+    public static final ImageIcon LOGO_LIGHT_64 = new ImageIcon(LOGOS + "light64.png");
+    public static final ImageIcon LOGO_64 = new ImageIcon(LOGOS + "uksf64.png");
 
     //Icons
-    public static final ImageIcon ICON_HOME = new ImageIcon("src\\main\\resources\\assets\\icons\\home.png");
-    public static final ImageIcon ICON_HOME_HOVER = new ImageIcon("src\\main\\resources\\assets\\icons\\home_hover.png");
-    public static final ImageIcon ICON_SETTINGS = new ImageIcon("src\\main\\resources\\assets\\icons\\settings.png");
-    public static final ImageIcon ICON_SETTINGS_HOVER = new ImageIcon("src\\main\\resources\\assets\\icons\\settings_hover.png");
+    public static final ImageIcon ICON_HOME = new ImageIcon(ICONS + "home.png");
+    public static final ImageIcon ICON_HOME_HOVER = new ImageIcon(ICONS + "home_hover.png");
+    public static final ImageIcon ICON_SETTINGS = new ImageIcon(ICONS + "settings.png");
+    public static final ImageIcon ICON_SETTINGS_HOVER = new ImageIcon(ICONS + "settings_hover.png");
 
     //Fonts
     public static Font FONT_STANDARD;

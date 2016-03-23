@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * @author Tim
+ */
 public class StringMetrics {
     /**
      * Gets size of string fron font and text
