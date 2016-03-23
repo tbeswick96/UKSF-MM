@@ -42,5 +42,30 @@ public class Invokable {
      */
     public void updateNow() {
         LogHandler.logSeverity(INFO, "Invokable updateNow called");
-        Update.run(); }
+        Update.run();
+	}
+
+	/**
+	 * Closes program
+	 */
+	public void close() {
+		LogHandler.logSeverity(INFO, "Closing");
+		System.exit(0);
+	}
+
+	/**
+	 * Minimizes program
+	 */
+	public void minimize() {
+		LogHandler.logSeverity(INFO, "Minimizing");
+		Core.getInstanceUI().minimize();
+	}
+
+	/**
+	 * Maximizes program
+	 */
+	public void maximize() {
+		LogHandler.logSeverity(INFO, "Maximizing");
+		Core.getInstanceUI().maximize();
+	}
 }

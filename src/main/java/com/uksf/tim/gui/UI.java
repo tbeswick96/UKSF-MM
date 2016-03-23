@@ -176,6 +176,24 @@ public class UI extends JFrame implements MouseInputListener {
         LogHandler.logSeverity(INFO, "State change denied");
     }
 
+	/**
+	 * Minimizes program
+	 */
+	public void minimize() {
+		setExtendedState(Frame.ICONIFIED);
+	}
+
+	/**
+	 * Maximizes program
+	 */
+	public void maximize() {
+		if(getExtendedState() < 1) {
+			setExtendedState(getExtendedState() | Frame.MAXIMIZED_BOTH);
+		} else {
+			setExtendedState(Frame.NORMAL);
+		}
+	}
+
     /**
      * Paint event, better resizing
      * @param graphics graphics object
