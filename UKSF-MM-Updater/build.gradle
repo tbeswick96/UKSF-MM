@@ -1,0 +1,30 @@
+apply plugin: 'us.kirchmeier.capsule'
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+group 'com.uksf.updater'
+version '0.1'
+mainClassName = 'com.uksf.updater.Run'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+//Dependencies
+dependencies {
+    compile fileTree(dir: 'lib', include: '*.jar')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
+}
+
+task fatCapsule(type: FatCapsule) {
+    applicationClass 'com.uksf.updater.Run'
+    applicationName =  'UKSF-MM'
+    capsuleManifest {
+        minJavaVersion = '1.8.0'
+    }
+}

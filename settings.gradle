@@ -1,2 +1,3 @@
 rootProject.name = 'UKSF-MM'
+include 'UKSF-MM-Updater'
 
