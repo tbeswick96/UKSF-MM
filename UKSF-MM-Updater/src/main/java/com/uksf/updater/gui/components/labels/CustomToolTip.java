@@ -63,6 +63,8 @@ public class CustomToolTip extends JLabel {
         int x = (width - stringWidth) / 2;
         int y = (height - stringHeight) * 2;
 
+		g.setColor(COLOUR_WHITE);
+		g.fillRect(0, 0, width, height);
         g.setColor(COLOUR_BLACK);
         g.drawString(text, x, y);
     }

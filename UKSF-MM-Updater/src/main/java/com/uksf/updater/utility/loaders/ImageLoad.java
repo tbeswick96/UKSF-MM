@@ -36,17 +36,7 @@ public class ImageLoad {
 		LOGO_LIGHT_32 = new ImageIcon(toByteArray(getClass().getResourceAsStream(LOGOS + "light32.png")));
 		LOGO_LIGHT_64 = new ImageIcon(toByteArray(getClass().getResourceAsStream(LOGOS + "light64.png")));
 		LOGO_64 = new ImageIcon(toByteArray(getClass().getResourceAsStream(LOGOS + "uksf64.png")));
-
-		ICON_HOME = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "home.png")));
-		ICON_HOME_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "home_hover.png")));
-		ICON_SETTINGS = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "settings.png")));
-		ICON_SETTINGS_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "settings_hover.png")));
-		ICON_MINIMIZE = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "minimize.png")));
-		ICON_MINIMIZE_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "minimize_hover.png")));
-		ICON_MAXIMIZE = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "maximize.png")));
-		ICON_MAXIMIZE_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "maximize_hover.png")));
-		ICON_CLOSE = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "close.png")));
-		ICON_CLOSE_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "close_hover.png")));
+		LOGO_256 = new ImageIcon(toByteArray(getClass().getResourceAsStream(LOGOS + "uksf256.png")));
         LogHandler.log("Updater images loaded");
     }
 }

@@ -6,22 +6,100 @@
 
 package com.uksf.updater.gui.components.panels;
 
+import com.uksf.updater.core.DownloadWorker;
+import com.uksf.updater.gui.components.buttons.CustomProgressBar;
+import com.uksf.updater.utility.Network;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.io.IOException;
+
+import static com.uksf.updater.core.Core.error;
+import static com.uksf.updater.utility.Info.*;
 
 /**
  * @author Tim
  */
 public class MainPanel extends JPanel {
 
+	private Point initialClick;
+
     /**
      * Creates main panel
      */
-    public MainPanel() {
-        //setOpaque(true);
+    public MainPanel(JFrame parent) {
 		setOpaque(false);
-		//setBackground(COLOUR_FOREGROUND);
-        setLayout(new MigLayout("fill", "", ""));
-    }
+		setBorder(BORDER_COLOURED);
+        setLayout(new MigLayout("", "0[center]0", "0[bottom]0[top]0"));
+
+		addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				initialClick = e.getPoint();
+				getComponentAt(initialClick);
+			}
+		});
+
+		addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				int x = parent.getLocation().x;
+				int y = parent.getLocation().y;
+				int xNew = x + (x + e.getX()) - (x + initialClick.x);
+				int yNew = y + (y + e.getY()) - (y + initialClick.y);
+				parent.setLocation(xNew, yNew);
+			}
+		});
+
+		try {
+			init();
+		} catch(IOException e) {
+			error(e);
+		}
+	}
+
+	private void init() throws IOException {
+		GenericPanel infoPanel = new GenericPanel("", "0[center]0", "0[]5[]0", false, COLOUR_TRANSPARENT);
+		GenericPanel infoPanelText = new GenericPanel("", "0[]0[]0", "0[]0", false, COLOUR_TRANSPARENT);
+		JLabel infoLogo = new JLabel(LOGO_256);
+		JLabel infoText = new JLabel("Updating to version: ");
+		JLabel infoVersion = new JLabel(Network.getDataFromTag("<Version>"));
+		infoText.setFont(new Font(FONT_STANDARD.getFontName(), FONT_STANDARD.getStyle(), 20));
+		infoVersion.setFont(new Font(FONT_STANDARD.getFontName(), FONT_STANDARD.getStyle(), 20));
+		infoText.setForeground(COLOUR_WHITE); infoVersion.setForeground(COLOUR_FOREGROUND);
+
+		GenericPanel downloadPanel = new GenericPanel("", "0[center]0", "0[]5[]0", false, COLOUR_TRANSPARENT);
+		JLabel downloadText = new JLabel("Downloading");
+		downloadText.setFont(new Font(FONT_STANDARD.getFontName(), FONT_STANDARD.getStyle(), 20));
+		downloadText.setForeground(COLOUR_WHITE);
+		CustomProgressBar downloadProgress = new CustomProgressBar();
+
+		infoPanelText.add(infoText, "cell 0 1");
+		infoPanelText.add(infoVersion, "push, cell 1 1");
+		infoPanel.add(infoLogo, "span, cell 0 0");
+		infoPanel.add(infoPanelText, "cell 0 1");
+		downloadPanel.add(downloadText, "cell 0 0");
+		downloadPanel.add(downloadProgress, "cell 0 1");
+
+		add(infoPanel, "push, cell 0 0");
+		add(downloadPanel, "push, cell 0 1");
+
+		final DownloadWorker downloadWorker = new DownloadWorker();
+		downloadWorker.addPropertyChangeListener(pcEvt -> {
+			if ("progress".equals(pcEvt.getPropertyName())) {
+				int percent = (int) pcEvt.getNewValue();
+				downloadProgress.setValue(percent);
+				downloadProgress.setString(percent + "%");
+				downloadProgress.setToolTipText(percent + "%");
+				repaint();
+			} else if (pcEvt.getNewValue() == SwingWorker.StateValue.DONE) {
+				//TODO Next step here
+				downloadProgress.setValue(100);
+				downloadText.setText("Download Finished");
+			}
+		});
+		downloadWorker.execute();}
 }

@@ -64,7 +64,7 @@ public class Core {
             error(exception);
         }
 
-		Thread updaterUpdateThread = new Thread(new UpdaterUpdate());
+		Thread updaterUpdateThread = new Thread(new Update());
 		updaterUpdateThread.start();
     }
 

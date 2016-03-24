@@ -10,9 +10,10 @@ import com.uksf.mm.utility.LogHandler;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-import java.util.Scanner;
 
+import static com.uksf.mm.core.Core.error;
 import static com.uksf.mm.utility.Info.*;
 import static com.uksf.mm.utility.LogHandler.Severity.INFO;
 
@@ -39,14 +40,18 @@ public class Update {
      */
     private static boolean versionCheck() {
         try {
-            URL url = new URL("http://www.uk-sf.com/mm/VERSION.txt");
-            Scanner scanner = new Scanner(url.openStream());
-            VERSION_LATEST = scanner.next();
-            System.out.println(VERSION);
-            System.out.println(VERSION_LATEST);
+            URL url = new URL("http://www.uk-sf.com/mm/LATEST.txt");
+            InputStream stream = url.openStream();
+			StringBuilder buffer = new StringBuilder("");
+			int character;
+			while(true) {
+				if((character = stream.read()) == -1) break;
+				buffer.append((char) character);
+			}
+			VERSION_LATEST = buffer.substring(buffer.indexOf("<Version>") + "<Version>".length(), buffer.indexOf("</Version>"));
             if(VERSION_LATEST.equals(VERSION)) return false;
         } catch(IOException e) {
-            e.printStackTrace();
+            error(e);
         }
         return true;
     }
@@ -55,19 +60,17 @@ public class Update {
      * Prompt user for update
      */
     private static void update() {
-        String message = "An update is available:\n" +
-                "        Current Version: " +
-                VERSION +
-                "\n" +
-                "        Latest Version: " +
-                VERSION_LATEST +
-                "\n\n" +
-                "Would you like to download and update to the latest version?";
+        String message =
+				"Current Version: " +
+				VERSION +
+				"\nLatest Version: " +
+				VERSION_LATEST +
+				"\n\nWould you like to download and update to the latest version?";
         JTextArea text = new JTextArea(message);
         text.setBorder(null); text.setOpaque(false); text.setFont(UIManager.getFont("Label.font"));
 
         Object[] options = {
-                "Download & Update",
+                "Update",
                 "Cancel",
                 "Cancel, don't ask again",
         };
@@ -99,13 +102,14 @@ public class Update {
                 stopShow();
                 break;
         }
+		Core.getInstanceUI().requestFocus();
     }
 
     /**
      * Runs update tasks
      */
     private static void runUpdate() {
-
+		//TODO Updater
     }
 
     /**

@@ -47,27 +47,16 @@ public class Info {
     public static final Color COLOUR_FOREGROUND_DARK = new Color(222, 106, 20);
 
     //Window settings
-    public static final Dimension WINDOW_SIZE = new Dimension(1240, 640);
-    public static final String WINDOW_TITLE = "UKSF Mission Manager - Updater";
+    public static final Dimension WINDOW_SIZE = new Dimension(400, 400);
     public static final Border BORDER_STANDARD = BorderFactory.createLineBorder(COLOUR_BACKGROUND_DARK, 1);
+	public static final Border BORDER_COLOURED = BorderFactory.createLineBorder(COLOUR_FOREGROUND, 1);
 
 	//Logos
 	public static ImageIcon LOGO_LIGHT_16;
 	public static ImageIcon LOGO_LIGHT_32;
 	public static ImageIcon LOGO_LIGHT_64;
 	public static ImageIcon LOGO_64;
-
-	//Icons
-	public static ImageIcon ICON_HOME;
-	public static ImageIcon ICON_HOME_HOVER ;
-	public static ImageIcon ICON_SETTINGS;
-	public static ImageIcon ICON_SETTINGS_HOVER;
-	public static ImageIcon ICON_MINIMIZE ;
-	public static ImageIcon ICON_MINIMIZE_HOVER;
-	public static ImageIcon ICON_MAXIMIZE;
-	public static ImageIcon ICON_MAXIMIZE_HOVER;
-	public static ImageIcon ICON_CLOSE;
-	public static ImageIcon ICON_CLOSE_HOVER;
+	public static ImageIcon LOGO_256;
 
     //Fonts
     public static Font FONT_STANDARD;

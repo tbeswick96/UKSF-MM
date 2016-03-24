@@ -7,21 +7,20 @@
 package com.uksf.updater.core;
 
 import com.uksf.updater.utility.LogHandler;
+import com.uksf.updater.utility.Network;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Scanner;
 
 import static com.uksf.updater.utility.Info.*;
+import static com.uksf.updater.utility.Network.getDataFromTag;
+import static sun.management.Agent.error;
 
 /**
  * @author Tim
  */
-public class UpdaterUpdate implements Runnable {
+public class Update implements Runnable {
 
     /**
      * Run update check
@@ -40,12 +39,10 @@ public class UpdaterUpdate implements Runnable {
      */
     private boolean versionCheck() {
         try {
-            URL url = new URL("http://www.uk-sf.com/mm/UPDATERVERSION.txt");
-            Scanner scanner = new Scanner(url.openStream());
-            VERSION_LATEST = scanner.next();
+			VERSION_LATEST = Network.getDataFromTag("<UpdaterVersion>");
             if(VERSION_LATEST.equals(VERSION)) return false;
         } catch(IOException e) {
-            e.printStackTrace();
+			error(e);
         }
         return true;
     }
@@ -54,20 +51,20 @@ public class UpdaterUpdate implements Runnable {
      * Prompt user for update
      */
     private void update() {
+		File file = new File("Update.zip");
 		try {
-			URL url = new URL("http://www.uk-sf.com/mm/UpdaterLatest.zip");
-			System.out.println(url.toString());
+			URL url = new URL(getDataFromTag("<UpdaterDownload>"));
+			LogHandler.log("Connecting to: '" + url.toString() + "'");
 			URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0");
 			connection.connect();
 
 			int filesize = connection.getContentLength();
+			LogHandler.log("File size: " + filesize);
 			if(filesize <= 0) {
-				displayError(i, null);
+				error("Cannot find file at '" + url + "'");
 			} else if(file.length() != filesize) {
-				System.out.println(filesize);
 				int totalDataRead = 0;
-
 				try (BufferedInputStream in = new BufferedInputStream(connection.getInputStream())) {
 					FileOutputStream fos = new FileOutputStream(file);
 					try (BufferedOutputStream out = new BufferedOutputStream(fos, 1024)) {
@@ -76,13 +73,14 @@ public class UpdaterUpdate implements Runnable {
 						while ((bytesRead = in.read(buffer)) >= 0) {
 							totalDataRead = totalDataRead + bytesRead;
 							out.write(buffer, 0, bytesRead);
-							setProgress((totalDataRead * 100) / filesize);
+							LogHandler.log(Integer.toString((totalDataRead * 100) / filesize));
 						}
 					}
 				}
 			}
+			LogHandler.log("Updater update downloaded to: '" + file.getAbsolutePath() + "'");
 		} catch (Exception exception) {
-			displayError(i, exception);
+			error(exception);
 		}
     }
 }

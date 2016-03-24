@@ -8,7 +8,6 @@ package com.uksf.updater.gui;
 
 
 import com.uksf.updater.gui.components.panels.MainPanel;
-import com.uksf.updater.gui.components.panels.TopPanel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -26,7 +25,6 @@ public class UI extends JFrame {
      * Panel instances
      */
     private MainPanel mainPanel;
-	private TopPanel topPanel;
 
 	/**
      * Create UI
@@ -40,7 +38,6 @@ public class UI extends JFrame {
      */
     private void initUI() {
         //Set title, size, and position
-        setTitle(WINDOW_TITLE);
         setSize(WINDOW_SIZE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -64,15 +61,14 @@ public class UI extends JFrame {
         setLayout(new MigLayout(
                 "fill", //fill space
                 "0[]0", //column constraints
-                "0[]0[]0" //row constraints
+                "0[]0" //row constraints
         ));
 
         //Create components
         createComponents();
 
         //Add components
-		add(topPanel, "grow, cell 0 0");
-        add(mainPanel, "grow, push, cell 0 1");
+        add(mainPanel, "grow, push");
 
         //Set window to visible
         setVisible(true);
@@ -82,8 +78,7 @@ public class UI extends JFrame {
      * Creates base components
      */
     private void createComponents() {
-        mainPanel = ComponentCreator.mainPanel();
-		topPanel = ComponentCreator.topPanel(this);
+        mainPanel = ComponentCreator.mainPanel(this);
     }
 
 	/**

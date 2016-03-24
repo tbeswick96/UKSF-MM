@@ -8,9 +8,9 @@ package com.uksf.updater.gui;
 
 
 import com.uksf.updater.gui.components.panels.MainPanel;
-import com.uksf.updater.gui.components.panels.TopPanel;
 
 import javax.swing.*;
+
 
 /**
  * @author Tim
@@ -21,15 +21,7 @@ class ComponentCreator {
      * Creates main panel instance
      * @return main panel instance
      */
-    static MainPanel mainPanel() {
-        return new MainPanel();
-    }
-
-	/**
-	 * Creates top panel instance
-	 * @return top panel instance
-	 */
-	static TopPanel topPanel(JFrame parent) {
-		return new TopPanel(parent);
+    static MainPanel mainPanel(JFrame parent) {
+			return new MainPanel(parent);
 	}
 }

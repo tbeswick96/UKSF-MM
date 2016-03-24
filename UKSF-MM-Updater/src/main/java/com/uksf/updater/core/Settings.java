@@ -49,7 +49,7 @@ public class Settings {
         LogHandler.log("User settings updated: ");
         //UPDATE_CHECK = preferences.getBoolean("update_check", true);
 
-        //LogHandler.log(TAB + "UpdaterUpdate check: " + UPDATE_CHECK);
+        //LogHandler.log(TAB + "Update check: " + UPDATE_CHECK);
     }
 
     /**
