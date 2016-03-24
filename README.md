@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/tbeswick96/UKSF-MM/blob/develop/src/main/resources/assets/logos/uksfSource.png" width="256">
+    <img src="https://github.com/tbeswick96/UKSF-MM/raw/master/src/main/resources/assets/logos/uksfSource.png" width="256">
 </p>
 <p align="center">
     <a href="https://github.com/tbeswick96/UKSF-MM/releases">
