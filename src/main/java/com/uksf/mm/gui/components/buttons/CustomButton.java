@@ -19,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import static com.uksf.mm.core.Core.error;
 import static com.uksf.mm.utility.Info.BORDER_STANDARD;
+import static com.uksf.mm.utility.Info.COLOUR_FOREGROUND_DARK;
 import static com.uksf.mm.utility.Info.COLOUR_TRANSPARENT;
 import static com.uksf.mm.utility.LogHandler.Severity;
 import static com.uksf.mm.utility.LogHandler.logSeverity;
@@ -31,7 +32,7 @@ public class CustomButton extends JPanel implements MouseListener {
     /**
      * Hover state. True when hovering, false when not
      */
-    private boolean hovered = false;
+    private boolean hovered = false, pressed = false;
 
 	private int width, height, hoverOffset;
 
@@ -111,7 +112,12 @@ public class CustomButton extends JPanel implements MouseListener {
         if(hovered) {
 			g.setColor(hoveredColour);
 			g.fillRect(0, 0, width, height);
-            g.drawImage(icon_hovered, 0, 0, width, height, null);
+			if(pressed) {
+				g.setColor(COLOUR_FOREGROUND_DARK);
+				g.drawImage(icon_hovered, hoverOffset/2, hoverOffset/2, width - hoverOffset, height - hoverOffset, null);
+			} else {
+				g.drawImage(icon_hovered, 0, 0, width, height, null);
+			}
         } else {
 			g.setColor(COLOUR_TRANSPARENT);
 			g.fillRect(0, 0, width, height);
@@ -141,13 +147,6 @@ public class CustomButton extends JPanel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        try {
-            Invokable.class.getMethod(toCall).invoke(Invokable.instance);
-        } catch(NoSuchMethodException exception) {
-            logSeverity(Severity.CRITICAL, "No such method: " + toCall);
-        } catch (InvocationTargetException | IllegalAccessException exception) {
-            error(exception);
-        }
     }
 
     /**
@@ -156,6 +155,8 @@ public class CustomButton extends JPanel implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
+		pressed = true;
+		repaint();
     }
 
     /**
@@ -164,6 +165,15 @@ public class CustomButton extends JPanel implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+		pressed = false;
+		repaint();
+		try {
+			Invokable.class.getMethod(toCall).invoke(Invokable.instance);
+		} catch(NoSuchMethodException exception) {
+			logSeverity(Severity.CRITICAL, "No such method: " + toCall);
+		} catch (InvocationTargetException | IllegalAccessException exception) {
+			error(exception);
+		}
     }
 
     /**

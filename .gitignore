@@ -26,3 +26,5 @@ proguard/
 .gradle/
 build/
 bin/
+
+runTest/

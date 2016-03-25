@@ -163,6 +163,7 @@ public class UI extends JFrame implements MouseInputListener {
      * @param newState state value to change to
      */
     public void changeState(int newState) {
+		LogHandler.logNoTime(HASHSPACE);
         LogHandler.logSeverity(INFO, "State change requested. Current state: " + state + " Requested State: " + newState);
         if(state != newState) {
             state = newState;

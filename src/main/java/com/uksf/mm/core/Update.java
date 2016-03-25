@@ -111,6 +111,7 @@ public class Update {
      * Runs update tasks
      */
     private static void runUpdate() {
+		LogHandler.logNoTime(HASHSPACE);
 		LogHandler.logSeverity(INFO, "Updating");
 		try {
 			Runtime.getRuntime().exec("UKSF-MM-Updater.exe");
@@ -128,6 +129,7 @@ public class Update {
     }
 
 	private static void updateUpdater() {
+		LogHandler.logNoTime(HASHSPACE);
 		LogHandler.logSeverity(INFO, "Updating the updater");
 		final InstallWorker installWorker = new InstallWorker();
 		installWorker.addPropertyChangeListener(pcEvt -> {

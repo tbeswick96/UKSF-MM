@@ -29,7 +29,7 @@ public class CustomButtonText extends JPanel implements MouseListener {
     /**
      * Hover state. True when hovering, false when not
      */
-    private boolean hovered = false;
+    private boolean hovered = false, pressed = false;
 
     /**
      * Text to display
@@ -108,19 +108,20 @@ public class CustomButtonText extends JPanel implements MouseListener {
 		if(!isEnabled()) {
 			g.setColor(COLOUR_BACKGROUND_LIGHT);
 			g.fillRect(0, 0, width, height);
-			g.setColor(COLOUR_BACKGROUND_DARK);
-			g.drawString(text, x, y);
 		} else if(hovered) {
-            g.setColor(COLOUR_FOREGROUND_DARK);
-            g.fillRect(0, 0, width, height);
-            g.setColor(COLOUR_BACKGROUND_DARK);
-            g.drawString(text, x, y);
+			if(pressed) {
+				g.setColor(COLOUR_FOREGROUND_DARK);
+				g.fillRect(1, 1, width - 2, height - 2);
+			} else {
+				g.setColor(COLOUR_FOREGROUND_DARK);
+				g.fillRect(0, 0, width, height);
+			}
         } else {
             g.setColor(COLOUR_FOREGROUND);
             g.fillRect(1, 1, width - 2, height - 2);
-            g.setColor(COLOUR_BACKGROUND_DARK);
-            g.drawString(text, x, y);
         }
+		g.setColor(COLOUR_BACKGROUND_DARK);
+		g.drawString(text, x, y);
     }
 
     /**
@@ -128,29 +129,36 @@ public class CustomButtonText extends JPanel implements MouseListener {
      * @param e event
      */
     @Override
-    public void mouseClicked(MouseEvent e) {
-        try {
-            Invokable.class.getMethod(toCall).invoke(Invokable.instance);
-        } catch(NoSuchMethodException exception) {
-            logSeverity(Severity.CRITICAL, "No such method: " + toCall);
-        } catch (InvocationTargetException | IllegalAccessException exception) {
-            error(exception);
-        }
-    }
+    public void mouseClicked(MouseEvent e) {}
 
     /**
      * Mouse pressed event
      * @param e event
      */
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+		pressed = true;
+		repaint();
+	}
 
     /**
      * Mouse released event
      * @param e event
      */
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+		pressed = false;
+		repaint();
+		if(isEnabled()) {
+			try {
+				Invokable.class.getMethod(toCall).invoke(Invokable.instance);
+			} catch(NoSuchMethodException exception) {
+				logSeverity(Severity.CRITICAL, "No such method: " + toCall);
+			} catch(InvocationTargetException | IllegalAccessException exception) {
+				error(exception);
+			}
+		}
+	}
 
     /**
      * Mouse entered event
