@@ -36,12 +36,12 @@ public class Core {
     public Core() {
         instance = this;
 
-        LogHandler.log("Updater started");
+        LogHandler.log("Started");
 
         //Set look and feel to OS default, and load fonts
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            LogHandler.log("Updater look & Feel set to " + UIManager.getSystemLookAndFeelClassName());
+            LogHandler.log("Look & Feel set to " + UIManager.getSystemLookAndFeelClassName());
 			FontLoad.instance.loadFonts();
 			ImageLoad.instance.loadImages();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | FontFormatException | IOException e) {
@@ -56,17 +56,35 @@ public class Core {
      * Initialise data and UI
      */
     private void initialise() {
+		//Get program settings
+		Settings.init();
+
         //Create UI
         try {
             SwingUtilities.invokeLater(() -> instanceUI = new UI());
-            LogHandler.log("Updater UI Started");
+            LogHandler.log("UI Started");
         } catch(Exception exception) {
             error(exception);
         }
 
 		Thread updaterUpdateThread = new Thread(new Update());
 		updaterUpdateThread.start();
-    }
+	}
+
+	public void runMain() {
+		final InstallWorker installWorker = new InstallWorker();
+		installWorker.addPropertyChangeListener(pcEvt -> {
+			if(pcEvt.getNewValue() == SwingWorker.StateValue.DONE) {
+				try {
+					Runtime.getRuntime().exec("UKSF-MM.exe");
+				} catch (Exception exception) {
+					error(exception);
+				}
+				System.exit(0);
+			}
+		});
+		installWorker.execute();
+	}
 
     /**
      * Get instance of program
@@ -103,7 +121,7 @@ public class Core {
                 return new Dimension(500, 300);
             }
         };
-        JOptionPane.showMessageDialog(null, print, "Updater Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, print, "Error", JOptionPane.ERROR_MESSAGE);
         LogHandler.log(builder.toString());
         System.exit(0);
     }

@@ -20,7 +20,7 @@ import java.util.Date;
 @SuppressWarnings("ALL")
 public class Info {
     //Program settings
-    public static final String VERSION = "0.1";
+    public static final String VERSION = "0.2";
     public static String VERSION_LATEST = "0.1";
 
     //Directories
@@ -35,6 +35,7 @@ public class Info {
     public static boolean UPDATE_CHECK;
     public static boolean UPDATE_WEEK;
     public static String UPDATE_TIME;
+	public static boolean UPDATER_UPDATED;
 
     //Colours
     public static final Color COLOUR_WHITE = new Color(255, 255, 255);
@@ -76,7 +77,7 @@ public class Info {
     //Fonts
     public static Font FONT_STANDARD;
     public static Font FONT_THIN;
-    public static Font FONT_TOOLTIP;
+	public static Font FONT_TOOLTIP;
 
     //Date
     public static DateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd__hh-mm-ss");

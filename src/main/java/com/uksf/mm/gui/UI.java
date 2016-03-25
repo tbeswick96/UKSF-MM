@@ -177,6 +177,18 @@ public class UI extends JFrame implements MouseInputListener {
     }
 
 	/**
+	 * Switches the state of the update button in the settings panel
+	 * @param state new enabled state
+	 */
+	public void enableUpdate(boolean state) {
+		try {
+			SwingUtilities.invokeLater(() -> settingsPanel.enableUpdate(state));
+		} catch(Exception exception) {
+			error(exception);
+		}
+	}
+
+	/**
 	 * Minimizes program
 	 */
 	public void minimize() {

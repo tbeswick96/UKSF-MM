@@ -69,5 +69,13 @@ public class SettingsPanel extends JPanel {
         checkOnLaunch.addActionListener(e -> Settings.set("update_check", true));
         checkWeekly.addActionListener(e -> Settings.setMultiple(new String[]{"update_week", "update_time"}, new Object[]{true, Settings.weekAhead()}));
         checkNever.addActionListener(e -> Settings.setMultiple(new String[]{"update_check", "update_week"}, new Object[]{false, false}));
+		enableUpdate(false);
     }
+	/**
+	 * Switches the state of the update button in the settings panel
+	 * @param state new enabled state
+	 */
+	public void enableUpdate(boolean state) {
+		updateNow.setEnabled(state);
+	}
 }

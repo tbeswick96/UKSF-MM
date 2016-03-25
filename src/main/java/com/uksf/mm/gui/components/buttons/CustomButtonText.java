@@ -91,21 +91,26 @@ public class CustomButtonText extends JPanel implements MouseListener {
      */
     @Override
     public void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-        Graphics2D g = (Graphics2D) graphics;
-        g.setFont(font);
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		super.paintComponent(graphics);
+		Graphics2D g = (Graphics2D) graphics;
+		g.setFont(font);
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int stringWidth = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getWidth();
-        int stringHeight = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getHeight();
-        width = (int) (stringWidth * 1.2);
-        height = (int) (stringHeight * 1.5);
-        int x = (width / 2) - (stringWidth / 2);
-        int y = (height - stringHeight) * 2;
-        setSize(width, height);
-        revalidate();
+		int stringWidth = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getWidth();
+		int stringHeight = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getHeight();
+		width = (int) (stringWidth * 1.2);
+		height = (int) (stringHeight * 1.5);
+		int x = (width / 2) - (stringWidth / 2);
+		int y = (height - stringHeight) * 2;
+		setSize(width, height);
+		revalidate();
 
-        if(hovered) {
+		if(!isEnabled()) {
+			g.setColor(COLOUR_BACKGROUND_LIGHT);
+			g.fillRect(0, 0, width, height);
+			g.setColor(COLOUR_BACKGROUND_DARK);
+			g.drawString(text, x, y);
+		} else if(hovered) {
             g.setColor(COLOUR_FOREGROUND_DARK);
             g.fillRect(0, 0, width, height);
             g.setColor(COLOUR_BACKGROUND_DARK);

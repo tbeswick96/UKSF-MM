@@ -31,10 +31,12 @@ public class Update {
             LogHandler.logNoTime(HASHSPACE);
             LogHandler.logSeverity(INFO, "Update is available. Current version: '" + VERSION + "' Latest version: '" + VERSION_LATEST + "'");
             update();
-        }
+			Core.getInstanceUI().enableUpdate(true);
+		}
+		if(UPDATER_UPDATED) {updateUpdater();}
     }
 
-    /**
+	/**
      * Check version against online version
      * @return true if version is different
      */
@@ -109,7 +111,13 @@ public class Update {
      * Runs update tasks
      */
     private static void runUpdate() {
-		//TODO Updater
+		LogHandler.logSeverity(INFO, "Updating");
+		try {
+			Runtime.getRuntime().exec("UKSF-MM-Updater.exe");
+		} catch (Exception exception) {
+			error(exception);
+		}
+		System.exit(0);
     }
 
     /**
@@ -118,4 +126,15 @@ public class Update {
     private static void stopShow() {
 		Settings.setMultiple(new String[]{"update_check", "update_week"}, new Object[]{false, false});
     }
+
+	private static void updateUpdater() {
+		LogHandler.logSeverity(INFO, "Updating the updater");
+		final InstallWorker installWorker = new InstallWorker();
+		installWorker.addPropertyChangeListener(pcEvt -> {
+			if(pcEvt.getNewValue() == SwingWorker.StateValue.DONE) {
+				Settings.set("updater_updated", false);
+			}
+		});
+		installWorker.execute();
+	}
 }

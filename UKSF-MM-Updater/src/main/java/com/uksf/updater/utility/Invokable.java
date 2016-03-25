@@ -23,7 +23,7 @@ public class Invokable {
 	 * Closes program
 	 */
 	public void close() {
-		LogHandler.log("Updater closing");
+		LogHandler.log("Closing");
 		System.exit(0);
 	}
 
@@ -31,7 +31,7 @@ public class Invokable {
 	 * Minimizes program
 	 */
 	public void minimize() {
-		LogHandler.log("Updater minimizing");
+		LogHandler.log("Minimizing");
 		Core.getInstanceUI().minimize();
 	}
 
@@ -39,7 +39,7 @@ public class Invokable {
 	 * Maximizes program
 	 */
 	public void maximize() {
-		LogHandler.log("Updater maximizing");
+		LogHandler.log("Maximizing");
 		Core.getInstanceUI().maximize();
 	}
 }

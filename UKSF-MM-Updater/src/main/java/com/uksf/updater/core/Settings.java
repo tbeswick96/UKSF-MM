@@ -27,18 +27,9 @@ public class Settings {
      * Check if program has run before and handle settings accordingly
      */
     static void init() {
-        preferences = Preferences.userNodeForPackage(Core.class);
+		preferences = Preferences.userRoot().node("uksf-mm");
         LogHandler.logNoTime(HASHSPACE);
         LogHandler.log("Settings loaded: " + preferences.absolutePath());
-
-        HAS_SETUP = preferences.getBoolean("has_setup", false);
-        LogHandler.log(TAB + "Setup? " + HAS_SETUP);
-        if(HAS_SETUP) {
-            getSettings();
-        } else {
-            setSettings();
-        }
-        LogHandler.logNoTime(HASHSPACE);
     }
 
     /**
@@ -47,16 +38,9 @@ public class Settings {
     private static void getSettings() {
         LogHandler.logNoTime(HASHSPACE);
         LogHandler.log("User settings updated: ");
-        //UPDATE_CHECK = preferences.getBoolean("update_check", true);
+        UPDATER_UPDATED = preferences.getBoolean("updater_updated", true);
 
-        //LogHandler.log(TAB + "Update check: " + UPDATE_CHECK);
-    }
-
-    /**
-     * If program has not run before, set settings
-     */
-    private static void setSettings() {
-        preferences.putBoolean("has_setup", true);
+        LogHandler.log(TAB + "Update check: " + UPDATER_UPDATED);
     }
 
     /**

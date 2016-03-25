@@ -13,9 +13,9 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 
+import static com.uksf.updater.core.Core.error;
 import static com.uksf.updater.utility.Info.*;
 import static com.uksf.updater.utility.Network.getDataFromTag;
-import static sun.management.Agent.error;
 
 /**
  * @author Tim
@@ -30,6 +30,7 @@ public class Update implements Runnable {
             LogHandler.logNoTime(HASHSPACE);
             LogHandler.log("Updater update is available. Current version: '" + VERSION + "' Latest version: '" + VERSION_LATEST + "'");
             update();
+			Settings.set("updater_updated", true);
         }
     }
 
@@ -51,7 +52,7 @@ public class Update implements Runnable {
      * Prompt user for update
      */
     private void update() {
-		File file = new File("Update.zip");
+		File file = new File("Updater.zip");
 		try {
 			URL url = new URL(getDataFromTag("<UpdaterDownload>"));
 			LogHandler.log("Connecting to: '" + url.toString() + "'");
@@ -62,7 +63,7 @@ public class Update implements Runnable {
 			int filesize = connection.getContentLength();
 			LogHandler.log("File size: " + filesize);
 			if(filesize <= 0) {
-				error("Cannot find file at '" + url + "'");
+				LogHandler.log("Cannot find file at '" + url + "'");
 			} else if(file.length() != filesize) {
 				int totalDataRead = 0;
 				try (BufferedInputStream in = new BufferedInputStream(connection.getInputStream())) {
@@ -73,7 +74,6 @@ public class Update implements Runnable {
 						while ((bytesRead = in.read(buffer)) >= 0) {
 							totalDataRead = totalDataRead + bytesRead;
 							out.write(buffer, 0, bytesRead);
-							LogHandler.log(Integer.toString((totalDataRead * 100) / filesize));
 						}
 					}
 				}

@@ -14,7 +14,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 
-import static sun.management.Agent.error;
+import static com.uksf.updater.core.Core.*;
 
 /**
  * @author Tim
@@ -34,7 +34,7 @@ public class DownloadWorker extends SwingWorker<Void, Void> {
 			int filesize = connection.getContentLength();
 			LogHandler.log("File size: " + filesize);
 			if(filesize <= 0) {
-				error("Cannot find file at '" + url + "'");
+				LogHandler.log("Cannot find file at '" + url + "'");
 			} else if(file.length() != filesize) {
 				System.out.println("test");
 				long totalDataRead = 0;
@@ -47,7 +47,6 @@ public class DownloadWorker extends SwingWorker<Void, Void> {
 							totalDataRead = totalDataRead + bytesRead;
 							out.write(buffer, 0, bytesRead);
 							int percent = (int) ((totalDataRead * 100) / filesize);
-							LogHandler.log(Integer.toString(percent) + "%");
 							setProgress(percent);
 						}
 					}

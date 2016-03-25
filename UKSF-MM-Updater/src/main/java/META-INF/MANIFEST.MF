@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.uksf.updater.Run
+Class-Path: miglayout-swing-5.1-20160312.230028-352.jar miglayout-core-5.1-20160312.230016-352.jar commons-io-2.4.jar
+Application-Name: UKSF-MM-Updater

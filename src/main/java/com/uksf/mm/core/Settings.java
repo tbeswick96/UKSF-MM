@@ -31,17 +31,16 @@ public class Settings {
      * Check if program has run before and handle settings accordingly
      */
     static void init() {
-        preferences = Preferences.userNodeForPackage(Core.class);
+        preferences = Preferences.userRoot().node("uksf-mm");
         LogHandler.logNoTime(HASHSPACE);
         LogHandler.logSeverity(INFO, "Settings loaded: " + preferences.absolutePath());
 
         HAS_SETUP = preferences.getBoolean("has_setup", false);
         LogHandler.logSeverity(INFO, TAB + "Setup? " + HAS_SETUP);
-        if(HAS_SETUP) {
-            getSettings();
-        } else {
-            setSettings();
+        if(!HAS_SETUP) {
+			setSettings();
         }
+		getSettings();
         LogHandler.logNoTime(HASHSPACE);
     }
 
@@ -54,10 +53,12 @@ public class Settings {
         UPDATE_CHECK = preferences.getBoolean("update_check", true);
         UPDATE_WEEK = preferences.getBoolean("update_week", false);
         UPDATE_TIME = preferences.get("update_time", weekAhead());
+		UPDATER_UPDATED = preferences.getBoolean("updater_updated", false);
 
         LogHandler.logSeverity(INFO, TAB + "Update check: " + UPDATE_CHECK);
         LogHandler.logSeverity(INFO, TAB + "Update week: " + UPDATE_WEEK);
         LogHandler.logSeverity(INFO, TAB + "Update time: " + UPDATE_TIME);
+		LogHandler.logSeverity(INFO, TAB + "Updater updated: " + UPDATER_UPDATED);
     }
 
     /**
@@ -68,6 +69,7 @@ public class Settings {
         preferences.putBoolean("update_check", true);
         preferences.putBoolean("update_week", false);
         preferences.put("update_time", weekAhead());
+		preferences.putBoolean("updater_updated", false);
     }
 
     /**

@@ -6,6 +6,7 @@
 
 package com.uksf.updater.gui.components.panels;
 
+import com.uksf.updater.core.Core;
 import com.uksf.updater.core.DownloadWorker;
 import com.uksf.updater.gui.components.buttons.CustomProgressBar;
 import com.uksf.updater.utility.Network;
@@ -87,6 +88,7 @@ public class MainPanel extends JPanel {
 		add(infoPanel, "push, cell 0 0");
 		add(downloadPanel, "push, cell 0 1");
 
+
 		final DownloadWorker downloadWorker = new DownloadWorker();
 		downloadWorker.addPropertyChangeListener(pcEvt -> {
 			if ("progress".equals(pcEvt.getPropertyName())) {
@@ -96,10 +98,11 @@ public class MainPanel extends JPanel {
 				downloadProgress.setToolTipText(percent + "%");
 				repaint();
 			} else if (pcEvt.getNewValue() == SwingWorker.StateValue.DONE) {
-				//TODO Next step here
 				downloadProgress.setValue(100);
 				downloadText.setText("Download Finished");
+				Core.getInstance().runMain();
 			}
 		});
-		downloadWorker.execute();}
+		SwingUtilities.invokeLater(downloadWorker:: execute);
+	}
 }

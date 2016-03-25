@@ -31,7 +31,7 @@ public class LogHandler {
      */
     public LogHandler() {
         createLogFile();
-		log("Updater log Created");
+		log("Log Created");
         LogHandler.logNoTime(HASHSPACE);
     }
 

@@ -20,18 +20,16 @@ import java.util.Date;
 @SuppressWarnings("ALL")
 public class Info {
     //Program settings
-    public static final String VERSION = "0.1";
+    public static final String VERSION = "0.2";
     public static String VERSION_LATEST = "0.1";
+	public static boolean UPDATER_UPDATED;
 
-    //Directories
+	//Directories
 	static File APPDATA = new File(System.getenv("LOCALAPPDATA"));
 	static File LOGS = new File(APPDATA + "\\UKSF-MM\\");
 	public static String ICONS = "/assets/icons/";
 	public static String LOGOS = "/assets/logos/";
 	public static String FONTS = "/assets/fonts/";
-
-    //User Settings
-    public static boolean HAS_SETUP;
 
     //Colours
     public static final Color COLOUR_WHITE = new Color(255, 255, 255);
