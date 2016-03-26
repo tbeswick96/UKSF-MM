@@ -12,16 +12,16 @@ import com.uksf.mm.core.Settings;
 import com.uksf.mm.gui.components.buttons.CustomButtonText;
 import com.uksf.mm.gui.components.buttons.CustomRadioButton;
 import com.uksf.mm.gui.components.labels.CustomLabel;
-import com.uksf.mm.utility.Info;
-import com.uksf.mm.utility.LogHandler;
+import com.uksf.mm.core.utility.Info;
+import com.uksf.mm.core.utility.LogHandler;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-import static com.uksf.mm.utility.Info.*;
-import static com.uksf.mm.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.Info.*;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
 /**
  * @author Tim

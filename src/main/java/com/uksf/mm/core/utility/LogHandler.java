@@ -4,7 +4,7 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.utility;
+package com.uksf.mm.core.utility;
 
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.FileFileFilter;
@@ -13,8 +13,8 @@ import java.io.*;
 import java.util.Arrays;
 
 import static com.uksf.mm.core.Core.error;
-import static com.uksf.mm.utility.Info.*;
-import static com.uksf.mm.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.Info.*;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
 /**
  * @author Tim

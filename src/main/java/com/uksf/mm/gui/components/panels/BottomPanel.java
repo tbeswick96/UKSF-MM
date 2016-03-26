@@ -15,7 +15,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import static com.uksf.mm.utility.Info.*;
+import static com.uksf.mm.core.utility.Info.*;
 
 /**
  * @author Tim

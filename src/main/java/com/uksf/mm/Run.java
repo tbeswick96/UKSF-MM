@@ -7,7 +7,7 @@
 package com.uksf.mm;
 
 import com.uksf.mm.core.Core;
-import com.uksf.mm.utility.LogHandler;
+import com.uksf.mm.core.utility.LogHandler;
 
 import javax.swing.*;
 

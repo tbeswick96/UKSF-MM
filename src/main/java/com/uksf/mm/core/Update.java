@@ -6,7 +6,7 @@
 
 package com.uksf.mm.core;
 
-import com.uksf.mm.utility.LogHandler;
+import com.uksf.mm.core.utility.LogHandler;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -14,8 +14,8 @@ import java.io.InputStream;
 import java.net.URL;
 
 import static com.uksf.mm.core.Core.error;
-import static com.uksf.mm.utility.Info.*;
-import static com.uksf.mm.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.Info.*;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
 /**
  * @author Tim

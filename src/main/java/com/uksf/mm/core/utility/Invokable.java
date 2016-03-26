@@ -4,12 +4,12 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.utility;
+package com.uksf.mm.core.utility;
 
 import com.uksf.mm.core.Core;
 import com.uksf.mm.core.Update;
 
-import static com.uksf.mm.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
 /**
  * @author Tim

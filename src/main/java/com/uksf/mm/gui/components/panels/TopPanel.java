@@ -7,7 +7,7 @@
 package com.uksf.mm.gui.components.panels;
 
 import com.uksf.mm.gui.components.buttons.CustomButton;
-import com.uksf.mm.utility.StringMetrics;
+import com.uksf.mm.core.utility.StringMetrics;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -16,7 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-import static com.uksf.mm.utility.Info.*;
+import static com.uksf.mm.core.utility.Info.*;
 
 /**
  * @author Tim

@@ -8,7 +8,7 @@ package com.uksf.mm.gui;
 
 
 import com.uksf.mm.gui.components.panels.*;
-import com.uksf.mm.utility.LogHandler;
+import com.uksf.mm.core.utility.LogHandler;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -18,8 +18,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import static com.uksf.mm.core.Core.error;
-import static com.uksf.mm.utility.Info.*;
-import static com.uksf.mm.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.Info.*;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
 /**
  * @author Tim

@@ -11,8 +11,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.uksf.mm.utility.Info.BORDER_STANDARD;
-import static com.uksf.mm.utility.Info.FONT_STANDARD;
+import static com.uksf.mm.core.utility.Info.BORDER_STANDARD;
+import static com.uksf.mm.core.utility.Info.FONT_STANDARD;
 
 /**
  * @author Tim

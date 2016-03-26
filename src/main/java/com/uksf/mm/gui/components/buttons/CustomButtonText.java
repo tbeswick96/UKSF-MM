@@ -7,8 +7,8 @@
 package com.uksf.mm.gui.components.buttons;
 
 
-import com.uksf.mm.utility.Invokable;
-import com.uksf.mm.utility.StringMetrics;
+import com.uksf.mm.core.utility.Invokable;
+import com.uksf.mm.core.utility.StringMetrics;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +17,9 @@ import java.awt.event.MouseListener;
 import java.lang.reflect.InvocationTargetException;
 
 import static com.uksf.mm.core.Core.error;
-import static com.uksf.mm.utility.Info.*;
-import static com.uksf.mm.utility.LogHandler.Severity;
-import static com.uksf.mm.utility.LogHandler.logSeverity;
+import static com.uksf.mm.core.utility.Info.*;
+import static com.uksf.mm.core.utility.LogHandler.Severity;
+import static com.uksf.mm.core.utility.LogHandler.logSeverity;
 
 /**
  * @author Tim

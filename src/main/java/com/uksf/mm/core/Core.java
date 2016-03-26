@@ -7,19 +7,20 @@
 package com.uksf.mm.core;
 
 
+import com.uksf.mm.core.utility.loaders.MapLoad;
 import com.uksf.mm.gui.UI;
-import com.uksf.mm.utility.LogHandler;
-import com.uksf.mm.utility.loaders.FontLoad;
-import com.uksf.mm.utility.loaders.ImageLoad;
+import com.uksf.mm.core.utility.LogHandler;
+import com.uksf.mm.core.utility.loaders.FontLoad;
+import com.uksf.mm.core.utility.loaders.ImageLoad;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.text.ParseException;
 
-import static com.uksf.mm.utility.Info.*;
-import static com.uksf.mm.utility.LogHandler.Severity.ERROR;
-import static com.uksf.mm.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.Info.*;
+import static com.uksf.mm.core.utility.LogHandler.Severity.ERROR;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
 /**
  * @author Tim
@@ -79,6 +80,8 @@ public class Core {
         if(UPDATE_CHECK || (UPDATE_WEEK && isWeekAhead())){
             Update.run();
         }
+
+		MapLoad.loadMaps();
     }
 
 	/**

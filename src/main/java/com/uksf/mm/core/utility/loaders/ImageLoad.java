@@ -4,15 +4,15 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.utility.loaders;
+package com.uksf.mm.core.utility.loaders;
 
-import com.uksf.mm.utility.LogHandler;
+import com.uksf.mm.core.utility.LogHandler;
 
 import javax.swing.*;
 import java.io.IOException;
 
-import static com.uksf.mm.utility.Info.*;
-import static com.uksf.mm.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.Info.*;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 import static org.apache.commons.io.IOUtils.toByteArray;
 
 /**

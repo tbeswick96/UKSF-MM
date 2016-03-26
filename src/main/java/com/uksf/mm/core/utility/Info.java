@@ -4,7 +4,7 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.utility;
+package com.uksf.mm.core.utility;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,6 +12,7 @@ import java.awt.*;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -92,4 +93,8 @@ public class Info {
 
 	//Utilities
 	public static JFileChooser FILE_CHOOSER;
+
+	//Dropdowns
+	public static ArrayList<String> MAPS;
+	public static ArrayList<String> MISSIONS;
 }
