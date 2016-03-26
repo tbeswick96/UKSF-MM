@@ -78,7 +78,7 @@ public class UI extends JFrame {
      * Creates base components
      */
     private void createComponents() {
-        mainPanel = ComponentCreator.mainPanel(this);
+        mainPanel = new MainPanel(this);
     }
 
 	/**

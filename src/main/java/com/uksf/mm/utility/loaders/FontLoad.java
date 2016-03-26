@@ -33,8 +33,8 @@ public class FontLoad {
         LogHandler.logNoTime(HASHSPACE);
         LogHandler.logSeverity(INFO, "Loading fonts");
 		FONT_STANDARD = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream(FONTS + "Bariol_Light.otf"));
-        FONT_THIN = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream(FONTS + "Bariol_Light.otf"));
-        FONT_TOOLTIP = new Font(FONT_THIN.getFontName(), FONT_THIN.getStyle(), 16);
+		FONT_BOLD = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream(FONTS + "Bariol_Regular.otf"));
+        FONT_TOOLTIP = new Font(FONT_STANDARD.getFontName(), FONT_STANDARD.getStyle(), 16);
         LogHandler.logSeverity(INFO, "Fonts loaded");
     }
 }

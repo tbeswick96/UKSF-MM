@@ -25,7 +25,7 @@ public class Info {
 
     //Directories
 	static File APPDATA = new File(System.getenv("LOCALAPPDATA"));
-	static File LOGS = new File(APPDATA + "\\UKSF-MM\\");
+	static File LOGS = new File(APPDATA + "/UKSF-MM/");
 	public static String ICONS = "/assets/icons/";
 	public static String LOGOS = "/assets/logos/";
 	public static String FONTS = "/assets/fonts/";
@@ -36,6 +36,7 @@ public class Info {
     public static boolean UPDATE_WEEK;
     public static String UPDATE_TIME;
 	public static boolean UPDATER_UPDATED;
+	public static String FOLDER_MISSIONS;
 
     //Colours
     public static final Color COLOUR_WHITE = new Color(255, 255, 255);
@@ -55,6 +56,7 @@ public class Info {
     public static final Dimension WINDOW_SIZE_MIN = new Dimension(600, 400);
     public static final String WINDOW_TITLE = "UKSF Mission Manager";
     public static final Border BORDER_STANDARD = BorderFactory.createLineBorder(COLOUR_BACKGROUND_DARK, 1);
+	public static final Border BORDER_COLOURED = BorderFactory.createLineBorder(COLOUR_FOREGROUND, 1);
 
     //Logos
     public static ImageIcon LOGO_LIGHT_16;
@@ -76,7 +78,7 @@ public class Info {
 
     //Fonts
     public static Font FONT_STANDARD;
-    public static Font FONT_THIN;
+	public static Font FONT_BOLD;
 	public static Font FONT_TOOLTIP;
 
     //Date
@@ -87,4 +89,7 @@ public class Info {
     //Strings
     public static String TAB = "    ";
     public static String HASHSPACE = "\n#############################################";
+
+	//Utilities
+	public static JFileChooser FILE_CHOOSER;
 }

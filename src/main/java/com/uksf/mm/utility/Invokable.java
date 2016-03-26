@@ -46,6 +46,14 @@ public class Invokable {
 	}
 
 	/**
+	 * Changes missions folder
+	 */
+	public void changeMissionsFolder() {
+		LogHandler.logSeverity(INFO, "Invokable changeMissionsFolder called");
+		Core.getInstanceUI().changeMissionsFolder();
+	}
+
+	/**
 	 * Closes program
 	 */
 	public void close() {

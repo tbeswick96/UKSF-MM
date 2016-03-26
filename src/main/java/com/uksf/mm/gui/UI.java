@@ -7,10 +7,7 @@
 package com.uksf.mm.gui;
 
 
-import com.uksf.mm.gui.components.panels.BottomPanel;
-import com.uksf.mm.gui.components.panels.MainPanel;
-import com.uksf.mm.gui.components.panels.SettingsPanel;
-import com.uksf.mm.gui.components.panels.TopPanel;
+import com.uksf.mm.gui.components.panels.*;
 import com.uksf.mm.utility.LogHandler;
 import net.miginfocom.swing.MigLayout;
 
@@ -50,6 +47,7 @@ public class UI extends JFrame implements MouseInputListener {
     private MainPanel mainPanel;
 	private TopPanel topPanel;
     private BottomPanel bottomPanel;
+	private HomePanel homePanel;
     private SettingsPanel settingsPanel;
 
     /**
@@ -74,7 +72,6 @@ public class UI extends JFrame implements MouseInputListener {
         setSize(WINDOW_SIZE);
         setMinimumSize(WINDOW_SIZE_MIN);
         setLocationRelativeTo(null);
-        setResizable(true);
 		setUndecorated(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,10 +116,11 @@ public class UI extends JFrame implements MouseInputListener {
      * Creates base components
      */
     private void createComponents() {
-        mainPanel = ComponentCreator.mainPanel();
-		topPanel = ComponentCreator.topPanel(this);
-        bottomPanel = ComponentCreator.bottomPanel();
-        settingsPanel = ComponentCreator.settingsPanel();
+		topPanel = new TopPanel(this);
+		mainPanel = new MainPanel();
+        bottomPanel = new BottomPanel();
+		homePanel = new HomePanel();
+        settingsPanel = new SettingsPanel();
     }
 
     /**
@@ -134,6 +132,8 @@ public class UI extends JFrame implements MouseInputListener {
         switch(state) {
             case 0:
                 LogHandler.logSeverity(INFO, "State 0");
+				mainPanel.add(homePanel, "grow, push, cell 0 0");
+				added.add(homePanel);
                 break;
             case 50:
                 LogHandler.logSeverity(INFO, "State 50");
@@ -184,6 +184,17 @@ public class UI extends JFrame implements MouseInputListener {
 	public void enableUpdate(boolean state) {
 		try {
 			SwingUtilities.invokeLater(() -> settingsPanel.enableUpdate(state));
+		} catch(Exception exception) {
+			error(exception);
+		}
+	}
+
+	/**
+	 * Opens file chooser to change missions folder
+	 */
+	public void changeMissionsFolder() {
+		try {
+			SwingUtilities.invokeLater(() -> settingsPanel.changeMissionsFolder());
 		} catch(Exception exception) {
 			error(exception);
 		}

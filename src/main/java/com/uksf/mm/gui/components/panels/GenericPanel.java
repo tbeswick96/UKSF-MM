@@ -14,7 +14,7 @@ import java.awt.*;
 /**
  * @author Tim
  */
-class GenericPanel extends JPanel {
+public class GenericPanel extends JPanel {
 
     /**
      * Creates a generic panel with miglayout constraints
@@ -22,7 +22,7 @@ class GenericPanel extends JPanel {
      * @param columns column constraints
      * @param rows row constraints
      */
-    GenericPanel(String layout, String columns, String rows, boolean opaque, Color background) {
+    public GenericPanel(String layout, String columns, String rows, boolean opaque, Color background) {
         setOpaque(opaque);
         setBackground(background);
         setLayout(new MigLayout(layout, columns, rows));

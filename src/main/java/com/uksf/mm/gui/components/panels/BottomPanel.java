@@ -13,6 +13,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 
+import java.awt.*;
+
 import static com.uksf.mm.utility.Info.*;
 
 /**
@@ -30,7 +32,7 @@ public class BottomPanel extends JPanel {
 
         CustomButton home = new CustomButton(27, 27, 2, ICON_HOME.getImage(), ICON_HOME_HOVER.getImage(), COLOUR_TRANSPARENT, "showHome", "Home");
         CustomButton settings = new CustomButton(27, 27, 2, ICON_SETTINGS.getImage(), ICON_SETTINGS_HOVER.getImage(), COLOUR_TRANSPARENT, "showSettings", "Settings");
-		CustomLabel version = new CustomLabel(VERSION, 14, false, COLOUR_TRANSPARENT, COLOUR_FOREGROUND, "Current version: " + VERSION);
+		CustomLabel version = new CustomLabel(VERSION, Font.BOLD, 16, false, COLOUR_TRANSPARENT, COLOUR_FOREGROUND, "Current version: " + VERSION);
 
         add(home);
         add(settings);

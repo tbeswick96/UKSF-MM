@@ -7,6 +7,8 @@
 package com.uksf.mm.gui.components.buttons;
 
 import javax.swing.*;
+import java.awt.*;
+
 import static com.uksf.mm.utility.Info.*;
 
 /**
@@ -20,6 +22,7 @@ public class CustomRadioButton extends JRadioButton {
      */
     public CustomRadioButton(String text) {
         super(text);
+		setFont(new Font(FONT_STANDARD.getFontName(), FONT_STANDARD.getStyle(), 12));
         setOpaque(false);
         setForeground(COLOUR_WHITE);
         setFocusPainted(false);

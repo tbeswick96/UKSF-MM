@@ -78,7 +78,7 @@ public class Update {
         };
 
         int input = JOptionPane.showOptionDialog(
-                null, //Parent frame
+				Core.getInstanceUI(), //Parent frame
                 text, //Message
                 "Update Available", //Title
                 JOptionPane.YES_NO_CANCEL_OPTION, //Option type

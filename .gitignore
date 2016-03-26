@@ -29,3 +29,5 @@ bin/
 
 runTest/
 launch4j/
+uksf-*.xml
+uksf-*.manifest

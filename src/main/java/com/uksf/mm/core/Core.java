@@ -47,6 +47,8 @@ public class Core {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             LogHandler.logSeverity(INFO, "Look & Feel set to " + UIManager.getSystemLookAndFeelClassName());
+			//WindowsFileChooserUI windowsFileChooserUI = new WindowsFileChooserUI(FILE_CHOOSER);
+			//windowsFileChooserUI.installUI(FILE_CHOOSER);
             FontLoad.instance.loadFonts();
 			ImageLoad.instance.loadImages();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | FontFormatException | IOException e) {

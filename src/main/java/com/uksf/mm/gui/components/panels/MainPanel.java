@@ -22,6 +22,6 @@ public class MainPanel extends JPanel {
         //setOpaque(true);
 		setOpaque(false);
 		//setBackground(COLOUR_FOREGROUND);
-        setLayout(new MigLayout("fill", "", ""));
+        setLayout(new MigLayout("fill", "0[]0", "0[]0"));
     }
 }

@@ -29,11 +29,11 @@ public class CustomLabel extends JLabel {
 	 */
 	private String toolTipText;
 
-	public CustomLabel(String text, int fontSize, boolean opaque, Color background, Color textColour, String toolTipText) {
+	public CustomLabel(String text, int style, int fontSize, boolean opaque, Color background, Color textColour, String toolTipText) {
 		super(text);
 		this.toolTipText = toolTipText;
 		setOpaque(opaque);
-		setFont(new Font(FONT_STANDARD.getFontName(), FONT_STANDARD.getStyle(), fontSize));
+		setFont(new Font(FONT_STANDARD.getFontName(), style, fontSize));
 		setBackground(background);
 		setForeground(textColour);
 		setToolTipText("");
