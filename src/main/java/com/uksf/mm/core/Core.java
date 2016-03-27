@@ -7,18 +7,16 @@
 package com.uksf.mm.core;
 
 
-import com.uksf.mm.core.utility.loaders.MapLoad;
-import com.uksf.mm.gui.UI;
 import com.uksf.mm.core.utility.LogHandler;
 import com.uksf.mm.core.utility.loaders.FontLoad;
 import com.uksf.mm.core.utility.loaders.ImageLoad;
+import com.uksf.mm.core.utility.loaders.MapLoad;
+import com.uksf.mm.gui.UI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.text.ParseException;
 
-import static com.uksf.mm.core.utility.Info.*;
 import static com.uksf.mm.core.utility.LogHandler.Severity.ERROR;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
@@ -67,36 +65,19 @@ public class Core {
         //Get program settings
         Settings.init();
 
-        //Create UI
-        try {
-            SwingUtilities.invokeLater(() -> instanceUI = new UI());
-            LogHandler.logSeverity(INFO, "UI Started");
-        } catch(Exception exception) {
-            error(exception);
-        }
+		//Create UI
+		try {
+			SwingUtilities.invokeLater(() -> instanceUI = new UI());
+			LogHandler.logSeverity(INFO, "UI Started");
+		} catch(Exception exception) {
+			error(exception);
+		}
 
-        LogHandler.logSeverity(INFO, "Update check running");
         //Run update check
-        if(UPDATE_CHECK || (UPDATE_WEEK && isWeekAhead())){
-            Update.run();
-        }
+		LogHandler.logSeverity(INFO, "Update check running");
+        Update.run();
 
 		MapLoad.loadMaps();
-    }
-
-	/**
-	 * Checks if current date is later than date in registry
-	 * @return true if current date is younger
-	 */
-    private boolean isWeekAhead() {
-        try {
-            if(DATEFORMAT.parse(UPDATE_TIME).before(DATEFORMAT.parse(DATEFORMAT.format(DATE)))) {
-                return true;
-            }
-        } catch(ParseException e) {
-            error(e);
-        }
-        return false;
     }
 
     /**

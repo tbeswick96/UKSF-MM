@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.ParseException;
 
 import static com.uksf.mm.core.Core.error;
 import static com.uksf.mm.core.utility.Info.*;
@@ -27,10 +28,13 @@ public class Update {
      */
     public static void run() {
         Settings.set("update_time", Settings.weekAhead());
+		Core.getInstanceUI().enableUpdate(false);
         if(versionCheck()) {
             LogHandler.logNoTime(HASHSPACE);
             LogHandler.logSeverity(INFO, "Update is available. Current version: '" + VERSION + "' Latest version: '" + VERSION_LATEST + "'");
-            update();
+			if(UPDATE_CHECK || (UPDATE_WEEK && isWeekAhead())) {
+				update();
+			}
 			Core.getInstanceUI().enableUpdate(true);
 		}
 		if(UPDATER_UPDATED) {updateUpdater();}
@@ -57,6 +61,21 @@ public class Update {
         }
         return true;
     }
+
+	/**
+	 * Checks if current date is later than date in registry
+	 * @return true if current date is younger
+	 */
+	private static boolean isWeekAhead() {
+		try {
+			if(DATEFORMAT.parse(UPDATE_TIME).before(DATEFORMAT.parse(DATEFORMAT.format(DATE)))) {
+				return true;
+			}
+		} catch(ParseException e) {
+			error(e);
+		}
+		return false;
+	}
 
     /**
      * Prompt user for update
