@@ -34,6 +34,11 @@ public class Core {
      */
     private static UI instanceUI;
 
+	/**
+	 * Updateworker instance
+	 */
+	private static UpdateWorker updateWorker;
+
     /**
      * Store instance, initialise program
      */
@@ -46,8 +51,6 @@ public class Core {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             LogHandler.logSeverity(INFO, "Look & Feel set to " + UIManager.getSystemLookAndFeelClassName());
-			//WindowsFileChooserUI windowsFileChooserUI = new WindowsFileChooserUI(FILE_CHOOSER);
-			//windowsFileChooserUI.installUI(FILE_CHOOSER);
             FontLoad.instance.loadFonts();
 			ImageLoad.instance.loadImages();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | FontFormatException | IOException e) {
@@ -65,6 +68,9 @@ public class Core {
         //Get program settings
         Settings.init();
 
+		//Load maps
+		MapLoad.loadMaps();
+
 		//Create UI
 		try {
 			SwingUtilities.invokeLater(() -> instanceUI = new UI());
@@ -73,12 +79,15 @@ public class Core {
 			error(exception);
 		}
 
-        //Run update check
-		LogHandler.logSeverity(INFO, "Update check running");
-        Update.run();
-
-		MapLoad.loadMaps();
+		//Run update
+		updateWorker = new UpdateWorker();
+		runUpdate();
     }
+
+	public static void runUpdate() {
+		LogHandler.logSeverity(INFO, "Update check running");
+		updateWorker.execute();
+	}
 
     /**
      * Get instance of program

@@ -12,7 +12,6 @@ import com.uksf.mm.gui.components.labels.CustomLabel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 import static com.uksf.mm.core.utility.Info.*;
@@ -21,6 +20,8 @@ import static com.uksf.mm.core.utility.Info.*;
  * @author Tim
  */
 public class BottomPanel extends JPanel {
+
+	private CustomLabel version;
 
     /**
      * Creates bottom panel
@@ -32,10 +33,24 @@ public class BottomPanel extends JPanel {
 
         CustomButton home = new CustomButton(27, 27, 2, ICON_HOME.getImage(), ICON_HOME_HOVER.getImage(), COLOUR_TRANSPARENT, "showHome", "Home");
         CustomButton settings = new CustomButton(27, 27, 2, ICON_SETTINGS.getImage(), ICON_SETTINGS_HOVER.getImage(), COLOUR_TRANSPARENT, "showSettings", "Settings");
-		CustomLabel version = new CustomLabel(VERSION, Font.BOLD, 16, false, COLOUR_TRANSPARENT, COLOUR_FOREGROUND, "Current version: " + VERSION);
+		version = new CustomLabel(VERSION, Font.BOLD, 16, false, COLOUR_TRANSPARENT, COLOUR_FOREGROUND, "Current version: " + VERSION);
 
         add(home);
         add(settings);
 		add(version, "push");
     }
+
+	/**
+	 * Updates version text
+	 */
+	public void updateVersionText() {
+		if(VERSION_LATEST.equals(VERSION)) {
+			version.setText(VERSION);
+			version.updateToolTipText("Current version: " + VERSION);
+		} else {
+			version.setFont(new Font(FONT_STANDARD.getName(), Font.BOLD, 14));
+			version.setText(VERSION + " - Update Available " + VERSION_LATEST);
+			version.updateToolTipText("Current version: " + VERSION + " - Update Available: " + VERSION_LATEST);
+		}
+	}
 }

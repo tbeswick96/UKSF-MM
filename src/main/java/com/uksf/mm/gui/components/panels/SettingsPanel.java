@@ -9,6 +9,7 @@ package com.uksf.mm.gui.components.panels;
 
 import com.uksf.mm.core.Core;
 import com.uksf.mm.core.Settings;
+import com.uksf.mm.core.utility.loaders.MapLoad;
 import com.uksf.mm.gui.components.buttons.CustomButtonText;
 import com.uksf.mm.gui.components.buttons.CustomRadioButton;
 import com.uksf.mm.gui.components.labels.CustomLabel;
@@ -22,6 +23,7 @@ import java.io.File;
 
 import static com.uksf.mm.core.utility.Info.*;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.LogHandler.Severity.WARNING;
 
 /**
  * @author Tim
@@ -58,9 +60,9 @@ public class SettingsPanel extends JPanel {
 
         CustomLabel updateCheck = new CustomLabel("Update Check", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Update Settings");
         ButtonGroup group = new ButtonGroup();
-        checkOnLaunch = new CustomRadioButton("On Launch"); checkOnLaunch.setSelected(UPDATE_CHECK);
-        checkWeekly = new CustomRadioButton("Weekly"); checkWeekly.setSelected(UPDATE_WEEK);
-        checkNever = new CustomRadioButton("Never"); checkNever.setSelected(!UPDATE_CHECK);
+        checkOnLaunch = new CustomRadioButton("On Launch");
+        checkWeekly = new CustomRadioButton("Weekly");
+        checkNever = new CustomRadioButton("Never");
         updateNow = new CustomButtonText("Update Now", FONT_STANDARD, 16, "updateNow");
         group.add(checkOnLaunch); group.add(checkWeekly); group.add(checkNever);
 
@@ -110,7 +112,20 @@ public class SettingsPanel extends JPanel {
         checkOnLaunch.addActionListener(e -> Settings.set("update_check", true));
         checkWeekly.addActionListener(e -> Settings.setMultiple(new String[]{"update_week", "update_time"}, new Object[]{true, Settings.weekAhead()}));
         checkNever.addActionListener(e -> Settings.setMultiple(new String[]{"update_check", "update_week"}, new Object[]{false, false}));
+		enableUpdate(false);
     }
+
+	/**
+	 * Change the selected update option
+	 * @param launch check on launch state
+	 * @param week check of week state
+	 * @param never check never state
+	 */
+	public void changeCheckStates(boolean launch, boolean week, boolean never) {
+		checkNever.setSelected(never);
+		checkWeekly.setSelected(week);
+		checkOnLaunch.setSelected(launch);
+	}
 
 	/**
 	 * Switches the state of the update button in the settings panel
@@ -139,11 +154,14 @@ public class SettingsPanel extends JPanel {
 					folderPath.setCaretPosition(0);
 					Settings.set("folder_missions", path);
 					fileOk = true;
+					MapLoad.loadMaps();
 				} else {
 					JOptionPane.showMessageDialog(Core.getInstanceUI(), "Not a missions folder", "Invalid folder", JOptionPane.ERROR_MESSAGE);
+					LogHandler.logSeverity(WARNING, "Mission folder invalid");
 				}
 			} else {
 				fileOk = true;
+				LogHandler.logSeverity(INFO, "Mission folder selection cancelled");
 			}
 		}
 	}

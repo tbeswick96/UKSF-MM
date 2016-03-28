@@ -40,6 +40,12 @@ public class CustomLabel extends JLabel {
 	}
 
 	/**
+	 * Updates label tooltip text
+	 * @param text new tooltip text
+	 */
+	public void updateToolTipText(String text) {toolTipText = text;}
+
+	/**
 	 * Create custom tooltip
 	 * @return tooltip object
 	 */

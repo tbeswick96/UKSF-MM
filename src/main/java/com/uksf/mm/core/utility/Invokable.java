@@ -7,7 +7,6 @@
 package com.uksf.mm.core.utility;
 
 import com.uksf.mm.core.Core;
-import com.uksf.mm.core.Update;
 
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
@@ -42,7 +41,7 @@ public class Invokable {
      */
     public void updateNow() {
         LogHandler.logSeverity(INFO, "Invokable updateNow called");
-        Update.run();
+        Core.runUpdate();
 	}
 
 	/**

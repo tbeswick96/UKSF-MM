@@ -7,8 +7,8 @@
 package com.uksf.mm.gui;
 
 
-import com.uksf.mm.gui.components.panels.*;
 import com.uksf.mm.core.utility.LogHandler;
+import com.uksf.mm.gui.components.panels.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import static com.uksf.mm.core.Core.error;
 import static com.uksf.mm.core.utility.Info.*;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.LogHandler.Severity.WARNING;
 
 /**
  * @author Tim
@@ -174,7 +175,7 @@ public class UI extends JFrame implements MouseInputListener {
             }
             return;
         }
-        LogHandler.logSeverity(INFO, "State change denied");
+        LogHandler.logSeverity(WARNING, "State change denied");
     }
 
 	/**
@@ -198,6 +199,23 @@ public class UI extends JFrame implements MouseInputListener {
 		} catch(Exception exception) {
 			error(exception);
 		}
+	}
+
+	/**
+	 * Change the selected update option
+	 * @param launch check on launch state
+	 * @param week check of week state
+	 * @param never check never state
+	 */
+	public void changeCheckStates(boolean launch, boolean week, boolean never) {
+		settingsPanel.changeCheckStates(launch, week, never);
+	}
+
+	/**
+	 * Updates version text
+	 */
+	public void updateVersionText() {
+		bottomPanel.updateVersionText();
 	}
 
 	/**
