@@ -220,10 +220,17 @@ public class UI extends JFrame implements MouseInputListener {
 		bottomPanel.updateVersionText();
 	}
 
+	/**
+	 * Update the dropdown lists
+	 */
 	public void updateDropdowns() {
 		homePanel.updateLists();
 	}
 
+	/**
+	 * Filters mission list based on selected map name
+	 * @param name map to name to filter by
+	 */
 	public void filterMap(String name) {homePanel.filterMap(name);}
 
 	/**

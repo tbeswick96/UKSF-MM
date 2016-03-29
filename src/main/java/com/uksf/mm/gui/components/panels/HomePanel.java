@@ -22,7 +22,14 @@ import static com.uksf.mm.core.utility.Info.*;
  */
 public class HomePanel extends JPanel {
 
+	/**
+	 * Map selection dropdown
+	 */
 	private final MapDropdown mapSelection;
+
+	/**
+	 * Mission selection dropdown
+	 */
 	private final MissionDropdown missionSelection;
 
 	/**
@@ -47,11 +54,18 @@ public class HomePanel extends JPanel {
 		add(selectionPanel, "dock north, growx, cell 0 0");
     }
 
+	/**
+	 * Update lists
+	 */
 	public void updateLists() {
 		mapSelection.updateList();
 		filterMap("");
 	}
 
+	/**
+	 * Filter mission list based on map name
+	 * @param name map to name to filter by
+	 */
 	public void filterMap(String name) {
 		missionSelection.filter(name);
 	}

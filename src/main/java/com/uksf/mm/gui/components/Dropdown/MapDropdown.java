@@ -23,8 +23,15 @@ import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 @SuppressWarnings("unchecked")
 public class MapDropdown extends CustomDropdown {
 
+	/**
+	 * Holds the current list of names
+	 */
 	private String[] names;
 
+	/**
+	 * Creates map list dropdown
+	 * Adds actionlistener for filtering mission dropdown
+	 */
 	public MapDropdown() {
 		super();
 		addActionListener(e -> {
@@ -38,6 +45,9 @@ public class MapDropdown extends CustomDropdown {
 		updateList();
 	}
 
+	/**
+	 * Update the list based on the latest list of maps
+	 */
 	public void updateList() {
 		removeAllItems();
 		ArrayList<String> maps = MAPS;
@@ -57,25 +67,37 @@ public class MapDropdown extends CustomDropdown {
 		setRenderer(new CustomDropDownCellRenderer());
 	}
 
-	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(150, getHeight());
-	}
-
+	/**
+	 * Custom cell renderer
+	 */
 	private class CustomDropDownCellRenderer extends CustomLabel implements ListCellRenderer {
 
+		/**
+		 * Call to custom label
+		 */
 		CustomDropDownCellRenderer() {
 			super("", FONT_STANDARD.getStyle(), 14, true, COLOUR_WHITE, COLOUR_BLACK, "");
 		}
 
+		/**
+		 * Gets component to render
+		 * @param list list of objects
+		 * @param value current value
+		 * @param index current index
+		 * @param isSelected true if selected
+		 * @param cellHasFocus true if has focus
+		 * @return component to render
+		 */
 		@Override
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			int selectionIndex = (Integer) value;
 
 			if(isSelected) {
 				setBackground(COLOUR_FOREGROUND_DARK);
+				setForeground(COLOUR_BLACK);
 			} else {
-				setBackground(COLOUR_WHITE);
+				setBackground(COLOUR_BACKGROUND_LIGHT);
+				setForeground(COLOUR_WHITE);
 			}
 			if(selectionIndex < names.length) {
 				String map = names[selectionIndex];

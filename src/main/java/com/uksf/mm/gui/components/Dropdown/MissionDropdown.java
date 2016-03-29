@@ -24,13 +24,25 @@ import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 @SuppressWarnings("unchecked")
 public class MissionDropdown extends CustomDropdown {
 
+	/**
+	 * Holds the current list of names
+	 */
 	private String[] names;
 
+	/**
+	 * Make the mission dropdown, initialise with a filter of all (show everything)
+	 */
 	public MissionDropdown() {
 		super();
 		filter("all");
 	}
 
+	/**
+	 * Filters according to the given string.
+	 * A zero length mission list results in a no mission warning.
+	 * Filter 'All' results in displaying all
+	 * @param name string to filter with
+	 */
 	public void filter(String name) {
 		removeAllItems();
 		ArrayList<Mission> missions = MISSIONS;
@@ -45,7 +57,7 @@ public class MissionDropdown extends CustomDropdown {
 				String missionName = mission.getName();
 				String[] missionParts = missionName.split("\\.");
 				String mapName = missionParts[missionParts.length - 1];
-				if(mapName.toLowerCase().contains(name.toLowerCase()) || name.toLowerCase().equals("all")) {
+				if(mapName.toLowerCase().equals(name.toLowerCase()) || name.toLowerCase().equals("all")) {
 					names[index] = missionName;
 					addItem(index);
 					index++;
@@ -56,17 +68,27 @@ public class MissionDropdown extends CustomDropdown {
 		setRenderer(new CustomDropDownCellRenderer());
 	}
 
-	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(150, getHeight());
-	}
-
+	/**
+	 * Custom cell renderer
+	 */
 	private class CustomDropDownCellRenderer extends CustomLabel implements ListCellRenderer {
 
+		/**
+		 * Call to custom label
+		 */
 		CustomDropDownCellRenderer() {
 			super("", FONT_STANDARD.getStyle(), 14, true, COLOUR_WHITE, COLOUR_BLACK, "");
 		}
 
+		/**
+		 * Gets component to render
+		 * @param list list of objects
+		 * @param value current value
+		 * @param index current index
+		 * @param isSelected true if selected
+		 * @param cellHasFocus true if has focus
+		 * @return component to render
+		 */
 		@Override
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			int selectionIndex = (Integer) value;
@@ -84,7 +106,6 @@ public class MissionDropdown extends CustomDropdown {
 					setText(mission);
 				}
 			}
-
 			return this;
 		}
 	}

@@ -86,6 +86,9 @@ public class Core {
 		runUpdate();
     }
 
+	/**
+	 * Run update
+	 */
 	public static void runUpdate() {
 		LogHandler.logNoTime(HASHSPACE);
 		LogHandler.logSeverity(INFO, "Update check running");

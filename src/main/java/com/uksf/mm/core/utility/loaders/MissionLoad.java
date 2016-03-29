@@ -26,6 +26,9 @@ import static java.util.Arrays.asList;
  */
 public class MissionLoad {
 
+	/**
+	 * Load missions from mission folder
+	 */
 	public static void loadMissions() {
 		LogHandler.logNoTime(HASHSPACE);
 		MISSIONS.clear();
@@ -39,6 +42,11 @@ public class MissionLoad {
 		LogHandler.logSeverity(INFO, "Loaded missions: " + MISSIONS);
 	}
 
+	/**
+	 * Get list of sanitized missions
+	 * @param files list of raw files
+	 * @return list of mission names
+	 */
 	private static ArrayList<String> getMissions(ArrayList<String> files) {
 		ArrayList<String> missions = new ArrayList<>();
 		for(String file : files) {
