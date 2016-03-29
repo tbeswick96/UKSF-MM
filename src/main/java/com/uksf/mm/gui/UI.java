@@ -60,6 +60,8 @@ public class UI extends JFrame implements MouseInputListener {
      * Create UI
      */
     public UI() {
+		LogHandler.logNoTime(HASHSPACE);
+		LogHandler.logSeverity(INFO, "UI Started");
         added = new ArrayList<>();
         initUI();
     }
@@ -217,6 +219,12 @@ public class UI extends JFrame implements MouseInputListener {
 	public void updateVersionText() {
 		bottomPanel.updateVersionText();
 	}
+
+	public void updateDropdowns() {
+		homePanel.updateLists();
+	}
+
+	public void filterMap(String name) {homePanel.filterMap(name);}
 
 	/**
 	 * Minimizes program

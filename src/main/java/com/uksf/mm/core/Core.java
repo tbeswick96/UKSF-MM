@@ -11,12 +11,14 @@ import com.uksf.mm.core.utility.LogHandler;
 import com.uksf.mm.core.utility.loaders.FontLoad;
 import com.uksf.mm.core.utility.loaders.ImageLoad;
 import com.uksf.mm.core.utility.loaders.MapLoad;
+import com.uksf.mm.core.utility.loaders.MissionLoad;
 import com.uksf.mm.gui.UI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+import static com.uksf.mm.core.utility.Info.HASHSPACE;
 import static com.uksf.mm.core.utility.LogHandler.Severity.ERROR;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
@@ -68,13 +70,13 @@ public class Core {
         //Get program settings
         Settings.init();
 
-		//Load maps
+		//Load missions & maps
+		MissionLoad.loadMissions();
 		MapLoad.loadMaps();
 
 		//Create UI
 		try {
 			SwingUtilities.invokeLater(() -> instanceUI = new UI());
-			LogHandler.logSeverity(INFO, "UI Started");
 		} catch(Exception exception) {
 			error(exception);
 		}
@@ -85,6 +87,7 @@ public class Core {
     }
 
 	public static void runUpdate() {
+		LogHandler.logNoTime(HASHSPACE);
 		LogHandler.logSeverity(INFO, "Update check running");
 		updateWorker.execute();
 	}

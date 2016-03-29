@@ -36,7 +36,9 @@ public class CustomLabel extends JLabel {
 		setFont(new Font(FONT_STANDARD.getFontName(), style, fontSize));
 		setBackground(background);
 		setForeground(textColour);
-		setToolTipText("");
+		if(!toolTipText.equals("")) {
+			setToolTipText("");
+		}
 	}
 
 	/**

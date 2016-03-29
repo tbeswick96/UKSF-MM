@@ -9,12 +9,13 @@ package com.uksf.mm.gui.components.panels;
 
 import com.uksf.mm.core.Core;
 import com.uksf.mm.core.Settings;
+import com.uksf.mm.core.utility.Info;
+import com.uksf.mm.core.utility.LogHandler;
 import com.uksf.mm.core.utility.loaders.MapLoad;
+import com.uksf.mm.core.utility.loaders.MissionLoad;
 import com.uksf.mm.gui.components.buttons.CustomButtonText;
 import com.uksf.mm.gui.components.buttons.CustomRadioButton;
 import com.uksf.mm.gui.components.labels.CustomLabel;
-import com.uksf.mm.core.utility.Info;
-import com.uksf.mm.core.utility.LogHandler;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -154,7 +155,9 @@ public class SettingsPanel extends JPanel {
 					folderPath.setCaretPosition(0);
 					Settings.set("folder_missions", path);
 					fileOk = true;
+					MissionLoad.loadMissions();
 					MapLoad.loadMaps();
+					SwingUtilities.invokeLater(() -> Core.getInstanceUI().updateDropdowns());
 				} else {
 					JOptionPane.showMessageDialog(Core.getInstanceUI(), "Not a missions folder", "Invalid folder", JOptionPane.ERROR_MESSAGE);
 					LogHandler.logSeverity(WARNING, "Mission folder invalid");

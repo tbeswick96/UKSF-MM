@@ -6,6 +6,8 @@
 
 package com.uksf.mm.core.utility;
 
+import com.uksf.mm.core.Mission;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -95,6 +97,6 @@ public class Info {
 	public static JFileChooser FILE_CHOOSER;
 
 	//Dropdowns
-	public static ArrayList<String> MAPS;
-	public static ArrayList<String> MISSIONS;
+	public static ArrayList<String> MAPS = new ArrayList<>();
+	public static ArrayList<Mission> MISSIONS = new ArrayList<>();
 }

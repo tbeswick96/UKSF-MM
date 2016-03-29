@@ -6,16 +6,17 @@
 
 package com.uksf.mm.core.utility.loaders;
 
+import com.uksf.mm.core.Mission;
 import com.uksf.mm.core.utility.LogHandler;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import static com.uksf.mm.core.utility.Info.FOLDER_MISSIONS;
+import static com.uksf.mm.core.utility.Info.HASHSPACE;
+import static com.uksf.mm.core.utility.Info.MAPS;
+import static com.uksf.mm.core.utility.Info.MISSIONS;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
 /**
@@ -25,41 +26,24 @@ public class MapLoad {
 
 	/**
 	 * List containing names of maps from available missions
-	 * @return list of map names
 	 */
-	public static ArrayList<String> loadMaps() {
-		ArrayList<String> mapNames;
-		File folder = new File(FOLDER_MISSIONS);
-		LogHandler.logSeverity(INFO, "Loading map names from '" + folder.getAbsolutePath() + "'");
-		ArrayList<String> files = new ArrayList<>(Arrays.asList(folder.list()));
-		files = removePbos(files);
-		LogHandler.logSeverity(INFO, "Found files: " + files);
-		ArrayList<String> allMaps = files.stream().map(MapLoad:: getMap).collect(Collectors.toCollection(ArrayList::new));
+	public static void loadMaps() {
+		LogHandler.logNoTime(HASHSPACE);
+		MAPS.clear();
+		ArrayList<String> allMaps = new ArrayList<>();
+		LogHandler.logSeverity(INFO, "Loading map names");
+		for(Mission mission : MISSIONS) {
+			String[] parts = mission.getName().split("\\.");
+			if(parts.length != 0) {
+				String name = parts[parts.length - 1].toLowerCase();
+				allMaps.add(name.substring(0, 1).toUpperCase() + name.substring(1));
+			}
+		}
 		LogHandler.logSeverity(INFO, "Found maps: " + allMaps);
 		Set<String> maps = new LinkedHashSet<>(allMaps);
-		LogHandler.logSeverity(INFO, "Using maps: " + maps);
-		mapNames = new ArrayList<>(maps);
-		mapNames.add("All");
-		return mapNames;
-	}
-
-	/**
-	 * Get list of just map names
-	 * @param files list of found files
-	 * @return list of maps
-	 */
-	private static ArrayList<String> removePbos( ArrayList<String> files) {
-		return files.stream().filter(file -> ! (file.contains("pbo") || file.contains("sqf"))).collect(Collectors.toCollection(ArrayList::new));
-	}
-
-	/**
-	 * Get map from given filename
-	 * @param fileName file to get map from
-	 * @return map name
-	 */
-	private static String getMap(String fileName) {
-		LogHandler.logSeverity(INFO, "Getting map from '" + fileName + "'");
-		String[] strings = fileName.split("\\.");
-		return strings[strings.length - 1];
+		if(maps.size() > 0) maps.add("All");
+		MAPS = new ArrayList<>(maps);
+		Collections.sort(MAPS);
+		LogHandler.logSeverity(INFO, "Using maps: " + MAPS);
 	}
 }

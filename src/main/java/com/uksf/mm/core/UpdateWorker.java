@@ -32,7 +32,6 @@ public class UpdateWorker extends SwingWorker<Void, Void> {
 	protected Void doInBackground() throws Exception {
 		Settings.set("update_time", Settings.weekAhead());
 		if(versionCheck()) {
-			LogHandler.logNoTime(HASHSPACE);
 			LogHandler.logSeverity(INFO, "Update is available. Current version: '" + VERSION + "' Latest version: '" + VERSION_LATEST + "'");
 			if(UPDATE_CHECK || (UPDATE_WEEK && isWeekAhead())) {
 				update();
@@ -125,7 +124,8 @@ public class UpdateWorker extends SwingWorker<Void, Void> {
 	 * Runs update tasks
 	 */
 	private static void runUpdate() {
-		LogHandler.logNoTime(HASHSPACE); LogHandler.logSeverity(INFO, "Updating"); try {
+		LogHandler.logNoTime(HASHSPACE);
+		LogHandler.logSeverity(INFO, "Updating"); try {
 			Runtime.getRuntime().exec("UKSF-MM-Updater.exe");
 		} catch(Exception exception) {
 			error(exception);
