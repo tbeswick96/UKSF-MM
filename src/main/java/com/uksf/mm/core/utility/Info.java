@@ -40,6 +40,7 @@ public class Info {
     public static String UPDATE_TIME;
 	public static boolean UPDATER_UPDATED;
 	public static String FOLDER_MISSIONS;
+	public static boolean SQM_BACKUP;
 
     //Colours
     public static final Color COLOUR_WHITE = new Color(255, 255, 255);
@@ -78,6 +79,9 @@ public class Info {
 	public static ImageIcon ICON_MAXIMIZE_HOVER;
 	public static ImageIcon ICON_CLOSE;
 	public static ImageIcon ICON_CLOSE_HOVER;
+	public static ImageIcon ICON_REFRESH;
+	public static ImageIcon ICON_REFRESH_HOVER;
+	public static ImageIcon FEELSBADMAN;
 
     //Fonts
     public static Font FONT_STANDARD;
@@ -99,4 +103,7 @@ public class Info {
 	//Dropdowns
 	public static ArrayList<String> MAPS = new ArrayList<>();
 	public static ArrayList<Mission> MISSIONS = new ArrayList<>();
+
+	//Core
+	public static Mission MISSION_SELECTED;
 }

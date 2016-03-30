@@ -7,6 +7,7 @@
 package com.uksf.mm.gui.components.buttons;
 
 
+import com.uksf.mm.core.utility.LogHandler;
 import com.uksf.mm.gui.components.labels.CustomToolTip;
 import com.uksf.mm.core.utility.Invokable;
 import net.miginfocom.swing.MigLayout;
@@ -18,10 +19,9 @@ import java.awt.event.MouseListener;
 import java.lang.reflect.InvocationTargetException;
 
 import static com.uksf.mm.core.Core.error;
-import static com.uksf.mm.core.utility.Info.BORDER_STANDARD;
-import static com.uksf.mm.core.utility.Info.COLOUR_FOREGROUND_DARK;
-import static com.uksf.mm.core.utility.Info.COLOUR_TRANSPARENT;
+import static com.uksf.mm.core.utility.Info.*;
 import static com.uksf.mm.core.utility.LogHandler.Severity;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 import static com.uksf.mm.core.utility.LogHandler.logSeverity;
 
 /**
@@ -168,6 +168,8 @@ public class CustomButton extends JPanel implements MouseListener {
 		pressed = false;
 		repaint();
 		try {
+			LogHandler.logNoTime(HASHSPACE);
+			LogHandler.logSeverity(INFO, "Calling " + toCall);
 			Invokable.class.getMethod(toCall).invoke(Invokable.instance);
 		} catch(NoSuchMethodException exception) {
 			logSeverity(Severity.CRITICAL, "No such method: " + toCall);

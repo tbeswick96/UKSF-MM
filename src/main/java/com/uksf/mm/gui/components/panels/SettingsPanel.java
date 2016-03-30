@@ -14,6 +14,7 @@ import com.uksf.mm.core.utility.LogHandler;
 import com.uksf.mm.core.utility.loaders.MapLoad;
 import com.uksf.mm.core.utility.loaders.MissionLoad;
 import com.uksf.mm.gui.components.buttons.CustomButtonText;
+import com.uksf.mm.gui.components.buttons.CustomCheckbox;
 import com.uksf.mm.gui.components.buttons.CustomRadioButton;
 import com.uksf.mm.gui.components.labels.CustomLabel;
 import net.miginfocom.swing.MigLayout;
@@ -32,12 +33,16 @@ import static com.uksf.mm.core.utility.LogHandler.Severity.WARNING;
 public class SettingsPanel extends JPanel {
 
 	/**
-	 * Settings panel objects
+	 * Update settings panel objects
 	 */
     private CustomRadioButton checkOnLaunch, checkWeekly, checkNever;
     private CustomButtonText updateNow;
 
+	/**
+	 * Folder settings panel objects
+	 */
 	private JTextField folderPath;
+	private CustomCheckbox backup;
 
 	/**
      * Creates settings panel
@@ -59,7 +64,7 @@ public class SettingsPanel extends JPanel {
         GenericPanel programSettings = new GenericPanel("", "5[]20[]5", "5[]5", false, COLOUR_TRANSPARENT);
         programSettings.setBorder(BORDER_STANDARD);
 
-        CustomLabel updateCheck = new CustomLabel("Update Check", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Update Settings");
+        CustomLabel updateCheck = new CustomLabel("Update Check", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When to check for updates");
         ButtonGroup group = new ButtonGroup();
         checkOnLaunch = new CustomRadioButton("On Launch");
         checkWeekly = new CustomRadioButton("Weekly");
@@ -83,18 +88,22 @@ public class SettingsPanel extends JPanel {
 	 * Make mission folder settings
 	 */
 	private void folderSettings() {
-		GenericPanel folderSettings = new GenericPanel("", "5[]20[]5[]5", "5[]5", false, COLOUR_TRANSPARENT);
+		GenericPanel folderSettings = new GenericPanel("", "5[]20[]5[]5", "5[]5[]5", false, COLOUR_TRANSPARENT);
 		folderSettings.setBorder(BORDER_STANDARD);
 
 		CustomLabel folder = new CustomLabel("Mission Folder", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Missions are loaded from this folder");
 		folderPath = new JTextField();
-		folderPath.setPreferredSize(new Dimension(253, 25));
+		folderPath.setPreferredSize(new Dimension(247, 25));
 		folderPath.setText(FOLDER_MISSIONS);
 		CustomButtonText folderChange = new CustomButtonText("Change", FONT_STANDARD, 16, "changeMissionsFolder");
+
+		backup = new CustomCheckbox("SQM Backup", SQM_BACKUP, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up when saving");
 
 		folderSettings.add(folder, "grow, cell 0 0");
 		folderSettings.add(folderPath, "cell 1 0");
 		folderSettings.add(folderChange, "cell 2 0");
+
+		folderSettings.add(backup, "cell 1 1");
 
 		add(folderSettings, "al center center, grow, cell 0 0");
 	}
@@ -104,6 +113,7 @@ public class SettingsPanel extends JPanel {
 	 */
     private void buttonFunctionality() {
         settingsUpdate();
+		settingsFolder();
     }
 
 	/**
@@ -115,6 +125,13 @@ public class SettingsPanel extends JPanel {
         checkNever.addActionListener(e -> Settings.setMultiple(new String[]{"update_check", "update_week"}, new Object[]{false, false}));
 		enableUpdate(false);
     }
+
+	/**
+	 * Functionality for folder settings
+	 */
+	private void settingsFolder() {
+		backup.addActionListener(e -> Settings.set("sqm_backup", backup.isSelected()));
+	}
 
 	/**
 	 * Change the selected update option

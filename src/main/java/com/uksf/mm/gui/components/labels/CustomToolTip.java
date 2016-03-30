@@ -43,7 +43,7 @@ public class CustomToolTip extends JLabel {
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         stringWidth = (int) StringMetrics.getBounds(graphics.getFont(), graphics.getFontRenderContext(), text).getWidth();
         stringHeight = (int) StringMetrics.getBounds(graphics.getFont(), graphics.getFontRenderContext(), text).getHeight();
-        width = (int) (stringWidth * 1.2);
+        width = stringWidth + 20;
         height = (int) (stringHeight * 1.5);
         setPreferredSize(new Dimension(width, height));
     }

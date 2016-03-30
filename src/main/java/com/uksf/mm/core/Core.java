@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+import static com.uksf.mm.core.utility.Info.FEELSBADMAN;
 import static com.uksf.mm.core.utility.Info.HASHSPACE;
 import static com.uksf.mm.core.utility.LogHandler.Severity.ERROR;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
@@ -130,7 +131,7 @@ public class Core {
                 return new Dimension(500, 300);
             }
         };
-        JOptionPane.showMessageDialog(null, print, "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(Core.getInstanceUI(), print, " Error", JOptionPane.ERROR_MESSAGE, FEELSBADMAN);
         LogHandler.logSeverity(ERROR, builder.toString());
         System.exit(0);
     }

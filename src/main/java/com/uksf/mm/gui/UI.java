@@ -8,6 +8,8 @@ package com.uksf.mm.gui;
 
 
 import com.uksf.mm.core.utility.LogHandler;
+import com.uksf.mm.core.utility.sqm.SqmLoader;
+import com.uksf.mm.core.utility.sqm.SqmSaver;
 import com.uksf.mm.gui.components.panels.*;
 import net.miginfocom.swing.MigLayout;
 
@@ -232,6 +234,22 @@ public class UI extends JFrame implements MouseInputListener {
 	 * @param name map to name to filter by
 	 */
 	public void filterMap(String name) {homePanel.filterMap(name);}
+
+	/**
+	 * Loads selected mission
+	 * @return true if load worked
+	 */
+	public boolean loadSelectedMission() {
+		MISSION_SELECTED = homePanel.getSelectedMission();
+		return SqmLoader.loadMission();
+	}
+
+	/**
+	 * Saves selected mission
+	 */
+	public void saveSelectedMission() {
+		SqmSaver.saveMission();
+	}
 
 	/**
 	 * Minimizes program

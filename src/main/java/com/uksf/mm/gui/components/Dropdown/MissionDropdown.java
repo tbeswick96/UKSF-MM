@@ -57,8 +57,12 @@ public class MissionDropdown extends CustomDropdown {
 				String missionName = mission.getName();
 				String[] missionParts = missionName.split("\\.");
 				String mapName = missionParts[missionParts.length - 1];
-				if(mapName.toLowerCase().equals(name.toLowerCase()) || name.toLowerCase().equals("all")) {
+				if(name.toLowerCase().equals("all")) {
 					names[index] = missionName;
+					addItem(index);
+					index++;
+				} else if(mapName.toLowerCase().equals(name.toLowerCase())) {
+					names[index] = (missionName.split("\\.")[0]);
 					addItem(index);
 					index++;
 				}
@@ -66,6 +70,16 @@ public class MissionDropdown extends CustomDropdown {
 			LogHandler.logSeverity(INFO, "Filtered missions: '" + Arrays.deepToString(names) + "'");
 		}
 		setRenderer(new CustomDropDownCellRenderer());
+	}
+
+	public Mission getSelectedMission() {
+		String name = names[getSelectedIndex()];
+		for(Mission mission : MISSIONS) {
+			if(mission.getName().toLowerCase().contains(name.toLowerCase())) {
+				return mission;
+			}
+		}
+		return null;
 	}
 
 	/**

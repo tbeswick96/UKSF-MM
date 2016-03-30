@@ -47,6 +47,9 @@ public class ImageLoad {
 		ICON_MAXIMIZE_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "maximize_hover.png")));
 		ICON_CLOSE = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "close.png")));
 		ICON_CLOSE_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "close_hover.png")));
+		ICON_REFRESH = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "refresh.png")));
+		ICON_REFRESH_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "refresh_hover.png")));
+		FEELSBADMAN = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "fbm64.png")));
         LogHandler.logSeverity(INFO, "Images loaded");
     }
 }

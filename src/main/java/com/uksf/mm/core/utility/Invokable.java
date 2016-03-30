@@ -7,8 +7,10 @@
 package com.uksf.mm.core.utility;
 
 import com.uksf.mm.core.Core;
+import com.uksf.mm.core.utility.loaders.MapLoad;
+import com.uksf.mm.core.utility.loaders.MissionLoad;
 
-import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
+import javax.swing.*;
 
 /**
  * @author Tim
@@ -24,7 +26,6 @@ public class Invokable {
      * Displays settings page, state 50
      */
     public void showSettings() {
-        LogHandler.logSeverity(INFO, "Invokable showSettings called");
         Core.getInstanceUI().changeState(50);
     }
 
@@ -32,7 +33,6 @@ public class Invokable {
      * Displays home page, state 0
      */
     public void showHome() {
-        LogHandler.logSeverity(INFO, "Invokable showHome called");
         Core.getInstanceUI().changeState(0);
     }
 
@@ -40,7 +40,6 @@ public class Invokable {
      * Runs update
      */
     public void updateNow() {
-        LogHandler.logSeverity(INFO, "Invokable updateNow called");
         Core.runUpdate();
 	}
 
@@ -48,15 +47,34 @@ public class Invokable {
 	 * Changes missions folder
 	 */
 	public void changeMissionsFolder() {
-		LogHandler.logSeverity(INFO, "Invokable changeMissionsFolder called");
 		Core.getInstanceUI().changeMissionsFolder();
 	}
+
+	/**
+	 * Refresh maps and missions
+	 */
+	public void refreshMissions() {
+		MissionLoad.loadMissions();
+		MapLoad.loadMaps();
+		SwingUtilities.invokeLater(() -> Core.getInstanceUI().updateDropdowns());
+	}
+
+	/**
+	 * Loads the selected mission
+	 */
+	public void loadSelectedMission() {
+		Core.getInstanceUI().loadSelectedMission();
+	}
+
+	/**
+	 * Saves the selected mission
+	 */
+	public void saveSelectedMission() { Core.getInstanceUI().saveSelectedMission(); }
 
 	/**
 	 * Closes program
 	 */
 	public void close() {
-		LogHandler.logSeverity(INFO, "Closing");
 		System.exit(0);
 	}
 
@@ -64,7 +82,6 @@ public class Invokable {
 	 * Minimizes program
 	 */
 	public void minimize() {
-		LogHandler.logSeverity(INFO, "Minimizing");
 		Core.getInstanceUI().minimize();
 	}
 
@@ -72,7 +89,6 @@ public class Invokable {
 	 * Maximizes program
 	 */
 	public void maximize() {
-		LogHandler.logSeverity(INFO, "Maximizing");
 		Core.getInstanceUI().maximize();
 	}
 }

@@ -8,6 +8,7 @@ package com.uksf.mm.gui.components.buttons;
 
 
 import com.uksf.mm.core.utility.Invokable;
+import com.uksf.mm.core.utility.LogHandler;
 import com.uksf.mm.core.utility.StringMetrics;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ import java.lang.reflect.InvocationTargetException;
 import static com.uksf.mm.core.Core.error;
 import static com.uksf.mm.core.utility.Info.*;
 import static com.uksf.mm.core.utility.LogHandler.Severity;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 import static com.uksf.mm.core.utility.LogHandler.logSeverity;
 
 /**
@@ -98,7 +100,7 @@ public class CustomButtonText extends JPanel implements MouseListener {
 
 		int stringWidth = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getWidth();
 		int stringHeight = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), text).getHeight();
-		width = (int) (stringWidth * 1.2);
+		width = stringWidth + 20;
 		height = (int) (stringHeight * 1.5);
 		int x = (width / 2) - (stringWidth / 2);
 		int y = (height - stringHeight) * 2;
@@ -108,6 +110,8 @@ public class CustomButtonText extends JPanel implements MouseListener {
 		if(!isEnabled()) {
 			g.setColor(COLOUR_BACKGROUND_LIGHT);
 			g.fillRect(0, 0, width, height);
+			g.setColor(COLOUR_BACKGROUND);
+			g.drawString(text, x, y);
 		} else if(hovered) {
 			if(pressed) {
 				g.setColor(COLOUR_FOREGROUND_DARK);
@@ -116,12 +120,14 @@ public class CustomButtonText extends JPanel implements MouseListener {
 				g.setColor(COLOUR_FOREGROUND_DARK);
 				g.fillRect(0, 0, width, height);
 			}
+			g.setColor(COLOUR_BLACK);
+			g.drawString(text, x, y);
         } else {
             g.setColor(COLOUR_FOREGROUND);
             g.fillRect(1, 1, width - 2, height - 2);
+			g.setColor(COLOUR_BLACK);
+			g.drawString(text, x, y);
         }
-		g.setColor(COLOUR_BACKGROUND_DARK);
-		g.drawString(text, x, y);
     }
 
     /**
@@ -151,6 +157,8 @@ public class CustomButtonText extends JPanel implements MouseListener {
 		repaint();
 		if(isEnabled()) {
 			try {
+				LogHandler.logNoTime(HASHSPACE);
+				LogHandler.logSeverity(INFO, "Calling " + toCall);
 				Invokable.class.getMethod(toCall).invoke(Invokable.instance);
 			} catch(NoSuchMethodException exception) {
 				logSeverity(Severity.CRITICAL, "No such method: " + toCall);

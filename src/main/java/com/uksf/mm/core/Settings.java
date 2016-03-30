@@ -58,12 +58,14 @@ public class Settings {
         UPDATE_TIME = preferences.get("update_time", weekAhead());
 		UPDATER_UPDATED = preferences.getBoolean("updater_updated", false);
 		FOLDER_MISSIONS = preferences.get("folder_missions", "");
+		SQM_BACKUP = preferences.getBoolean("sqm_backup", true);
 
         LogHandler.logSeverity(INFO, TAB + "Update check: " + UPDATE_CHECK);
         LogHandler.logSeverity(INFO, TAB + "Update week: " + UPDATE_WEEK);
         LogHandler.logSeverity(INFO, TAB + "Update time: " + UPDATE_TIME);
 		LogHandler.logSeverity(INFO, TAB + "Updater updated: " + UPDATER_UPDATED);
 		LogHandler.logSeverity(INFO, TAB + "Missions Folder: " + FOLDER_MISSIONS);
+		LogHandler.logSeverity(INFO, TAB + "SQM Backup: " + SQM_BACKUP);
     }
 
 	/**
@@ -76,6 +78,7 @@ public class Settings {
         preferences.put("update_time", weekAhead());
 		preferences.putBoolean("updater_updated", false);
 		preferences.put("folder_missions", getDefaultMissionsFolder());
+		preferences.putBoolean("sqm_backup", true);
     }
 
     /**
