@@ -9,6 +9,3 @@ cache:
     - $HOME/.gradle/wrapper/
 jdk:
   - oraclejdk8
-addons:
-  code_climate:
-    repo_token: 2ec2228654866dc7ed83ae70a364358e35034740cc530e7a2b5852ed59a02934
