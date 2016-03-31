@@ -78,13 +78,6 @@ public class UpdateWorker extends SwingWorker<Void, Void> {
 		} return false;
 	}
 
-	private static void updateUI() {
-		SwingUtilities.invokeLater(() -> {
-			Core.getInstanceUI().enableUpdate(true);
-			Core.getInstanceUI().changeCheckStates(UPDATE_CHECK, UPDATE_CHECK, !UPDATE_CHECK);
-		});
-	}
-
 	/**
 	 * Prompt user for update
 	 */
@@ -144,10 +137,12 @@ public class UpdateWorker extends SwingWorker<Void, Void> {
 	 */
 	private static void updateUpdater() {
 		LogHandler.logNoTime(HASHSPACE); LogHandler.logSeverity(INFO, "Updating the updater");
-		final InstallWorker installWorker = new InstallWorker(); installWorker.addPropertyChangeListener(pcEvt -> {
+		final InstallWorker installWorker = new InstallWorker();
+		installWorker.addPropertyChangeListener(pcEvt -> {
 			if(pcEvt.getNewValue() == SwingWorker.StateValue.DONE) {
 				Settings.set("updater_updated", false);
 			}
-		}); installWorker.execute();
+		});
+		installWorker.execute();
 	}
 }

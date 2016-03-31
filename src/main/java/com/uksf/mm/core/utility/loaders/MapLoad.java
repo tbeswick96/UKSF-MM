@@ -33,7 +33,7 @@ public class MapLoad {
 		ArrayList<String> allMaps = new ArrayList<>();
 		LogHandler.logSeverity(INFO, "Loading map names");
 		for(Mission mission : MISSIONS) {
-			String[] parts = mission.getName().split("\\.");
+			String[] parts = mission.name.split("\\.");
 			if(parts.length != 0) {
 				String name = parts[parts.length - 1].toLowerCase();
 				allMaps.add(name.substring(0, 1).toUpperCase() + name.substring(1));

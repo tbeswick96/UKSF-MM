@@ -30,22 +30,22 @@ public class SqmLoader {
 	 * @return true if load worked, false if an error occurred
 	 */
 	public static boolean loadMission() {
-		LogHandler.logSeverity(INFO, "Loading mission '" + MISSION_SELECTED.getName() + "' at '" + MISSION_SELECTED.getPath() + "'");
+		LogHandler.logSeverity(INFO, "Loading mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "'");
 		try {
 			int state = readSqm();
 			switch(state) {
 				case 0:
 					return true;
 				case 1:
-					JOptionPane.showMessageDialog(Core.getInstanceUI(), "No mission.sqm file found at '" + MISSION_SELECTED.getPath() + "'", "No mission.sqm", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(Core.getInstanceUI(), "No mission.sqm file found at '" + MISSION_SELECTED.path + "'", "No mission.sqm", JOptionPane.ERROR_MESSAGE);
 					return false;
 				case 2:
 					JOptionPane.showMessageDialog(Core.getInstanceUI(),
-							"Empty mission.sqm file found at '" + MISSION_SELECTED.getPath() + "'", "Empty mission.sqm", JOptionPane.ERROR_MESSAGE);
+							"Empty mission.sqm file found at '" + MISSION_SELECTED.path + "'", "Empty mission.sqm", JOptionPane.ERROR_MESSAGE);
 					return false;
 				case 3:
 					JOptionPane.showMessageDialog(Core.getInstanceUI(),
-							"Invalid mission.sqm file found at '" + MISSION_SELECTED.getPath() + "' \nEnsure mission.sqm is not binarized.", "Invalid mission.sqm", JOptionPane.ERROR_MESSAGE);
+							"Invalid mission.sqm file found at '" + MISSION_SELECTED.path + "' \nEnsure mission.sqm is not binarized.", "Invalid mission.sqm", JOptionPane.ERROR_MESSAGE);
 					return false;
 			}
 
@@ -61,32 +61,32 @@ public class SqmLoader {
 	 * @throws Exception
 	 */
 	private static int readSqm() throws Exception {
-		File sqmFile = new File(MISSION_SELECTED.getPath() + "/mission.sqm");
+		File sqmFile = new File(MISSION_SELECTED.path + "/mission.sqm");
 		if(!sqmFile.exists()) {
-			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.getName() + "' at '" + MISSION_SELECTED.getPath() + "' has no mission.sqm file");
+			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' has no mission.sqm file");
 			return 1;
 		}
 		List<String> rawSqm = FileUtils.readLines(sqmFile);
 		if(rawSqm.size() == 0) {
-			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.getName() + "' at '" + MISSION_SELECTED.getPath() + "' is empty");
+			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' is empty");
 			return 2;
 		}
 		if(!rawSqm.get(0).contains("version=")) {
-			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.getName() + "' at '" + MISSION_SELECTED.getPath() + "' has no valid mission.sqm file (probably binarized)");
+			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' has no valid mission.sqm file (probably binarized)");
 			return 3;
 		}
 
-		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.getName() + "' is valid. Reading data...");
-		MISSION_SELECTED.setVersion(getSingleData(rawSqm, "version"));
-		MISSION_SELECTED.setEditorData(getData(rawSqm, "editordata"));
-		MISSION_SELECTED.setBinarized(getSingleData(rawSqm, "binarization"));
-		MISSION_SELECTED.setAddons(getData(rawSqm, "addons"));
-		MISSION_SELECTED.setRandomSeed(getSingleData(rawSqm, "randomseed"));
-		MISSION_SELECTED.setScenarioData(getData(rawSqm, "scenariodata"));
-		MISSION_SELECTED.setCustomAttributes(getData(rawSqm, "customattributes"));
-		MISSION_SELECTED.setMissionIntel(getData(rawSqm, "intel"));
-		MISSION_SELECTED.setMissionData(getData(rawSqm, "entities"));
-		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.getName() + "' read sucessfully.");
+		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' is valid. Reading data...");
+		MISSION_SELECTED.version = getSingleData(rawSqm, "version");
+		MISSION_SELECTED.editorData = getData(rawSqm, "editordata");
+		MISSION_SELECTED.binarized = getSingleData(rawSqm, "binarization");
+		MISSION_SELECTED.addons = getData(rawSqm, "addons");
+		MISSION_SELECTED.randomSeed = getSingleData(rawSqm, "randomseed");
+		MISSION_SELECTED.scenarioData = getData(rawSqm, "scenariodata");
+		MISSION_SELECTED.customAttributes = getData(rawSqm, "customattributes");
+		MISSION_SELECTED.missionIntel = getData(rawSqm, "intel");
+		MISSION_SELECTED.missionData = getData(rawSqm, "entities");
+		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' read sucessfully.");
 
 		return 0;
 	}
@@ -98,10 +98,11 @@ public class SqmLoader {
 	 * @return list with data from key
 	 */
 	private static List<String> getData(List<? extends String> raw, String key) {
-		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.getName() + "'");
+		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.name + "'");
 		List<String> data = new ArrayList<>();
 		int index = 0;
 		while(true) {
+			if(index > raw.size()) return null;
 			String line = raw.get(index);
 			if(line.toLowerCase().contains(key)) {
 				break;
@@ -137,7 +138,7 @@ public class SqmLoader {
 	 * @return string with data from key
 	 */
 	private static String getSingleData(List<String> raw, String key) {
-		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.getName() + "'");
+		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.name + "'");
 		int index = 0;
 		while(true) {
 			String line = raw.get(index);

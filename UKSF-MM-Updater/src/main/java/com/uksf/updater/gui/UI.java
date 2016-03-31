@@ -80,22 +80,4 @@ public class UI extends JFrame {
     private void createComponents() {
         mainPanel = new MainPanel(this);
     }
-
-	/**
-	 * Minimizes program
-	 */
-	public void minimize() {
-		setExtendedState(Frame.ICONIFIED);
-	}
-
-	/**
-	 * Maximizes program
-	 */
-	public void maximize() {
-		if(getExtendedState() < 1) {
-			setExtendedState(getExtendedState() | Frame.MAXIMIZED_BOTH);
-		} else {
-			setExtendedState(Frame.NORMAL);
-		}
-	}
 }

@@ -33,6 +33,11 @@ import static com.uksf.mm.core.utility.LogHandler.Severity.WARNING;
 public class SettingsPanel extends JPanel {
 
 	/**
+	 * Main settings panel
+	 */
+	private GenericPanel mainSettingsPanel;
+
+	/**
 	 * Update settings panel objects
 	 */
     private CustomRadioButton checkOnLaunch, checkWeekly, checkNever;
@@ -42,7 +47,7 @@ public class SettingsPanel extends JPanel {
 	 * Folder settings panel objects
 	 */
 	private JTextField folderPath;
-	private CustomCheckbox backup;
+	private CustomCheckbox backupBox;
 
 	/**
      * Creates settings panel
@@ -50,12 +55,43 @@ public class SettingsPanel extends JPanel {
     public SettingsPanel() {
         setOpaque(false);
         setBackground(COLOUR_TRANSPARENT);
-        setLayout(new MigLayout("", "10[center]10[center]10", "10[center]10[center]10"));
+        setLayout(new MigLayout("fill", "10[]10", "10[]10[]10"));
 
+		mainSettingsPanel = new GenericPanel("fill", "10[]10[]10", "10[]10[]10", false, COLOUR_TRANSPARENT);
 		folderSettings();
         programSettings();
+
+		add(mainSettingsPanel, "push, top, cell 0 0");
+		credits();
+
         buttonFunctionality();
     }
+
+	/**
+	 * Make mission folder settings
+	 */
+	private void folderSettings() {
+		GenericPanel folderSettings = new GenericPanel("", "5[]20[]5[]5", "5[]5[]5", false, COLOUR_TRANSPARENT);
+		folderSettings.setBorder(BORDER_STANDARD);
+
+		CustomLabel folder = new CustomLabel("Mission Folder", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Missions are loaded from this folder");
+		folderPath = new JTextField();
+		folderPath.setPreferredSize(new Dimension(247, 25));
+		folderPath.setText(FOLDER_MISSIONS);
+		CustomButtonText folderChange = new CustomButtonText("Change", FONT_STANDARD, 16, "changeMissionsFolder");
+
+		CustomLabel backup = new CustomLabel("SQM Backup", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up when saving");
+		backupBox = new CustomCheckbox("", SQM_BACKUP, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up when saving");
+
+		folderSettings.add(folder, "grow, cell 0 0");
+		folderSettings.add(folderPath, "cell 1 0");
+		folderSettings.add(folderChange, "cell 2 0");
+
+		folderSettings.add(backup, "grow, cell 0 1");
+		folderSettings.add(backupBox, "cell 1 1");
+
+		mainSettingsPanel.add(folderSettings, "al center center, grow, cell 0 0");
+	}
 
 	/**
 	 * Make program settings
@@ -81,31 +117,24 @@ public class SettingsPanel extends JPanel {
         programSettings.add(updateCheck, "grow, cell 0 0");
         programSettings.add(updateButtons, "cell 1 0");
 
-        add(programSettings, "al center center, grow, cell 0 1");
+		mainSettingsPanel.add(programSettings, "al center center, grow, cell 0 1");
     }
 
 	/**
-	 * Make mission folder settings
+	 * Create credits area
 	 */
-	private void folderSettings() {
-		GenericPanel folderSettings = new GenericPanel("", "5[]20[]5[]5", "5[]5[]5", false, COLOUR_TRANSPARENT);
-		folderSettings.setBorder(BORDER_STANDARD);
+	private void credits() {
+		GenericPanel creditsPanel = new GenericPanel("fill", "5[]5", "5[]0[]0[]5", false, COLOUR_TRANSPARENT);
 
-		CustomLabel folder = new CustomLabel("Mission Folder", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Missions are loaded from this folder");
-		folderPath = new JTextField();
-		folderPath.setPreferredSize(new Dimension(247, 25));
-		folderPath.setText(FOLDER_MISSIONS);
-		CustomButtonText folderChange = new CustomButtonText("Change", FONT_STANDARD, 16, "changeMissionsFolder");
+		CustomLabel author = new CustomLabel("Tim Beswick www.uk-sf.com", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "");
+		CustomLabel copyright = new CustomLabel("Copyright (c) Tim UKSF 2016", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "");
+		CustomLabel license = new CustomLabel("This program is released under GPLv3", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "");
 
-		backup = new CustomCheckbox("SQM Backup", SQM_BACKUP, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up when saving");
+		creditsPanel.add(author, "center, cell 0 0");
+		creditsPanel.add(copyright, "center, cell 0 1");
+		creditsPanel.add(license, "center, cell 0 2");
 
-		folderSettings.add(folder, "grow, cell 0 0");
-		folderSettings.add(folderPath, "cell 1 0");
-		folderSettings.add(folderChange, "cell 2 0");
-
-		folderSettings.add(backup, "cell 1 1");
-
-		add(folderSettings, "al center center, grow, cell 0 0");
+		add(creditsPanel, "center, cell 0 1");
 	}
 
 	/**
@@ -130,7 +159,7 @@ public class SettingsPanel extends JPanel {
 	 * Functionality for folder settings
 	 */
 	private void settingsFolder() {
-		backup.addActionListener(e -> Settings.set("sqm_backup", backup.isSelected()));
+		backupBox.addActionListener(e -> Settings.set("sqm_backup", backupBox.isSelected()));
 	}
 
 	/**

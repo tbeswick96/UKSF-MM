@@ -6,8 +6,6 @@
 
 package com.uksf.updater.utility;
 
-import com.uksf.updater.core.Core;
-
 /**
  * @author Tim
  */
@@ -18,28 +16,4 @@ public class Invokable {
      * Invokable instance
      */
     public static Invokable instance = new Invokable();
-
-	/**
-	 * Closes program
-	 */
-	public void close() {
-		LogHandler.log("Closing");
-		System.exit(0);
-	}
-
-	/**
-	 * Minimizes program
-	 */
-	public void minimize() {
-		LogHandler.log("Minimizing");
-		Core.getInstanceUI().minimize();
-	}
-
-	/**
-	 * Maximizes program
-	 */
-	public void maximize() {
-		LogHandler.log("Maximizing");
-		Core.getInstanceUI().maximize();
-	}
 }

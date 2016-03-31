@@ -4,7 +4,7 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.gui.components.Dropdown;
+package com.uksf.mm.gui.components.dropdown;
 
 import com.uksf.mm.core.Mission;
 import com.uksf.mm.core.utility.LogHandler;
@@ -54,7 +54,7 @@ public class MissionDropdown extends CustomDropdown {
 		} else {
 			int index = 0;
 			for(Mission mission : missions) {
-				String missionName = mission.getName();
+				String missionName = mission.name;
 				String[] missionParts = missionName.split("\\.");
 				String mapName = missionParts[missionParts.length - 1];
 				if(name.toLowerCase().equals("all")) {
@@ -75,7 +75,7 @@ public class MissionDropdown extends CustomDropdown {
 	public Mission getSelectedMission() {
 		String name = names[getSelectedIndex()];
 		for(Mission mission : MISSIONS) {
-			if(mission.getName().toLowerCase().contains(name.toLowerCase())) {
+			if(mission.name.toLowerCase().contains(name.toLowerCase())) {
 				return mission;
 			}
 		}

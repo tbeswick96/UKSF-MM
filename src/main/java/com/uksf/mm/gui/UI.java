@@ -10,6 +10,7 @@ package com.uksf.mm.gui;
 import com.uksf.mm.core.utility.LogHandler;
 import com.uksf.mm.core.utility.sqm.SqmLoader;
 import com.uksf.mm.core.utility.sqm.SqmSaver;
+import com.uksf.mm.core.utility.sqm.parsers.ParserAuthor;
 import com.uksf.mm.gui.components.panels.*;
 import net.miginfocom.swing.MigLayout;
 
@@ -241,7 +242,14 @@ public class UI extends JFrame implements MouseInputListener {
 	 */
 	public boolean loadSelectedMission() {
 		MISSION_SELECTED = homePanel.getSelectedMission();
-		return SqmLoader.loadMission();
+		boolean state = SqmLoader.loadMission();
+		state = state && ParserAuthor.getAuthor();
+		if(state) {
+			homePanel.add(new MissionPanel());
+			revalidate();
+			repaint();
+		}
+		return state;
 	}
 
 	/**
