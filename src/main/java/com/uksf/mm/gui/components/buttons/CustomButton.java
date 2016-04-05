@@ -85,21 +85,6 @@ public class CustomButton extends JPanel implements MouseListener {
         addMouseListener(this);
         setToolTipText("");
     }
-
-    /**
-     * Set size to width x height
-     * @return dimension width x height
-     */
-    @Override public Dimension getPreferredSize() {
-        return new Dimension(width, height);
-    }
-
-	/**
-	 * Set size to width x height
-	 * @return dimension width x height
-	 */
-	@Override public Dimension getMaximumSize() { return new Dimension(width, height); }
-
 	/**
 	 * Set size to width x height
 	 * @return dimension width x height
