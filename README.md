@@ -22,13 +22,17 @@
 
 **UKSF Mission Manager** is a mission visualiser enabling larger communities to maintain multiple missions/templates without the need to open ArmA.
 ### Key features include:
-  - Mass mission editing
+  - Mission parameter editing
   - Visualisation of unit values and order in lobby
   - Easily re-order units in the lobby
   
 Please use the [Issue Tracker](https://github.com/tbeswick96/UKSF-MM/issues) to report a bug, propose a feature, or suggest changes to existing features.
 
 ##TODO
-    - Load missions by map, then name. Store previously loaded mission in settings.
-    - Show unit groups (that would appear in game lobby) as list
-    - Editible mission elements - inside sqm, description.ext
+* ~~Load missions from user selected missions folder, by default Documents/Arma 3/missions~~
+* ~~Display missions by map, then name~~
+* Store previously loaded mission in settings
+* Show unit groups (that would appear in game lobby) as list
+* Editible mission elements:
+    * ~~Name (creates new mission folder when renamed)~~
+    * ~~Author~~
