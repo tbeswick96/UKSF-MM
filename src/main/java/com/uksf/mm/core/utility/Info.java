@@ -57,7 +57,7 @@ public class Info {
 
     //Window settings
     public static final Dimension WINDOW_SIZE = new Dimension(1240, 640);
-    public static final Dimension WINDOW_SIZE_MIN = new Dimension(600, 400);
+    public static final Dimension WINDOW_SIZE_MIN = new Dimension(600, 300);
     public static final String WINDOW_TITLE = "UKSF Mission Manager";
     public static final Border BORDER_STANDARD = BorderFactory.createLineBorder(COLOUR_BACKGROUND_DARK, 1);
 	public static final Border BORDER_COLOURED = BorderFactory.createLineBorder(COLOUR_FOREGROUND, 1);

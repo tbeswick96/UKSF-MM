@@ -94,11 +94,17 @@ public class CustomButton extends JPanel implements MouseListener {
         return new Dimension(width, height);
     }
 
-    /**
-     * Set size to width x height
-     * @return dimension width x height
-     */
-    @Override public Dimension getMaximumSize() { return new Dimension(width, height); }
+	/**
+	 * Set size to width x height
+	 * @return dimension width x height
+	 */
+	@Override public Dimension getMaximumSize() { return new Dimension(width, height); }
+
+	/**
+	 * Set size to width x height
+	 * @return dimension width x height
+	 */
+	@Override public Dimension getMinimumSize() { return new Dimension(width, height); }
 
     /**
      * Paints button with custom icons

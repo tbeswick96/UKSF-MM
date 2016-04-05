@@ -10,6 +10,8 @@ package com.uksf.mm.gui.components.buttons;
 import com.uksf.mm.core.utility.Invokable;
 import com.uksf.mm.core.utility.LogHandler;
 import com.uksf.mm.core.utility.StringMetrics;
+import com.uksf.mm.gui.components.labels.CustomToolTip;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,6 +50,16 @@ public class CustomButtonText extends JPanel implements MouseListener {
      */
     private String toCall;
 
+	/**
+	 * Graphics object for tooltip
+	 */
+	private Graphics2D g;
+
+	/**
+	 * Tooltip text
+	 */
+	private String toolTipText;
+
     /**
      * Button width and height
      */
@@ -60,15 +72,19 @@ public class CustomButtonText extends JPanel implements MouseListener {
      * @param fontSize text to display
      * @param toCall method to call on click
      */
-    public CustomButtonText(String text, Font font, int fontSize, String toCall) {
+    public CustomButtonText(String text, Font font, int fontSize, String toCall, String toolTipText) {
         this.text = text;
         this.font = new Font(font.getFontName(), font.getStyle(), fontSize);
         this.toCall = toCall;
+		this.toolTipText = toolTipText;
 
         setSize(getPreferredSize());
         setBorder(null);
         setOpaque(false);
         addMouseListener(this);
+		if(!toolTipText.equals("")) {
+			setToolTipText("");
+		}
     }
 
     /**
@@ -87,6 +103,22 @@ public class CustomButtonText extends JPanel implements MouseListener {
         return new Dimension(width, height);
     }
 
+	/**
+	 * Create custom tooltip
+	 * @return tooltip object
+	 */
+	@Override public JToolTip createToolTip() {
+		JToolTip tooltip = super.createToolTip();
+		tooltip.setBorder(BORDER_STANDARD);
+		tooltip.setLayout(new MigLayout("fill", "0[]0", "0[]0"));
+
+		CustomToolTip label = new CustomToolTip(toolTipText, g);
+		tooltip.setPreferredSize(label.getPreferredSize());
+
+		tooltip.add(label, "grow");
+		return tooltip;
+	}
+
     /**
      * Paints button with custom string
      * @param graphics graphics object
@@ -94,7 +126,7 @@ public class CustomButtonText extends JPanel implements MouseListener {
     @Override
     public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
-		Graphics2D g = (Graphics2D) graphics;
+		g = (Graphics2D) graphics;
 		g.setFont(font);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 

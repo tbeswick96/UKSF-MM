@@ -33,16 +33,17 @@ public class TopPanel extends JPanel {
 	public TopPanel(JFrame parent) {
 		setOpaque(true);
 		setBackground(COLOUR_FOREGROUND);
-		setLayout(new MigLayout("al center center, fill", "push[]5", "0[]0"));
+		setLayout(new MigLayout("al center center, fill", "5[]5[]0", "0[]0"));
 
 		CustomButton minimize = new CustomButton(27, 27, 0, ICON_MINIMIZE.getImage(), ICON_MINIMIZE_HOVER.getImage(), COLOUR_TRANSPARENT, "minimize", "Minimize");
 		CustomButton maximize = new CustomButton(27, 27, 0, ICON_MAXIMIZE.getImage(), ICON_MAXIMIZE_HOVER.getImage(), COLOUR_TRANSPARENT, "maximize", "Maximize");
 		CustomButton close = new CustomButton(27, 27, 0, ICON_CLOSE.getImage(), ICON_CLOSE_HOVER.getImage(), COLOUR_TRANSPARENT, "close", "Close");
 
-		GenericPanel panel = new GenericPanel("fill", "5[]5[]5[]0", "0[]0", false, COLOUR_TRANSPARENT);
-		panel.add(minimize, "");
-		panel.add(maximize, "");
-		panel.add(close, "");
+		GenericPanel panel = new GenericPanel("fill", "5[27]5[27]5[27]0", "0[]0", false, COLOUR_TRANSPARENT);
+		panel.add(minimize, "push");
+		panel.add(maximize, "push");
+		panel.add(close, "push");
+		add(Box.createHorizontalGlue(), "grow, push");
 		add(panel, "grow, align right");
 
 		addMouseListener(new MouseAdapter() {

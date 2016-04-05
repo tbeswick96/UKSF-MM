@@ -17,6 +17,7 @@ import com.uksf.mm.gui.components.buttons.CustomButtonText;
 import com.uksf.mm.gui.components.buttons.CustomCheckbox;
 import com.uksf.mm.gui.components.buttons.CustomRadioButton;
 import com.uksf.mm.gui.components.labels.CustomLabel;
+import com.uksf.mm.gui.components.labels.CustomTextField;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -35,7 +36,7 @@ public class SettingsPanel extends JPanel {
 	/**
 	 * Main settings panel
 	 */
-	private GenericPanel mainSettingsPanel;
+	private GenericPanel mainSettingsPanel, creditsPanel;
 
 	/**
 	 * Update settings panel objects
@@ -46,23 +47,23 @@ public class SettingsPanel extends JPanel {
 	/**
 	 * Folder settings panel objects
 	 */
-	private JTextField folderPath;
+	private CustomTextField folderPath;
 	private CustomCheckbox backupBox;
 
 	/**
      * Creates settings panel
      */
     public SettingsPanel() {
-        setOpaque(false);
-        setBackground(COLOUR_TRANSPARENT);
-        setLayout(new MigLayout("fill", "10[]10", "10[]10[]10"));
+		setOpaque(false);
+		setLayout(new MigLayout("fill", "10[]10", "10[]10[]10"));
 
 		mainSettingsPanel = new GenericPanel("fill", "10[]10[]10", "10[]10[]10", false, COLOUR_TRANSPARENT);
 		folderSettings();
         programSettings();
+		credits();
 
 		add(mainSettingsPanel, "push, top, cell 0 0");
-		credits();
+		add(creditsPanel, "center, cell 0 1");
 
         buttonFunctionality();
     }
@@ -75,10 +76,14 @@ public class SettingsPanel extends JPanel {
 		folderSettings.setBorder(BORDER_STANDARD);
 
 		CustomLabel folder = new CustomLabel("Mission Folder", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Missions are loaded from this folder");
-		folderPath = new JTextField();
+		folderPath = new CustomTextField("", true, COLOUR_BACKGROUND_LIGHT, COLOUR_WHITE, "Missions are loaded from this folder"){
+			@Override public Dimension getPreferredSize() {
+				return new Dimension(247, getHeight());
+			}
+		};
 		folderPath.setPreferredSize(new Dimension(247, 25));
 		folderPath.setText(FOLDER_MISSIONS);
-		CustomButtonText folderChange = new CustomButtonText("Change", FONT_STANDARD, 16, "changeMissionsFolder");
+		CustomButtonText folderChange = new CustomButtonText("Change", FONT_STANDARD, 16, "changeMissionsFolder", "Change folder where missions are loaded from");
 
 		CustomLabel backup = new CustomLabel("SQM Backup", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up when saving");
 		backupBox = new CustomCheckbox("", SQM_BACKUP, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up when saving");
@@ -100,12 +105,12 @@ public class SettingsPanel extends JPanel {
         GenericPanel programSettings = new GenericPanel("", "5[]20[]5", "5[]5", false, COLOUR_TRANSPARENT);
         programSettings.setBorder(BORDER_STANDARD);
 
-        CustomLabel updateCheck = new CustomLabel("Update Check", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When to check for updates");
+        CustomLabel updateCheck = new CustomLabel("Update Check", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Change when updates are run");
         ButtonGroup group = new ButtonGroup();
-        checkOnLaunch = new CustomRadioButton("On Launch");
-        checkWeekly = new CustomRadioButton("Weekly");
-        checkNever = new CustomRadioButton("Never");
-        updateNow = new CustomButtonText("Update Now", FONT_STANDARD, 16, "updateNow");
+        checkOnLaunch = new CustomRadioButton("On Launch", "Updates on program launch");
+        checkWeekly = new CustomRadioButton("Weekly", "Updates on program launch once a week");
+        checkNever = new CustomRadioButton("Never", "Never run update");
+        updateNow = new CustomButtonText("Update Now", FONT_STANDARD, 16, "updateNow", "Run update now");
         group.add(checkOnLaunch); group.add(checkWeekly); group.add(checkNever);
 
         GenericPanel updateButtons = new GenericPanel("", "0[]0[]0[]18[]0", "0[]0", false, COLOUR_TRANSPARENT);
@@ -124,17 +129,15 @@ public class SettingsPanel extends JPanel {
 	 * Create credits area
 	 */
 	private void credits() {
-		GenericPanel creditsPanel = new GenericPanel("fill", "5[]5", "5[]0[]0[]5", false, COLOUR_TRANSPARENT);
+		creditsPanel = new GenericPanel("fill", "5[]5", "5[]0[]0[]5", false, COLOUR_TRANSPARENT);
 
-		CustomLabel author = new CustomLabel("Tim Beswick www.uk-sf.com", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "");
-		CustomLabel copyright = new CustomLabel("Copyright (c) Tim UKSF 2016", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "");
-		CustomLabel license = new CustomLabel("This program is released under GPLv3", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "");
+		CustomLabel author = new CustomLabel("Tim Beswick www.uk-sf.com", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Dev Glub");
+		CustomLabel copyright = new CustomLabel("Copyright (c) Tim UKSF 2016", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Don't steal mah stuff :(");
+		CustomLabel license = new CustomLabel("This program is released under GPLv3", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Plz comply");
 
 		creditsPanel.add(author, "center, cell 0 0");
 		creditsPanel.add(copyright, "center, cell 0 1");
 		creditsPanel.add(license, "center, cell 0 2");
-
-		add(creditsPanel, "center, cell 0 1");
 	}
 
 	/**

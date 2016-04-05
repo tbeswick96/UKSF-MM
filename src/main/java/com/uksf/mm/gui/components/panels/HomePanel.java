@@ -8,15 +8,16 @@ package com.uksf.mm.gui.components.panels;
 
 
 import com.uksf.mm.core.Mission;
-import com.uksf.mm.gui.components.dropdown.MapDropdown;
-import com.uksf.mm.gui.components.dropdown.MissionDropdown;
 import com.uksf.mm.gui.components.buttons.CustomButton;
 import com.uksf.mm.gui.components.buttons.CustomButtonText;
+import com.uksf.mm.gui.components.dropdown.MapDropdown;
+import com.uksf.mm.gui.components.dropdown.MissionDropdown;
 import com.uksf.mm.gui.components.labels.CustomLabel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 import static com.uksf.mm.core.utility.Info.*;
 
@@ -35,6 +36,8 @@ public class HomePanel extends JPanel {
 	 */
 	private final MissionDropdown missionSelection;
 
+	private ArrayList<MissionPanel> missionPanels;
+
 	/**
      * Creates home panel
      */
@@ -43,6 +46,8 @@ public class HomePanel extends JPanel {
         setBackground(COLOUR_TRANSPARENT);
         setLayout(new MigLayout("fill", "0[]0", "0[]0"));
 
+		missionPanels = new ArrayList<>();
+
 		GenericPanel selectionPanel = new GenericPanel("al left center", "5[]10[]5[]20[]5[]20[]5[]5", "0[]0", true, COLOUR_BACKGROUND_LIGHTER);
 		selectionPanel.setPreferredSize(new Dimension(getWidth(), 35));
 		CustomButton refresh = new CustomButton(27, 27, 0, ICON_REFRESH.getImage(), ICON_REFRESH_HOVER.getImage(), COLOUR_TRANSPARENT, "refreshMissions", "Refresh Map & Mission list");
@@ -50,8 +55,8 @@ public class HomePanel extends JPanel {
 		mapSelection = new MapDropdown();
 		CustomLabel missionText = new CustomLabel("Mission:", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "");
 		missionSelection = new MissionDropdown();
-		CustomButtonText loadMission = new CustomButtonText("Load", FONT_STANDARD, 16, "loadSelectedMission");
-		CustomButtonText saveMission = new CustomButtonText("Save", FONT_STANDARD, 16, "saveSelectedMission");
+		CustomButtonText loadMission = new CustomButtonText("Load", FONT_STANDARD, 16, "loadSelectedMission", "Load selected mission");
+		CustomButtonText saveMission = new CustomButtonText("Save", FONT_STANDARD, 16, "saveSelectedMission", "Save selected mission");
 		selectionPanel.add(refresh, "cell 0 0");
 		selectionPanel.add(mapText, "cell 1 0");
 		selectionPanel.add(mapSelection, "cell 2 0");
@@ -84,4 +89,11 @@ public class HomePanel extends JPanel {
 	 * @return mission selected in dropdown
 	 */
 	public Mission getSelectedMission() {return missionSelection.getSelectedMission();}
+
+	public void addMission() {
+		missionPanels.forEach(this :: remove);
+		MissionPanel panel = new MissionPanel();
+		add(panel, "grow");
+		missionPanels.add(panel);
+	}
 }

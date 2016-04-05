@@ -6,22 +6,30 @@
 
 package com.uksf.mm.gui.components.panels;
 
-import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author Tim
  */
-public class MainPanel extends JPanel {
+public class MainPanel extends JScrollPane {
+
 
     /**
      * Creates main panel
      */
     public MainPanel() {
-        //setOpaque(true);
 		setOpaque(false);
-		//setBackground(COLOUR_FOREGROUND);
-        setLayout(new MigLayout("fill", "0[]0", "0[]0"));
+		getViewport().setOpaque(false);
+		setBorder(null);
+		setViewportBorder(null);
     }
+
+	public void addPanel(Component panel) {
+		getViewport().add(panel);
+	}
+
+	public void removePanel(Component panel) {
+		getViewport().remove(panel);
+	}
 }

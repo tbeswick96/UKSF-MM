@@ -138,12 +138,12 @@ public class UI extends JFrame implements MouseInputListener {
         switch(state) {
             case 0:
                 LogHandler.logSeverity(INFO, "State 0");
-				mainPanel.add(homePanel, "grow, push, cell 0 0");
+				mainPanel.addPanel(homePanel);
 				added.add(homePanel);
                 break;
             case 50:
                 LogHandler.logSeverity(INFO, "State 50");
-                mainPanel.add(settingsPanel, "grow, push, cell 0 0");
+                mainPanel.addPanel(settingsPanel);
                 added.add(settingsPanel);
                 break;
             default:
@@ -159,7 +159,7 @@ public class UI extends JFrame implements MouseInputListener {
     private void removeAdded() {
         if(added.isEmpty()) return;
         for(JPanel panel : added) {
-            mainPanel.remove(panel);
+            mainPanel.removePanel(panel);
         }
         added.clear();
     }
@@ -245,7 +245,7 @@ public class UI extends JFrame implements MouseInputListener {
 		boolean state = SqmLoader.loadMission();
 		state = state && ParserAuthor.getAuthor();
 		if(state) {
-			homePanel.add(new MissionPanel());
+			homePanel.addMission();
 			revalidate();
 			repaint();
 		}

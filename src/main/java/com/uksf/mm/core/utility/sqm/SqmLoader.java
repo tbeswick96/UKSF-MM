@@ -86,7 +86,7 @@ public class SqmLoader {
 		MISSION_SELECTED.customAttributes = getData(rawSqm, "customattributes");
 		MISSION_SELECTED.missionIntel = getData(rawSqm, "intel");
 		MISSION_SELECTED.missionData = getData(rawSqm, "entities");
-		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' read sucessfully.");
+		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' read successfully.");
 
 		return 0;
 	}
@@ -102,7 +102,7 @@ public class SqmLoader {
 		List<String> data = new ArrayList<>();
 		int index = 0;
 		while(true) {
-			if(index > raw.size()) return null;
+			if(index >= raw.size()) return null;
 			String line = raw.get(index);
 			if(line.toLowerCase().contains(key)) {
 				break;
