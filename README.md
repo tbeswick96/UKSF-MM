@@ -31,7 +31,6 @@ Please use the [Issue Tracker](https://github.com/tbeswick96/UKSF-MM/issues) to 
 ##TODO
 * ~~Load missions from user selected missions folder, by default Documents/Arma 3/missions~~
 * ~~Display missions by map, then name~~
-* Store previously loaded mission in settings
 * Show unit groups (that would appear in game lobby) as list
 * Editible mission elements:
     * ~~Name (creates new mission folder when renamed)~~
