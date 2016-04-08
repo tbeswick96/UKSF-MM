@@ -40,7 +40,7 @@ public class Invokable {
      * Runs update
      */
     public void updateNow() {
-        Core.runUpdate();
+        Core.runUpdate(true);
 	}
 
 	/**

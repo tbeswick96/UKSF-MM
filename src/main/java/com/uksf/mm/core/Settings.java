@@ -64,7 +64,7 @@ public class Settings {
         LogHandler.logSeverity(INFO, TAB + "Update week: " + UPDATE_WEEK);
         LogHandler.logSeverity(INFO, TAB + "Update time: " + UPDATE_TIME);
 		LogHandler.logSeverity(INFO, TAB + "Updater updated: " + UPDATER_UPDATED);
-		LogHandler.logSeverity(INFO, TAB + "Missions Folder: " + FOLDER_MISSIONS);
+		LogHandler.logSeverity(INFO, TAB + "Missions folder: " + FOLDER_MISSIONS);
 		LogHandler.logSeverity(INFO, TAB + "SQM Backup: " + SQM_BACKUP);
     }
 

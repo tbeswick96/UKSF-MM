@@ -16,22 +16,38 @@ import javax.swing.*;
  */
 public class Run {
     public static void main(String args[]) {
-        //If not windows, close
-        String os = System.getProperty("os.name").toUpperCase();
-        if(!os.contains("WIN")) {
-            JOptionPane.showMessageDialog(null, "Currently only compatible with Windows", "Currently Incompatible", JOptionPane.ERROR_MESSAGE);
-            System.exit(1);
-        }
+		//Check windows and java version
+		if(checkWindows() && checkJava()) {
+			//Create log handler and start program
+			new LogHandler();
+			new Core();
+		} else {
+			System.exit(1);
+		}
 
-        //Create log handler and start program
-        new LogHandler();
-        new Core();
-
-        //Catch shutdown event to safely close files
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
-		        LogHandler.closeLog();
+		//Catch shutdown event to safely close files
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				LogHandler.closeLog();
 			}
-        });
+		});
     }
+
+	private static boolean checkWindows() {
+		String os = System.getProperty("os.name").toUpperCase();
+		if(!os.contains("WIN")) {
+			JOptionPane.showMessageDialog(null, "Currently only compatible with Windows", "Currently Incompatible", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
+
+	private static boolean checkJava() {
+		String java = System.getProperty("java.specification.version");
+		if(!java.equals("1.8")) {
+			JOptionPane.showMessageDialog(null, "Incompatible Java version.\n " + java + " detected, 1.8 required", "Incompatible Java version", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
 }

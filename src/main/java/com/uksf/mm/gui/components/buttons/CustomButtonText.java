@@ -103,11 +103,13 @@ public class CustomButtonText extends JPanel implements MouseListener {
 		JToolTip tooltip = super.createToolTip();
 		tooltip.setBorder(BORDER_STANDARD);
 		tooltip.setLayout(new MigLayout("fill", "0[]0", "0[]0"));
-
 		CustomToolTip label = new CustomToolTip(toolTipText, g);
 		tooltip.setPreferredSize(label.getPreferredSize());
-
 		tooltip.add(label, "grow");
+		tooltip.setVisible(true);
+		if(!isEnabled()) {
+			tooltip.setVisible(false);
+		}
 		return tooltip;
 	}
 

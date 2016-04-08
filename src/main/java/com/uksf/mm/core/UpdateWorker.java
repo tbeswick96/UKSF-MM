@@ -15,13 +15,14 @@ import java.net.URL;
 import java.text.ParseException;
 
 import static com.uksf.mm.core.Core.error;
+import static com.uksf.mm.core.Core.nonFatalError;
 import static com.uksf.mm.core.utility.Info.*;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
 /**
  * @author Tim
  */
-public class UpdateWorker extends SwingWorker<Void, Void> {
+class UpdateWorker extends SwingWorker<Void, Void> {
 
 	/**
 	 * Run update check
@@ -30,6 +31,8 @@ public class UpdateWorker extends SwingWorker<Void, Void> {
 	 */
 	@Override
 	protected Void doInBackground() throws Exception {
+		LogHandler.logNoTime(HASHSPACE);
+		LogHandler.logSeverity(INFO, "Update check running");
 		Settings.set("update_time", Settings.weekAhead());
 		if(versionCheck()) {
 			LogHandler.logSeverity(INFO, "Update is available. Current version: '" + VERSION + "' Latest version: '" + VERSION_LATEST + "'");
@@ -37,11 +40,12 @@ public class UpdateWorker extends SwingWorker<Void, Void> {
 				update();
 			}
 			SwingUtilities.invokeLater(() -> Core.getInstanceUI().enableUpdate(true));
-		} if(UPDATER_UPDATED) {
+		}
+		if(UPDATER_UPDATED) {
 			updateUpdater();
 		}
 		SwingUtilities.invokeLater(() -> {
-			Core.getInstanceUI().changeCheckStates(UPDATE_CHECK, UPDATE_CHECK, ! UPDATE_CHECK);
+			Core.getInstanceUI().changeCheckStates(UPDATE_CHECK, UPDATE_WEEK, !UPDATE_CHECK);
 			Core.getInstanceUI().updateVersionText();
 		});
 		return null;
@@ -116,13 +120,14 @@ public class UpdateWorker extends SwingWorker<Void, Void> {
 	/**
 	 * Runs update tasks
 	 */
-	private static void runUpdate() {
+	static void runUpdate() {
 		LogHandler.logNoTime(HASHSPACE);
-		LogHandler.logSeverity(INFO, "Updating"); try {
+		LogHandler.logSeverity(INFO, "Updating");
+		try {
 			Runtime.getRuntime().exec("UKSF-MM-Updater.exe");
 		} catch(Exception exception) {
-			error(exception);
-		} System.exit(0);
+			nonFatalError(exception);
+		}
 	}
 
 	/**

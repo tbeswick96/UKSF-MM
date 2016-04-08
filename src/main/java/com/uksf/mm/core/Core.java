@@ -19,7 +19,6 @@ import java.awt.*;
 import java.io.IOException;
 
 import static com.uksf.mm.core.utility.Info.FEELSBADMAN;
-import static com.uksf.mm.core.utility.Info.HASHSPACE;
 import static com.uksf.mm.core.utility.LogHandler.Severity.ERROR;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
@@ -38,11 +37,6 @@ public class Core {
     private static UI instanceUI;
 
 	/**
-	 * Updateworker instance
-	 */
-	private static UpdateWorker updateWorker;
-
-    /**
      * Store instance, initialise program
      */
     public Core() {
@@ -82,18 +76,20 @@ public class Core {
 			error(exception);
 		}
 
-		//Run update
-		updateWorker = new UpdateWorker();
-		runUpdate();
+		//Run update check
+		runUpdate(false);
     }
 
 	/**
 	 * Run update
 	 */
-	public static void runUpdate() {
-		LogHandler.logNoTime(HASHSPACE);
-		LogHandler.logSeverity(INFO, "Update check running");
-		updateWorker.execute();
+	public static void runUpdate(boolean force) {
+		UpdateWorker updateWorker = new UpdateWorker();
+		if(force) {
+			UpdateWorker.runUpdate();
+		} else {
+			updateWorker.execute();
+		}
 	}
 
     /**
@@ -135,4 +131,27 @@ public class Core {
         LogHandler.logSeverity(ERROR, builder.toString());
         System.exit(0);
     }
+
+	/**
+	 * Global method to display error as stacktrace, but don't close program
+	 * @param exception error to display
+	 */
+	public static void nonFatalError(Exception exception) {
+		exception.printStackTrace();
+		StringBuilder builder = new StringBuilder();
+		builder.append(exception.getMessage());
+		builder.append("\n");
+		for (StackTraceElement element : exception.getStackTrace()) {
+			builder.append(element.toString());
+			builder.append("\n");
+		}
+		JTextArea printText = new JTextArea("Something went wrong.\n\n" + builder.toString());
+		JScrollPane print = new JScrollPane(printText){
+			@Override public Dimension getPreferredSize() {
+				return new Dimension(500, 300);
+			}
+		};
+		JOptionPane.showMessageDialog(Core.getInstanceUI(), print, " Error", JOptionPane.ERROR_MESSAGE, FEELSBADMAN);
+		LogHandler.logSeverity(ERROR, builder.toString());
+	}
 }

@@ -153,7 +153,7 @@ public class SettingsPanel extends JPanel {
 	 */
     private void settingsUpdate() {
         checkOnLaunch.addActionListener(e -> Settings.set("update_check", true));
-        checkWeekly.addActionListener(e -> Settings.setMultiple(new String[]{"update_week", "update_time"}, new Object[]{true, Settings.weekAhead()}));
+        checkWeekly.addActionListener(e -> Settings.setMultiple(new String[]{"update_check", "update_week", "update_time"}, new Object[]{false, true, Settings.weekAhead()}));
         checkNever.addActionListener(e -> Settings.setMultiple(new String[]{"update_check", "update_week"}, new Object[]{false, false}));
 		enableUpdate(false);
     }
