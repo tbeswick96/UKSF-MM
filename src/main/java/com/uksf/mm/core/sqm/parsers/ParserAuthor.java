@@ -4,7 +4,7 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.core.utility.sqm.parsers;
+package com.uksf.mm.core.sqm.parsers;
 
 import java.util.ArrayList;
 import java.util.Arrays;

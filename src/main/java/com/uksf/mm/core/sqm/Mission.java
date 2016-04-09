@@ -4,7 +4,7 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.core;
+package com.uksf.mm.core.sqm;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class Mission {
 	/**
 	 * Name and file path of mission folder
 	 */
-	public String name, path;
+	public String name, path, originalPath;
 
 	/**
 	 * Mission SQM data
@@ -37,6 +37,7 @@ public class Mission {
 	public Mission(String name, String path) {
 		this.name = name;
 		this.path = path;
+		originalPath = path;
 	}
 
 	/**

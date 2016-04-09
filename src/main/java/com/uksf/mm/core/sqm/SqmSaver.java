@@ -4,16 +4,18 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.core.utility.sqm;
+package com.uksf.mm.core.sqm;
 
 import com.uksf.mm.core.Core;
 import com.uksf.mm.core.utility.LogHandler;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 
 import static com.uksf.mm.core.utility.Info.MISSION_SELECTED;
 import static com.uksf.mm.core.utility.Info.SQM_BACKUP;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
+import static com.uksf.mm.core.utility.LogHandler.Severity.WARNING;
 
 /**
  * @author Tim
@@ -55,11 +57,28 @@ public class SqmSaver {
 	 */
 	private static void makeFile() {
 		File missionFolder = new File(MISSION_SELECTED.path);
-		if(! missionFolder.exists()) {
-			LogHandler.logSeverity(INFO, "Mission file not found, creating '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "'");
+		if(!missionFolder.exists()) {
+			LogHandler.logSeverity(INFO, "Mission file not found, creating new folder'" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "'");
 			missionFolder.mkdir();
+			copyOriginal();
 		}
 		sqmFile = new File(MISSION_SELECTED.path + "/mission.sqm");
+	}
+
+	/**
+	 * Copies other files from original path to new folder
+	 */
+	private static void copyOriginal() {
+		LogHandler.logSeverity(INFO, "Copying other files from '" + MISSION_SELECTED.originalPath + "' to '" + MISSION_SELECTED.path + "'");
+		File original = new File(MISSION_SELECTED.originalPath);
+		File newFolder = new File(MISSION_SELECTED.path);
+		try {
+			FileUtils.copyDirectory(original, newFolder);
+			File oldSqm = new File(MISSION_SELECTED.originalPath + "/mission.sqm");
+			oldSqm.delete();
+		} catch(IOException e) {
+			LogHandler.logSeverity(WARNING, "Copying files failed.");
+		}
 	}
 
 	/**

@@ -8,6 +8,7 @@ package com.uksf.mm.core;
 
 
 import com.uksf.mm.core.utility.LogHandler;
+import com.uksf.mm.core.utility.UpdateWorker;
 import com.uksf.mm.core.utility.loaders.FontLoad;
 import com.uksf.mm.core.utility.loaders.ImageLoad;
 import com.uksf.mm.core.utility.loaders.MapLoad;

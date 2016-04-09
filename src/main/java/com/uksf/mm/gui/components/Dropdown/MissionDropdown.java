@@ -6,7 +6,7 @@
 
 package com.uksf.mm.gui.components.dropdown;
 
-import com.uksf.mm.core.Mission;
+import com.uksf.mm.core.sqm.Mission;
 import com.uksf.mm.core.utility.LogHandler;
 import com.uksf.mm.gui.components.labels.CustomLabel;
 

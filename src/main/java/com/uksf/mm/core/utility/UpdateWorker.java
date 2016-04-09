@@ -4,9 +4,10 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.core;
+package com.uksf.mm.core.utility;
 
-import com.uksf.mm.core.utility.LogHandler;
+import com.uksf.mm.core.Core;
+import com.uksf.mm.core.Settings;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -22,7 +23,7 @@ import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 /**
  * @author Tim
  */
-class UpdateWorker extends SwingWorker<Void, Void> {
+public class UpdateWorker extends SwingWorker<Void, Void> {
 
 	/**
 	 * Run update check
@@ -120,7 +121,7 @@ class UpdateWorker extends SwingWorker<Void, Void> {
 	/**
 	 * Runs update tasks
 	 */
-	static void runUpdate() {
+	public static void runUpdate() {
 		LogHandler.logNoTime(HASHSPACE);
 		LogHandler.logSeverity(INFO, "Updating");
 		try {

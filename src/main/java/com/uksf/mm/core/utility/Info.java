@@ -6,7 +6,7 @@
 
 package com.uksf.mm.core.utility;
 
-import com.uksf.mm.core.Mission;
+import com.uksf.mm.core.sqm.Mission;
 
 import javax.swing.*;
 import javax.swing.border.Border;

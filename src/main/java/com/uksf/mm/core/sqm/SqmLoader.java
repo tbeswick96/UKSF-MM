@@ -4,7 +4,7 @@
  * Go to https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE for full license details.
  */
 
-package com.uksf.mm.core.utility.sqm;
+package com.uksf.mm.core.sqm;
 
 import com.uksf.mm.core.Core;
 import com.uksf.mm.core.utility.LogHandler;

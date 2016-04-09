@@ -6,7 +6,7 @@
 
 package com.uksf.mm.core.utility.loaders;
 
-import com.uksf.mm.core.Mission;
+import com.uksf.mm.core.sqm.Mission;
 import com.uksf.mm.core.utility.LogHandler;
 
 import java.util.ArrayList;

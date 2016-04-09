@@ -8,9 +8,9 @@ package com.uksf.mm.gui;
 
 
 import com.uksf.mm.core.utility.LogHandler;
-import com.uksf.mm.core.utility.sqm.SqmLoader;
-import com.uksf.mm.core.utility.sqm.SqmSaver;
-import com.uksf.mm.core.utility.sqm.parsers.ParserAuthor;
+import com.uksf.mm.core.sqm.SqmLoader;
+import com.uksf.mm.core.sqm.SqmSaver;
+import com.uksf.mm.core.sqm.parsers.ParserAuthor;
 import com.uksf.mm.gui.components.panels.*;
 import net.miginfocom.swing.MigLayout;
 
