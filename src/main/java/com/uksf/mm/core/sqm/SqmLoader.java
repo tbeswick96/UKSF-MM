@@ -45,7 +45,8 @@ public class SqmLoader {
 					return false;
 				case 3:
 					JOptionPane.showMessageDialog(Core.getInstanceUI(),
-							"Invalid mission.sqm file found at '" + MISSION_SELECTED.path + "' \nEnsure mission.sqm is not binarized.", "Invalid mission.sqm", JOptionPane.ERROR_MESSAGE);
+							"Invalid mission.sqm file found at '" + MISSION_SELECTED.path
+									+ "' \nEnsure mission.sqm is not binarized and is the latest SQM version.", "Invalid mission.sqm", JOptionPane.ERROR_MESSAGE);
 					return false;
 			}
 
@@ -71,8 +72,8 @@ public class SqmLoader {
 			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' is empty");
 			return 2;
 		}
-		if(!rawSqm.get(0).contains("version=")) {
-			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' has no valid mission.sqm file (probably binarized)");
+		if(!rawSqm.get(0).contains("version=51")) {
+			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' has no valid mission.sqm file (probably binarized or old sqm version)");
 			return 3;
 		}
 
@@ -86,7 +87,7 @@ public class SqmLoader {
 		MISSION_SELECTED.customAttributes = getData(rawSqm, "customattributes");
 		MISSION_SELECTED.missionIntel = getData(rawSqm, "intel");
 		MISSION_SELECTED.missionData = getData(rawSqm, "entities");
-		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' read successfully.");
+		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' read successfully");
 
 		return 0;
 	}

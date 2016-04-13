@@ -6,6 +6,8 @@
 
 package com.uksf.mm.core.sqm.parsers;
 
+import com.uksf.mm.core.utility.LogHandler;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -13,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.uksf.mm.core.utility.Info.MISSION_SELECTED;
+import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
 /**
  * @author Tim
@@ -20,6 +23,7 @@ import static com.uksf.mm.core.utility.Info.MISSION_SELECTED;
 public class ParserAuthor {
 
 	public static boolean getAuthor() {
+		LogHandler.logSeverity(INFO, "Reading mission author");
 		String author;
 		String all = "";
 		if(MISSION_SELECTED.scenarioData == null) {
@@ -33,6 +37,7 @@ public class ParserAuthor {
 			author = matcher.group(1);
 			if(!Objects.equals(author, "")) {
 				MISSION_SELECTED.author = author;
+				LogHandler.logSeverity(INFO, "Read mission author as '" + MISSION_SELECTED.author + "'");
 				return true;
 			}
 		}

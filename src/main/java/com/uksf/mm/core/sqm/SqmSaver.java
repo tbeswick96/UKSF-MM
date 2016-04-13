@@ -145,11 +145,24 @@ public class SqmSaver {
 	private static void saveMissionData() throws IOException {
 		writer.append("\r\n").append("class Mission");
 		writer.append("\r\n").append("{");
-		for(String line : MISSION_SELECTED.missionIntel) {
-			writer.append("\r\n").append(line);
-		} for(String line : MISSION_SELECTED.missionData) {
+		saveMissionIntel();
+		for(String line : MISSION_SELECTED.missionData) {
 			writer.append("\r\n").append(line);
 		}
 		writer.append("\r\n").append("};").append("\r\n");
+	}
+
+	private static void saveMissionIntel() throws IOException {
+		int index = 0;
+		for(String line : MISSION_SELECTED.missionIntel) {
+			if(line.contains("=")) {
+				String name = line.split("=")[0];
+				String value = index >= MISSION_SELECTED.intel.size() ? "0" : MISSION_SELECTED.intel.get(index);
+				writer.append("\r\n").append(name).append("=").append(value).append(";");
+				index++;
+			} else {
+				writer.append("\r\n").append(line);
+			}
+		}
 	}
 }

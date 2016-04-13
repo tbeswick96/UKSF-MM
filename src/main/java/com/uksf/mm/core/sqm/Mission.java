@@ -6,6 +6,7 @@
 
 package com.uksf.mm.core.sqm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,9 +26,10 @@ public class Mission {
 	public List<String> editorData, addons, scenarioData, customAttributes, missionIntel, missionData;
 
 	/**
-	 * SQM Specifics
+	 * Parsed SQM data
 	 */
 	public String author;
+	public ArrayList<String> intel;
 
 	/**
 	 * Create new mission

@@ -15,6 +15,7 @@ import javax.swing.*;
 /**
  * @author Tim
  */
+@SuppressWarnings("All")
 public class Invokable {
 
     /**
