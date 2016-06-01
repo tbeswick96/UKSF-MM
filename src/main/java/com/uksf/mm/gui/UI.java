@@ -309,7 +309,7 @@ public class UI extends JFrame implements MouseInputListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        if (gp.contains(e.getPoint())) {
+        if(gp.contains(e.getPoint())) {
             startPos = new Point(getWidth()-e.getX(), getHeight()-e.getY());
         }
     }
@@ -320,7 +320,8 @@ public class UI extends JFrame implements MouseInputListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        startPos = null;
+		mouseMoved(e);
+		startPos = null;
     }
 
     /**
@@ -343,7 +344,7 @@ public class UI extends JFrame implements MouseInputListener {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (startPos != null) {
+        if(startPos != null) {
             int dx = e.getX() + startPos.x;
             int dy = e.getY() + startPos.y;
             setSize(dx, dy);
@@ -356,8 +357,8 @@ public class UI extends JFrame implements MouseInputListener {
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-        if (gp.contains(e.getPoint())) {
-            setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
+        if(gp.contains(e.getPoint())) {
+			setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
         } else {
             setCursor(Cursor.getDefaultCursor());
         }

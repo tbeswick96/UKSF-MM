@@ -49,6 +49,7 @@ public class ParserIntel {
 		}
 		MISSION_SELECTED.intel = new ArrayList<>();
 		String intel;
+		//TODO: Find a cleaner way of doing the regex matching for the intel.
 
 		Matcher matcher = Pattern.compile("(?<=timeOfChanges)=.+?;").matcher(all);
 		if(matcher.find()) {

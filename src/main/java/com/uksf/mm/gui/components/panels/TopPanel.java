@@ -25,7 +25,7 @@ public class TopPanel extends JPanel {
 
 	private Point initialClick;
 
-	private int width, height = 30;
+	private int width, height = 36;
 
 	/**
 	 * Creates main panel
@@ -35,11 +35,11 @@ public class TopPanel extends JPanel {
 		setBackground(COLOUR_FOREGROUND);
 		setLayout(new MigLayout("al center center, fill", "5[]5[]0", "0[]0"));
 
-		CustomButton minimize = new CustomButton(27, 27, 0, ICON_MINIMIZE.getImage(), ICON_MINIMIZE_HOVER.getImage(), COLOUR_TRANSPARENT, "minimize", "Minimize");
-		CustomButton maximize = new CustomButton(27, 27, 0, ICON_MAXIMIZE.getImage(), ICON_MAXIMIZE_HOVER.getImage(), COLOUR_TRANSPARENT, "maximize", "Maximize");
-		CustomButton close = new CustomButton(27, 27, 0, ICON_CLOSE.getImage(), ICON_CLOSE_HOVER.getImage(), COLOUR_TRANSPARENT, "close", "Close");
+		CustomButton minimize = new CustomButton(23, 23, 0, ICON_MINIMIZE.getImage(), ICON_MINIMIZE_HOVER.getImage(), COLOUR_TRANSPARENT, "minimize", "Minimize");
+		CustomButton maximize = new CustomButton(23, 23, 0, ICON_MAXIMIZE.getImage(), ICON_MAXIMIZE_HOVER.getImage(), COLOUR_TRANSPARENT, "maximize", "Maximize");
+		CustomButton close = new CustomButton(23, 23, 0, ICON_CLOSE.getImage(), ICON_CLOSE_HOVER.getImage(), COLOUR_TRANSPARENT, "close", "Close");
 
-		GenericPanel panel = new GenericPanel("fill", "5[27]5[27]5[27]0", "0[]0", false, COLOUR_TRANSPARENT);
+		GenericPanel panel = new GenericPanel("fill", "5[23]5[23]5[23]5", "0[]0", false, COLOUR_TRANSPARENT);
 		panel.add(minimize, "push");
 		panel.add(maximize, "push");
 		panel.add(close, "push");
@@ -82,10 +82,10 @@ public class TopPanel extends JPanel {
 
 		//Paint title
 		g.setColor(COLOUR_FOREGROUND);
-		g.setFont(new Font(FONT_STANDARD.getFontName(), FONT_STANDARD.getStyle(), 20));
+		g.setFont(new Font(FONT_STANDARD.getFontName(), FONT_STANDARD.getStyle(), 24));
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		int stringWidth = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), WINDOW_TITLE).getWidth();
 		int stringHeight = (int) StringMetrics.getBounds(g.getFont(), g.getFontRenderContext(), WINDOW_TITLE).getHeight();
-		g.drawString(WINDOW_TITLE, (width - stringWidth) / 2, (28 - stringHeight) / 2 + getFontMetrics(g.getFont()).getAscent());
+		g.drawString(WINDOW_TITLE, (width - stringWidth) / 2, (30 - stringHeight) / 2 + getFontMetrics(g.getFont()).getAscent());
 	}
 }

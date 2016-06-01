@@ -9,6 +9,8 @@ package com.uksf.mm.core.utility.loaders;
 import com.uksf.mm.core.utility.LogHandler;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import static com.uksf.mm.core.utility.Info.*;
@@ -38,18 +40,43 @@ public class ImageLoad {
 		LOGO_64 = new ImageIcon(toByteArray(getClass().getResourceAsStream(LOGOS + "uksf64.png")));
 
 		ICON_HOME = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "home.png")));
-		ICON_HOME_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "home_hover.png")));
+		ICON_HOME_HOVER = changeImageColour(ICON_HOME, COLOUR_FOREGROUND_DARK.getRGB());
 		ICON_SETTINGS = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "settings.png")));
-		ICON_SETTINGS_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "settings_hover.png")));
+		ICON_SETTINGS_HOVER = changeImageColour(ICON_SETTINGS, COLOUR_FOREGROUND_DARK.getRGB());
 		ICON_MINIMIZE = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "minimize.png")));
-		ICON_MINIMIZE_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "minimize_hover.png")));
+		ICON_MINIMIZE_HOVER = changeImageColour(ICON_MINIMIZE, COLOUR_FOREGROUND_DARK.getRGB());
 		ICON_MAXIMIZE = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "maximize.png")));
-		ICON_MAXIMIZE_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "maximize_hover.png")));
+		ICON_MAXIMIZE_HOVER = changeImageColour(ICON_MAXIMIZE, COLOUR_FOREGROUND_DARK.getRGB());
 		ICON_CLOSE = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "close.png")));
-		ICON_CLOSE_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "close_hover.png")));
+		ICON_CLOSE_HOVER = changeImageColour(ICON_CLOSE, COLOUR_FOREGROUND_DARK.getRGB());
 		ICON_REFRESH = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "refresh.png")));
-		ICON_REFRESH_HOVER = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "refresh_hover.png")));
+		ICON_REFRESH_HOVER = changeImageColour(ICON_REFRESH, COLOUR_FOREGROUND_DARK.getRGB());
 		FEELSBADMAN = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "fbm64.png")));
         LogHandler.logSeverity(INFO, "Images loaded");
     }
+
+	/**
+	 * Changes colour of all non-transparent pixels for given image to given colour
+	 * @param image - image to change colours in
+	 * @param newColour colour to change to
+	 * @return image with changed colours
+	 */
+	private static ImageIcon changeImageColour(ImageIcon image, int newColour) {
+		LogHandler.logSeverity(INFO, "Converting image: " + image + " colour to: " + newColour);
+		BufferedImage bufferedImage = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics graphics = bufferedImage.createGraphics();
+		image.paintIcon(null, graphics, 0, 0);
+		graphics.dispose();
+		for(int x = 0; x < bufferedImage.getWidth(); x++) {
+			for(int y = 0; y < bufferedImage.getHeight(); y++) {
+				int colour = bufferedImage.getRGB(x, y);
+				colour = (((colour >> 24) & 0xff) << 24) | (((colour & 0x00ff0000) >> 16) << 16) | (((colour & 0x0000ff00) >> 8) << 8) | (colour & 0x000000ff);
+				if(colour != COLOUR_TRANSPARENT.getRGB()) {
+					newColour = (((colour >> 24) & 0xff) << 24) | (((newColour & 0x00ff0000) >> 16) << 16) | (((newColour & 0x0000ff00) >> 8) << 8) | (newColour & 0x000000ff);
+					bufferedImage.setRGB(x, y, newColour);
+				}
+			}
+		}
+		return new ImageIcon(bufferedImage);
+	}
 }
