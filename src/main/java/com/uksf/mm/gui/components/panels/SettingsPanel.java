@@ -15,7 +15,6 @@ import com.uksf.mm.core.utility.loaders.MapLoad;
 import com.uksf.mm.core.utility.loaders.MissionLoad;
 import com.uksf.mm.gui.components.buttons.CustomButtonText;
 import com.uksf.mm.gui.components.buttons.CustomCheckbox;
-import com.uksf.mm.gui.components.buttons.CustomRadioButton;
 import com.uksf.mm.gui.components.labels.CustomLabel;
 import com.uksf.mm.gui.components.labels.CustomTextField;
 import net.miginfocom.swing.MigLayout;
@@ -39,12 +38,6 @@ public class SettingsPanel extends JPanel {
 	private GenericPanel mainSettingsPanel, creditsPanel;
 
 	/**
-	 * Update settings panel objects
-	 */
-    private CustomRadioButton checkOnLaunch, checkWeekly, checkNever;
-    private CustomButtonText updateNow;
-
-	/**
 	 * Folder settings panel objects
 	 */
 	private CustomTextField folderPath;
@@ -59,7 +52,7 @@ public class SettingsPanel extends JPanel {
 
 		mainSettingsPanel = new GenericPanel("fill", "10[]10[]10", "10[]10[]10", false, COLOUR_TRANSPARENT);
 		folderSettings();
-        programSettings();
+        //programSettings();
 		credits();
 
 		add(mainSettingsPanel, "push, top, cell 0 0");
@@ -105,23 +98,6 @@ public class SettingsPanel extends JPanel {
         GenericPanel programSettings = new GenericPanel("", "5[]20[]5", "5[]5", false, COLOUR_TRANSPARENT);
         programSettings.setBorder(BORDER_STANDARD);
 
-        CustomLabel updateCheck = new CustomLabel("Update Check", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Change when updates are run");
-        ButtonGroup group = new ButtonGroup();
-        checkOnLaunch = new CustomRadioButton("On Launch", "Updates on program launch");
-        checkWeekly = new CustomRadioButton("Weekly", "Updates on program launch once a week");
-        checkNever = new CustomRadioButton("Never", "Never run update");
-        updateNow = new CustomButtonText("Update Now", FONT_STANDARD, 16, "updateNow", "Run update now");
-        group.add(checkOnLaunch); group.add(checkWeekly); group.add(checkNever);
-
-        GenericPanel updateButtons = new GenericPanel("", "0[]0[]0[]18[]0", "0[]0", false, COLOUR_TRANSPARENT);
-        updateButtons.add(checkOnLaunch, "shrink, cell 0 0");
-        updateButtons.add(checkWeekly, "shrink, cell 1 0");
-        updateButtons.add(checkNever, "shrink, cell 2 0");
-        updateButtons.add(updateNow, "cell 3 0");
-
-        programSettings.add(updateCheck, "grow, cell 0 0");
-        programSettings.add(updateButtons, "cell 1 0");
-
 		mainSettingsPanel.add(programSettings, "al center center, grow, cell 0 1");
     }
 
@@ -144,18 +120,7 @@ public class SettingsPanel extends JPanel {
 	 * Add all button functionality
 	 */
     private void buttonFunctionality() {
-        settingsUpdate();
 		settingsFolder();
-    }
-
-	/**
-	 * Functionality for update settings
-	 */
-    private void settingsUpdate() {
-        checkOnLaunch.addActionListener(e -> Settings.set("update_check", true));
-        checkWeekly.addActionListener(e -> Settings.setMultiple(new String[]{"update_check", "update_week", "update_time"}, new Object[]{false, true, Settings.weekAhead()}));
-        checkNever.addActionListener(e -> Settings.setMultiple(new String[]{"update_check", "update_week"}, new Object[]{false, false}));
-		enableUpdate(false);
     }
 
 	/**
@@ -163,26 +128,6 @@ public class SettingsPanel extends JPanel {
 	 */
 	private void settingsFolder() {
 		backupBox.addActionListener(e -> Settings.set("sqm_backup", backupBox.isSelected()));
-	}
-
-	/**
-	 * Change the selected update option
-	 * @param launch check on launch state
-	 * @param week check of week state
-	 * @param never check never state
-	 */
-	public void changeCheckStates(boolean launch, boolean week, boolean never) {
-		checkNever.setSelected(never);
-		checkWeekly.setSelected(week);
-		checkOnLaunch.setSelected(launch);
-	}
-
-	/**
-	 * Switches the state of the update button in the settings panel
-	 * @param state new enabled state
-	 */
-	public void enableUpdate(boolean state) {
-		updateNow.setEnabled(state);
 	}
 
 	/**

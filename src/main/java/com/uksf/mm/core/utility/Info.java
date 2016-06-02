@@ -20,11 +20,10 @@ import java.util.Date;
 /**
  * @author Tim
  */
-@SuppressWarnings("ALL")
+
 public class Info {
     //Program settings
     public static final String VERSION = "0.1";
-    public static String VERSION_LATEST = "0.1";
 
     //Directories
 	static File APPDATA = new File(System.getenv("LOCALAPPDATA"));
@@ -35,9 +34,6 @@ public class Info {
 
     //User Settings
     public static boolean HAS_SETUP;
-    public static boolean UPDATE_CHECK;
-    public static boolean UPDATE_WEEK;
-    public static String UPDATE_TIME;
 	public static boolean UPDATER_UPDATED;
 	public static String FOLDER_MISSIONS;
 	public static boolean SQM_BACKUP;

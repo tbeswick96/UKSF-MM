@@ -82,9 +82,9 @@ public class UI extends JFrame implements MouseInputListener {
 		setUndecorated(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        //Add resize mouse listeners
-        addMouseListener(this);
-        addMouseMotionListener(this);
+		//Add resize listeners
+		addMouseListener(this);
+		addMouseMotionListener(this);
 
         //Set background and icons
         setBackground(COLOUR_BACKGROUND);
@@ -123,11 +123,11 @@ public class UI extends JFrame implements MouseInputListener {
      * Creates base components
      */
     private void createComponents() {
-		topPanel = new TopPanel(this);
-		mainPanel = new MainPanel();
+		topPanel = new TopPanel(this); topPanel.addMouseMotionListener(this);
+		mainPanel = new MainPanel(); mainPanel.addMouseMotionListener(this);
         bottomPanel = new BottomPanel();
-		homePanel = new HomePanel();
-        settingsPanel = new SettingsPanel();
+		homePanel = new HomePanel(); homePanel.addMouseMotionListener(this);
+        settingsPanel = new SettingsPanel(); settingsPanel.addMouseMotionListener(this);
     }
 
     /**
@@ -185,18 +185,6 @@ public class UI extends JFrame implements MouseInputListener {
     }
 
 	/**
-	 * Switches the state of the update button in the settings panel
-	 * @param state new enabled state
-	 */
-	public void enableUpdate(boolean state) {
-		try {
-			SwingUtilities.invokeLater(() -> settingsPanel.enableUpdate(state));
-		} catch(Exception exception) {
-			error(exception);
-		}
-	}
-
-	/**
 	 * Opens file chooser to change missions folder
 	 */
 	public void changeMissionsFolder() {
@@ -205,23 +193,6 @@ public class UI extends JFrame implements MouseInputListener {
 		} catch(Exception exception) {
 			error(exception);
 		}
-	}
-
-	/**
-	 * Change the selected update option
-	 * @param launch check on launch state
-	 * @param week check of week state
-	 * @param never check never state
-	 */
-	public void changeCheckStates(boolean launch, boolean week, boolean never) {
-		settingsPanel.changeCheckStates(launch, week, never);
-	}
-
-	/**
-	 * Updates version text
-	 */
-	public void updateVersionText() {
-		bottomPanel.updateVersionText();
 	}
 
 	/**
@@ -272,11 +243,7 @@ public class UI extends JFrame implements MouseInputListener {
 	 * Maximizes program
 	 */
 	public void maximize() {
-		if(getExtendedState() < 1) {
-			setExtendedState(getExtendedState() | Frame.MAXIMIZED_BOTH);
-		} else {
-			setExtendedState(Frame.NORMAL);
-		}
+		setExtendedState(getExtendedState() < 1 ? getExtendedState() | Frame.MAXIMIZED_BOTH : Frame.NORMAL);
 	}
 
     /**
@@ -286,7 +253,6 @@ public class UI extends JFrame implements MouseInputListener {
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
-
         int width = getWidth();
         int height = getHeight();
         gp = new java.awt.geom.GeneralPath();
@@ -297,70 +263,69 @@ public class UI extends JFrame implements MouseInputListener {
     }
 
 	/**
-     * Mouse clicked event
-     * @param e event
-     */
-    @Override
-    public void mouseClicked(MouseEvent e) {}
+	 * Mouse clicked event
+	 * @param e event
+	 */
+	@Override
+	public void mouseClicked(MouseEvent e) {}
 
-    /**
-     * Mouse pressed event
-     * @param e event
-     */
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if(gp.contains(e.getPoint())) {
-            startPos = new Point(getWidth()-e.getX(), getHeight()-e.getY());
-        }
-    }
+	/**
+	 * Mouse pressed event
+	 * @param e event
+	 */
+	@Override
+	public void mousePressed(MouseEvent e) {
+		if(gp.contains(e.getPoint())) {
+			startPos = new Point(getWidth()-e.getX(), getHeight()-e.getY());
+		}
+	}
 
-    /**
-     * Mouse released event
-     * @param e event
-     */
-    @Override
-    public void mouseReleased(MouseEvent e) {
-		mouseMoved(e);
+	/**
+	 * Mouse released event
+	 * @param e event
+	 */
+	@Override
+	public void mouseReleased(MouseEvent e) {
 		startPos = null;
-    }
+	}
 
-    /**
-     * Mouse entered event
-     * @param e event
-     */
-    @Override
-    public void mouseEntered(MouseEvent e) {}
+	/**
+	 * Mouse entered event
+	 * @param e event
+	 */
+	@Override
+	public void mouseEntered(MouseEvent e) {}
 
-    /**
-     * Mouse exited event
-     * @param e event
-     */
-    @Override
-    public void mouseExited(MouseEvent e) {}
+	/**
+	 * Mouse exited event
+	 * @param e event
+	 */
+	@Override
+	public void mouseExited(MouseEvent e) {}
 
-    /**
-     * Mouse dragged event
-     * @param e event
-     */
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        if(startPos != null) {
-            int dx = e.getX() + startPos.x;
-            int dy = e.getY() + startPos.y;
-            setSize(dx, dy);
-        }
-    }
+	/**
+	 * Mouse dragged event
+	 * @param e event
+	 */
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		if(startPos != null) {
+			int dx = e.getX() + startPos.x;
+			int dy = e.getY() + startPos.y;
+			setSize(dx, dy);
+		}
+	}
 
-    /**
-     * Mouse moved event
-     * @param e event
-     */
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        if(gp.contains(e.getPoint())) {
+	/**
+	 * Mouse moved event
+	 * @param e event
+	 */
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		if(gp.contains(e.getPoint())) {
 			setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
-        } else {
-            setCursor(Cursor.getDefaultCursor());
-        }
-    }
+		} else {
+			setCursor(Cursor.getDefaultCursor());
+		}
+	}
 }

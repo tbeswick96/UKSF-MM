@@ -78,19 +78,15 @@ public class Core {
 		}
 
 		//Run update check
-		runUpdate(false);
+		runUpdate();
     }
 
 	/**
 	 * Run update
 	 */
-	public static void runUpdate(boolean force) {
+	public static void runUpdate() {
 		UpdateWorker updateWorker = new UpdateWorker();
-		if(force) {
-			UpdateWorker.runUpdate();
-		} else {
-			updateWorker.execute();
-		}
+		updateWorker.execute();
 	}
 
     /**

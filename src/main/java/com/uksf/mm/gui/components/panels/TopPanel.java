@@ -6,8 +6,8 @@
 
 package com.uksf.mm.gui.components.panels;
 
-import com.uksf.mm.gui.components.buttons.CustomButton;
 import com.uksf.mm.core.utility.StringMetrics;
+import com.uksf.mm.gui.components.buttons.CustomButton;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -47,6 +47,7 @@ public class TopPanel extends JPanel {
 		add(panel, "grow, align right");
 
 		addMouseListener(new MouseAdapter() {
+			@Override
 			public void mousePressed(MouseEvent e) {
 				initialClick = e.getPoint();
 				getComponentAt(initialClick);

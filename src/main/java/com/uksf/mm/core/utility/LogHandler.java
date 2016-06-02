@@ -94,11 +94,9 @@ public class LogHandler {
     @SuppressWarnings("ResultOfMethodCallIgnored")
 	private static void toFile(String log) {
         try {
-            logFile.setWritable(true);
             Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile, true)));
             writer.append(log).append("\n");
             writer.close();
-            logFile.setReadOnly();
         } catch(IOException e) {
             error(e);
         }
@@ -111,7 +109,6 @@ public class LogHandler {
 	public static void closeLog() {
         LogHandler.logNoTime(HASHSPACE);
         logSeverity(INFO, "Log Closing");
-        logFile.setWritable(true);
     }
 
     /**

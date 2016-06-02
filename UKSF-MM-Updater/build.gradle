@@ -6,9 +6,6 @@ repositories {
 }
 
 group 'com.uksf.updater'
-mainClassName = 'com.uksf.updater.Run'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 //Dependencies
 dependencies {

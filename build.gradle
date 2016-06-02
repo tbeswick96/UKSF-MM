@@ -6,9 +6,6 @@ repositories {
 }
 
 group 'com.uksf.mm'
-mainClassName = 'com.uksf.mm.Run'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 //Dependencies
 dependencies {

@@ -37,13 +37,6 @@ public class Invokable {
         Core.getInstanceUI().changeState(0);
     }
 
-    /**
-     * Runs update
-     */
-    public void updateNow() {
-        Core.runUpdate(true);
-	}
-
 	/**
 	 * Changes missions folder
 	 */

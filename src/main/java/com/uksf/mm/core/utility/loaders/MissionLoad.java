@@ -50,8 +50,8 @@ public class MissionLoad {
 	private static ArrayList<String> getMissions(ArrayList<String> files) {
 		ArrayList<String> missions = new ArrayList<>();
 		for(String file : files) {
-			if(file.contains("pbo") || file.contains("sqf") || file.contains("sqm")) continue;
 			File mission = new File(FOLDER_MISSIONS + "/" + file);
+			if(!mission.isDirectory()) continue;
 			String[] missionFiles = mission.list();
 			if(missionFiles.length != 0 && Arrays.asList(missionFiles).contains("mission.sqm")) {
 				missions.add(file);
