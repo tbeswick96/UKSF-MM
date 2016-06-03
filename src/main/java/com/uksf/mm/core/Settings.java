@@ -41,7 +41,6 @@ public class Settings {
 			setSettings();
         }
 		getSettings();
-        LogHandler.logNoTime(HASHSPACE);
     }
 
     /**
@@ -50,10 +49,12 @@ public class Settings {
     private static void getSettings() {
         LogHandler.logNoTime(HASHSPACE);
         LogHandler.logSeverity(INFO, "User settings updated: ");
+		LOGS_ENABLED = preferences.getBoolean("logs_enabled", true);
 		UPDATER_UPDATED = preferences.getBoolean("updater_updated", false);
 		FOLDER_MISSIONS = preferences.get("folder_missions", "");
 		SQM_BACKUP = preferences.getBoolean("sqm_backup", true);
 
+		LogHandler.logSeverity(INFO, TAB + "Logs enabled: " + LOGS_ENABLED);
 		LogHandler.logSeverity(INFO, TAB + "Updater updated: " + UPDATER_UPDATED);
 		LogHandler.logSeverity(INFO, TAB + "Missions folder: " + FOLDER_MISSIONS);
 		LogHandler.logSeverity(INFO, TAB + "SQM Backup: " + SQM_BACKUP);
@@ -64,6 +65,7 @@ public class Settings {
      */
     private static void setSettings() {
         preferences.putBoolean("has_setup", true);
+		preferences.putBoolean("logs_enabled", true);
 		preferences.putBoolean("updater_updated", false);
 		preferences.put("folder_missions", getDefaultMissionsFolder());
 		preferences.putBoolean("sqm_backup", true);

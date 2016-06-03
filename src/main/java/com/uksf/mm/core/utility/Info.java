@@ -35,6 +35,7 @@ public class Info {
     //User Settings
     public static boolean HAS_SETUP;
 	public static boolean UPDATER_UPDATED;
+	public static boolean LOGS_ENABLED = true;
 	public static String FOLDER_MISSIONS;
 	public static boolean SQM_BACKUP;
 
@@ -47,7 +48,6 @@ public class Info {
     public static final Color COLOUR_BACKGROUND = new Color(45, 45, 45);
     public static final Color COLOUR_BACKGROUND_DARKER = new Color(40, 40, 40);
     public static final Color COLOUR_BACKGROUND_DARK = new Color(35, 35, 35);
-
     public static final Color COLOUR_FOREGROUND = new Color(222, 154, 37);
     public static final Color COLOUR_FOREGROUND_DARK = new Color(222, 106, 20);
 
@@ -85,8 +85,8 @@ public class Info {
 	public static Font FONT_TOOLTIP;
 
     //Date
-    public static DateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd__hh-mm-ss");
-    public static DateFormat TIMEFORMAT = new SimpleDateFormat("hh:mm:ss");
+    public static DateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd__HH-mm-ss");
+    public static DateFormat TIMEFORMAT = new SimpleDateFormat("HH:mm:ss");
     public static Date DATE = new Date();
 
     //Strings
@@ -100,6 +100,11 @@ public class Info {
 	public static ArrayList<String> MAPS = new ArrayList<>();
 	public static ArrayList<Mission> MISSIONS = new ArrayList<>();
 
-	//Core
+	//Mission
 	public static Mission MISSION_SELECTED;
+	public static String SQM_VERSION = "52";
+	public static String DEFAULT_VERSION = "version=52;";
+	public static String DEFAULT_BINARIZED = "binarizationWanted=0;";
+	public static String DEFAULT_SEED = "randomSeed=12623053;";
+	public static String DEFAULT_AUTHOR = "UKSF";
 }

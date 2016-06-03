@@ -12,11 +12,10 @@ import org.apache.commons.io.FileUtils;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 import static com.uksf.mm.core.utility.Info.MISSION_SELECTED;
+import static com.uksf.mm.core.utility.Info.SQM_VERSION;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 import static com.uksf.mm.core.utility.LogHandler.Severity.WARNING;
 
@@ -46,7 +45,12 @@ public class SqmLoader {
 				case 3:
 					JOptionPane.showMessageDialog(Core.getInstanceUI(),
 							"Invalid mission.sqm file found at '" + MISSION_SELECTED.path
-									+ "' \nEnsure mission.sqm is not binarized and is the latest SQM version.", "Invalid mission.sqm", JOptionPane.ERROR_MESSAGE);
+									+ "' \nEnsure mission.sqm is SQM version " + SQM_VERSION, "Invalid mission.sqm", JOptionPane.ERROR_MESSAGE);
+					return false;
+				case 4:
+					JOptionPane.showMessageDialog(Core.getInstanceUI(),
+							"Invalid mission.sqm file found at '" + MISSION_SELECTED.path
+									+ "' \nEnsure mission.sqm is not binarized.", "Invalid mission.sqm", JOptionPane.ERROR_MESSAGE);
 					return false;
 			}
 
@@ -67,14 +71,18 @@ public class SqmLoader {
 			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' has no mission.sqm file");
 			return 1;
 		}
-		List<String> rawSqm = FileUtils.readLines(sqmFile);
+		SqmList rawSqm = new SqmList(FileUtils.readLines(sqmFile));
 		if(rawSqm.size() == 0) {
 			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' is empty");
 			return 2;
 		}
-		if(!rawSqm.get(0).contains("version=51")) {
-			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' has no valid mission.sqm file (probably binarized or old sqm version)");
+		if(!rawSqm.get(0).contains(SQM_VERSION) && rawSqm.get(0).contains("version")) {
+			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' is not version 52");
 			return 3;
+		}
+		if(!rawSqm.get(0).contains(SQM_VERSION)) {
+			LogHandler.logSeverity(WARNING, "Mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "' is binarized");
+			return 4;
 		}
 
 		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' is valid. Reading data...");
@@ -82,9 +90,9 @@ public class SqmLoader {
 		MISSION_SELECTED.editorData = getData(rawSqm, "editordata");
 		MISSION_SELECTED.binarized = getSingleData(rawSqm, "binarization");
 		MISSION_SELECTED.addons = getData(rawSqm, "addons");
+		MISSION_SELECTED.addonsMeta = getData(rawSqm, "addonsmetadata");
 		MISSION_SELECTED.randomSeed = getSingleData(rawSqm, "randomseed");
 		MISSION_SELECTED.scenarioData = getData(rawSqm, "scenariodata");
-		MISSION_SELECTED.customAttributes = getData(rawSqm, "customattributes");
 		MISSION_SELECTED.missionIntel = getData(rawSqm, "intel");
 		MISSION_SELECTED.missionData = getData(rawSqm, "entities");
 		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' read successfully");
@@ -98,12 +106,12 @@ public class SqmLoader {
 	 * @param key name of data to find
 	 * @return list with data from key
 	 */
-	private static List<String> getData(List<? extends String> raw, String key) {
+	private static SqmList getData(SqmList raw, String key) {
 		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.name + "'");
-		List<String> data = new ArrayList<>();
+		SqmList data = new SqmList();
 		int index = 0;
 		while(true) {
-			if(index >= raw.size()) return null;
+			if(index >= raw.size()) return data;
 			String line = raw.get(index);
 			if(line.toLowerCase().contains(key)) {
 				break;
@@ -138,8 +146,9 @@ public class SqmLoader {
 	 * @param key name of data to find
 	 * @return string with data from key
 	 */
-	private static String getSingleData(List<String> raw, String key) {
+	private static String getSingleData(SqmList raw, String key) {
 		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.name + "'");
+		if(!raw.contains(key)) return "";
 		int index = 0;
 		while(true) {
 			String line = raw.get(index);

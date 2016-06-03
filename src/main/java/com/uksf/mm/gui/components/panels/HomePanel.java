@@ -17,7 +17,6 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 import static com.uksf.mm.core.utility.Info.*;
 
@@ -36,7 +35,10 @@ public class HomePanel extends JPanel {
 	 */
 	private final MissionDropdown missionSelection;
 
-	private ArrayList<MissionPanel> missionPanels;
+	/**
+	 * Currently displayed mission panel
+	 */
+	private MissionPanel missionPanel;
 
 	/**
      * Creates home panel
@@ -45,8 +47,6 @@ public class HomePanel extends JPanel {
         setOpaque(false);
         setBackground(COLOUR_TRANSPARENT);
         setLayout(new MigLayout("fill", "0[]0", "0[]0"));
-
-		missionPanels = new ArrayList<>();
 
 		GenericPanel selectionPanel = new GenericPanel("al left center", "5[]10[]5[]20[]5[]20[]5[]5", "0[]0", true, COLOUR_BACKGROUND_LIGHTER);
 		selectionPanel.setPreferredSize(new Dimension(getWidth(), 35));
@@ -90,10 +90,12 @@ public class HomePanel extends JPanel {
 	 */
 	public Mission getSelectedMission() {return missionSelection.getSelectedMission();}
 
+	/**
+	 * Adds mission panel to view, replacing old
+	 */
 	public void addMission() {
-		missionPanels.forEach(this :: remove);
-		MissionPanel panel = new MissionPanel();
-		add(panel, "grow");
-		missionPanels.add(panel);
+		remove(missionPanel);
+		missionPanel = new MissionPanel();
+		add(missionPanel, "grow");
 	}
 }

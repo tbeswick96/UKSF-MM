@@ -38,10 +38,10 @@ public class SettingsPanel extends JPanel {
 	private GenericPanel mainSettingsPanel, creditsPanel;
 
 	/**
-	 * Folder settings panel objects
+	 * Settings objects
 	 */
 	private CustomTextField folderPath;
-	private CustomCheckbox backupBox;
+	private CustomCheckbox backupBox, logsEnabled;
 
 	/**
      * Creates settings panel
@@ -52,7 +52,7 @@ public class SettingsPanel extends JPanel {
 
 		mainSettingsPanel = new GenericPanel("fill", "10[]10[]10", "10[]10[]10", false, COLOUR_TRANSPARENT);
 		folderSettings();
-        //programSettings();
+        programSettings();
 		credits();
 
 		add(mainSettingsPanel, "push, top, cell 0 0");
@@ -78,15 +78,11 @@ public class SettingsPanel extends JPanel {
 		folderPath.setText(FOLDER_MISSIONS);
 		CustomButtonText folderChange = new CustomButtonText("Change", FONT_STANDARD, 16, "changeMissionsFolder", "Change folder where missions are loaded from");
 
-		CustomLabel backup = new CustomLabel("SQM Backup", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up when saving");
-		backupBox = new CustomCheckbox("", SQM_BACKUP, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up when saving");
+		CustomLabel backup = new CustomLabel("SQM Backup", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up before saving");
+		backupBox = new CustomCheckbox("", SQM_BACKUP, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, SQM files are backed up before saving");
 
-		folderSettings.add(folder, "grow, cell 0 0");
-		folderSettings.add(folderPath, "cell 1 0");
-		folderSettings.add(folderChange, "cell 2 0");
-
-		folderSettings.add(backup, "grow, cell 0 1");
-		folderSettings.add(backupBox, "cell 1 1");
+		folderSettings.add(folder, "grow, cell 0 0"); folderSettings.add(folderPath, "cell 1 0"); folderSettings.add(folderChange, "cell 2 0");
+		folderSettings.add(backup, "grow, cell 0 1"); folderSettings.add(backupBox, "cell 1 1");
 
 		mainSettingsPanel.add(folderSettings, "al center center, grow, cell 0 0");
 	}
@@ -97,6 +93,11 @@ public class SettingsPanel extends JPanel {
     private void programSettings() {
         GenericPanel programSettings = new GenericPanel("", "5[]20[]5", "5[]5", false, COLOUR_TRANSPARENT);
         programSettings.setBorder(BORDER_STANDARD);
+
+		CustomLabel logs = new CustomLabel("Logs Enabled", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, log files will be saved to AppData");
+		logsEnabled = new CustomCheckbox("", LOGS_ENABLED, 16, true, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, log files will be saved to AppData");
+
+		programSettings.add(logs, "cell 0 0"); programSettings.add(logsEnabled, "cell 1 0");
 
 		mainSettingsPanel.add(programSettings, "al center center, grow, cell 0 1");
     }
@@ -121,6 +122,7 @@ public class SettingsPanel extends JPanel {
 	 */
     private void buttonFunctionality() {
 		settingsFolder();
+		settingsProgram();
     }
 
 	/**
@@ -128,6 +130,18 @@ public class SettingsPanel extends JPanel {
 	 */
 	private void settingsFolder() {
 		backupBox.addActionListener(e -> Settings.set("sqm_backup", backupBox.isSelected()));
+	}
+
+	/**
+	 * Functionality for program settings
+	 */
+	private void settingsProgram() {
+		logsEnabled.addActionListener(e -> {
+			LogHandler.logSeverity(INFO, logsEnabled.isSelected() ? "Logging enabled, starting" : "Logging disabled, stopping");
+			LOGS_ENABLED = logsEnabled.isSelected();
+			LogHandler.logSeverity(INFO, logsEnabled.isSelected() ? "Logging enabled, starting" : "Logging disabled, stopping");
+			Settings.set("logs_enabled", logsEnabled.isSelected());
+		});
 	}
 
 	/**
@@ -142,19 +156,20 @@ public class SettingsPanel extends JPanel {
 			int returnValue = Info.FILE_CHOOSER.showOpenDialog(Core.getInstanceUI());
 			if(returnValue == JFileChooser.APPROVE_OPTION) {
 				File selectedFolder = FILE_CHOOSER.getSelectedFile();
-				if(selectedFolder.getAbsolutePath().contains("missions")) {
+				if(selectedFolder.getAbsolutePath().toLowerCase().contains("missions")) {
 					String path = selectedFolder.getAbsolutePath().replace("\\", "/");
 					LogHandler.logSeverity(INFO, "Missions folder chosen: '" + path + "'");
 					folderPath.setText(path);
 					folderPath.setCaretPosition(0);
 					Settings.set("folder_missions", path);
 					fileOk = true;
+					Core.getInstance().defaultAuthor();
 					MissionLoad.loadMissions();
 					MapLoad.loadMaps();
 					SwingUtilities.invokeLater(() -> Core.getInstanceUI().updateDropdowns());
 				} else {
 					JOptionPane.showMessageDialog(Core.getInstanceUI(), "Not a missions folder", "Invalid folder", JOptionPane.ERROR_MESSAGE);
-					LogHandler.logSeverity(WARNING, "Mission folder invalid");
+					LogHandler.logSeverity(WARNING, "'" + selectedFolder.getAbsolutePath() + "' is invalid");
 				}
 			} else {
 				fileOk = true;

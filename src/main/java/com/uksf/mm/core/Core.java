@@ -17,9 +17,10 @@ import com.uksf.mm.gui.UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
-import static com.uksf.mm.core.utility.Info.FEELSBADMAN;
+import static com.uksf.mm.core.utility.Info.*;
 import static com.uksf.mm.core.utility.LogHandler.Severity.ERROR;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
@@ -45,10 +46,10 @@ public class Core {
 
         LogHandler.logSeverity(INFO, "Started");
 
-        //Set look and feel to OS default, and load fonts
+        //Set look and feel to OS default, and load resources
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            LogHandler.logSeverity(INFO, "Look & Feel set to " + UIManager.getSystemLookAndFeelClassName());
+            LogHandler.logSeverity(INFO, "Look & Feel set to :" + UIManager.getSystemLookAndFeelClassName());
             FontLoad.instance.loadFonts();
 			ImageLoad.instance.loadImages();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | FontFormatException | IOException e) {
@@ -65,6 +66,9 @@ public class Core {
     private void initialise() {
         //Get program settings
         Settings.init();
+
+		//Set default author
+		defaultAuthor();
 
 		//Load missions & maps
 		MissionLoad.loadMissions();
@@ -84,9 +88,20 @@ public class Core {
 	/**
 	 * Run update
 	 */
-	public static void runUpdate() {
+	private static void runUpdate() {
 		UpdateWorker updateWorker = new UpdateWorker();
 		updateWorker.execute();
+	}
+
+	/**
+	 * Sets default author according to current missions folder
+	 */
+	public void defaultAuthor() {
+		File folder = new File(FOLDER_MISSIONS).getParentFile();
+		String[] files = folder.list((dir, name) -> name.toLowerCase().endsWith(".arma3profile"));
+		DEFAULT_AUTHOR = files[0].split("\\.")[0].replaceAll("%2e", ".");
+		LogHandler.logNoTime(HASHSPACE);
+		LogHandler.logSeverity(INFO, "Default Author: " + DEFAULT_AUTHOR);
 	}
 
     /**

@@ -86,7 +86,7 @@ public class SqmSaver {
 	 */
 	private static void backup() {
 		if(SQM_BACKUP && sqmFile.exists()) {
-			LogHandler.logSeverity(INFO, "SQM Backup enabled, backing up SQM '" + MISSION_SELECTED.name + "' as '" + MISSION_SELECTED.path + "/mission.sqm.backup'");
+			LogHandler.logSeverity(INFO, "SQM Backup enabled, backing up SQM '" + MISSION_SELECTED.name + "/mission.sqm' as '" + MISSION_SELECTED.path + "/mission.sqm.backup'");
 			File backup = new File(sqmFile.getAbsolutePath());
 			backup.renameTo(new File(sqmFile.getAbsolutePath() + ".backup"));
 		} else {
@@ -108,24 +108,41 @@ public class SqmSaver {
 		saveAddonData();
 		writer.append("\r\n").append(MISSION_SELECTED.randomSeed);
 		saveScenarioData();
-		saveCustomAttributeData();
 		saveMissionData();
 
 		writer.close();
 	}
 
+	/**
+	 * Saves editor data
+	 * @throws IOException file exception
+	 */
 	private static void saveEditorData() throws IOException {
 		for(String line : MISSION_SELECTED.editorData) {
 			writer.append("\r\n").append(line);
 		}
 	}
 
+
+	/**
+	 * Saves addon data
+	 * @throws IOException file exception
+	 */
 	private static void saveAddonData() throws IOException {
 		for(String line : MISSION_SELECTED.addons) {
 			writer.append("\r\n").append(line);
 		}
+		System.out.println(MISSION_SELECTED.addonsMeta);
+		for(String line : MISSION_SELECTED.addonsMeta) {
+			writer.append("\r\n").append(line);
+		}
 	}
 
+
+	/**
+	 * Saves scenario data
+	 * @throws IOException file exception
+	 */
 	private static void saveScenarioData() throws IOException {
 		for(String line : MISSION_SELECTED.scenarioData) {
 			if(line.contains("author")) {
@@ -136,12 +153,11 @@ public class SqmSaver {
 		}
 	}
 
-	private static void saveCustomAttributeData() throws IOException {
-		for(String line : MISSION_SELECTED.customAttributes) {
-			writer.append("\r\n").append(line);
-		}
-	}
 
+	/**
+	 * Saves mission data
+	 * @throws IOException file exception
+	 */
 	private static void saveMissionData() throws IOException {
 		writer.append("\r\n").append("class Mission");
 		writer.append("\r\n").append("{");
@@ -152,10 +168,17 @@ public class SqmSaver {
 		writer.append("\r\n").append("};").append("\r\n");
 	}
 
+
+	/**
+	 * Saves mission intel
+	 * @throws IOException file exception
+	 */
 	private static void saveMissionIntel() throws IOException {
 		int index = 0;
+		boolean intelDone = false;
 		for(String line : MISSION_SELECTED.missionIntel) {
-			if(line.contains("=")) {
+			if(line.toLowerCase().contains("customattributes")) intelDone = true;
+			if(!intelDone && line.contains("=")) {
 				String name = line.split("=")[0];
 				String value = index >= MISSION_SELECTED.intel.size() ? "0" : MISSION_SELECTED.intel.get(index);
 				writer.append("\r\n").append(name).append("=").append(value).append(";");

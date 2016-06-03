@@ -6,9 +6,9 @@
 
 package com.uksf.mm.core.sqm.parsers;
 
+import com.uksf.mm.core.sqm.SqmList;
 import com.uksf.mm.core.utility.LogHandler;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -27,7 +27,7 @@ public class ParserAuthor {
 		String author;
 		String all = "";
 		if(MISSION_SELECTED.scenarioData == null) {
-			MISSION_SELECTED.scenarioData = new ArrayList<>(Arrays.asList("class ScenarioData", "{" ,"author=\"UKSF\"", "};"));
+			MISSION_SELECTED.scenarioData = new SqmList(Arrays.asList("class ScenarioData", "{" ,"author=\"UKSF\"", "};"));
 		}
 		for(String line : MISSION_SELECTED.scenarioData) {
 			all += line;

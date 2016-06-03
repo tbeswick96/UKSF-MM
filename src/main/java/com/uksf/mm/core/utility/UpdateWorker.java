@@ -31,8 +31,7 @@ public class UpdateWorker extends SwingWorker<Void, Void> {
 	 * @return nothing
 	 * @throws Exception ui error
 	 */
-	@Override
-	protected Void doInBackground() throws Exception {
+	@Override protected Void doInBackground() throws Exception {
 		LogHandler.logNoTime(HASHSPACE);
 		LogHandler.logSeverity(INFO, "Update check running");
 		if(versionCheck()) {
@@ -96,6 +95,8 @@ public class UpdateWorker extends SwingWorker<Void, Void> {
 		try {
 			LogHandler.logSeverity(INFO, "Would run updater here...");
 			//Runtime.getRuntime().exec("UKSF-MM-Updater.exe");
+			LogHandler.logSeverity(INFO, "Would exit here...");
+			//System.exit(0);
 		} catch(Exception exception) {
 			nonFatalError(exception);
 		}

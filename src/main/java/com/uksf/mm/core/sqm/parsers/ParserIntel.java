@@ -6,6 +6,7 @@
 
 package com.uksf.mm.core.sqm.parsers;
 
+import com.uksf.mm.core.sqm.SqmList;
 import com.uksf.mm.core.utility.LogHandler;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class ParserIntel {
 		LogHandler.logSeverity(INFO, "Reading mission intel");
 		String all = "";
 		if(MISSION_SELECTED.missionIntel == null || !MISSION_SELECTED.missionIntel.toString().contains("=")) {
-			MISSION_SELECTED.missionIntel = new ArrayList<>(Arrays.asList("\tclass Intel", "\t{" ,
+			MISSION_SELECTED.missionIntel = new SqmList(Arrays.asList("\tclass Intel", "\t{" ,
 					"\t\ttimeOfChanges=1800;",
 					"\t\tstartWeather=0;",
 					"\t\tstartWind=0.1;",

@@ -103,8 +103,7 @@ public class MissionDropdown extends CustomDropdown {
 		 * @param cellHasFocus true if has focus
 		 * @return component to render
 		 */
-		@Override
-		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+		@Override public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			int selectionIndex = (Integer) value;
 
 			if(isSelected) {

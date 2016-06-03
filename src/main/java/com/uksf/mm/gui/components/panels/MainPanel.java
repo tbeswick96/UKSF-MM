@@ -25,10 +25,18 @@ public class MainPanel extends JScrollPane {
 		setViewportBorder(null);
     }
 
+	/**
+	 * Adds a panel to the view
+	 * @param panel panel to add
+	 */
 	public void addPanel(Component panel) {
 		getViewport().add(panel);
 	}
 
+	/**
+	 * Removes a panel from the view
+	 * @param panel panel to remove
+	 */
 	public void removePanel(Component panel) {
 		getViewport().remove(panel);
 	}

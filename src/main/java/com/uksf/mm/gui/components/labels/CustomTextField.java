@@ -39,8 +39,8 @@ public class CustomTextField extends JTextField {
 	private String toolTipText;
 
 	/**
-	 * Create custom label
-	 * @param text        label text
+	 * Create custom text field
+	 * @param text        text field text
 	 * @param opaque      opaque background
 	 * @param background  background colour
 	 * @param textColour  text colour
@@ -62,8 +62,7 @@ public class CustomTextField extends JTextField {
 	 * Create custom tooltip
 	 * @return tooltip object
 	 */
-	@Override
-	public JToolTip createToolTip() {
+	@Override public JToolTip createToolTip() {
 		JToolTip tooltip = super.createToolTip();
 		tooltip.setBorder(BORDER_STANDARD);
 		tooltip.setLayout(new MigLayout("fill", "0[]0", "0[]0"));
@@ -78,37 +77,28 @@ public class CustomTextField extends JTextField {
 	 * Paints button with custom icons
 	 * @param graphics graphics object
 	 */
-	@Override
-	public void paintComponent(Graphics graphics) {
+	@Override public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 		g = (Graphics2D) graphics;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 	}
 
 	/**
-	 *
-	 * @param changeListener a listener to receive {@link ChangeEvent}s
-	 *                       when the text is changed; the source object for the events
-	 *                       will be the text component
+	 * When the text is changed the source object for the events will be the text component
+	 * @param changeListener a listener to receive change events
 	 */
 	public void addChangeListener(ChangeListener changeListener) {
 		Objects.requireNonNull(this);
 		Objects.requireNonNull(changeListener);
 		DocumentListener documentListener = new DocumentListener() {
 			private int lastChange = 0, lastNotifiedChange = 0;
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
+			@Override public void insertUpdate(DocumentEvent e) {
 				changedUpdate(e);
 			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
+			@Override public void removeUpdate(DocumentEvent e) {
 				changedUpdate(e);
 			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
+			@Override public void changedUpdate(DocumentEvent e) {
 				lastChange++;
 				SwingUtilities.invokeLater(() -> {
 					if(lastNotifiedChange != lastChange) {

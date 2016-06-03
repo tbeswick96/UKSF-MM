@@ -6,10 +6,11 @@
 
 package com.uksf.mm.core.utility;
 
-import com.uksf.mm.core.utility.LogHandler;
-
 import javax.swing.*;
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -25,8 +26,7 @@ class InstallWorker extends SwingWorker<Void, Void> {
 	 * @return null
 	 * @throws Exception on error
 	 */
-	@Override
-	protected Void doInBackground() throws Exception {
+	@Override protected Void doInBackground() throws Exception {
 		LogHandler.log("Unzipping update");
 		int BUFFER = 2048;
 		BufferedOutputStream outputStream;

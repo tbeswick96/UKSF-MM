@@ -23,8 +23,14 @@ import static com.uksf.mm.core.utility.Info.*;
  */
 public class TopPanel extends JPanel {
 
+	/**
+	 * Point where mouse was first pressed
+	 */
 	private Point initialClick;
 
+	/**
+	 * Set width and height for bar (width is changed)
+	 */
 	private int width, height = 36;
 
 	/**
@@ -47,16 +53,14 @@ public class TopPanel extends JPanel {
 		add(panel, "grow, align right");
 
 		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+			@Override public void mousePressed(MouseEvent e) {
 				initialClick = e.getPoint();
 				getComponentAt(initialClick);
 			}
 		});
 
 		addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
+			@Override public void mouseDragged(MouseEvent e) {
 				int x = parent.getLocation().x;
 				int y = parent.getLocation().y;
 				int xNew = x + (x + e.getX()) - (x + initialClick.x);
@@ -66,13 +70,19 @@ public class TopPanel extends JPanel {
 		});
 	}
 
-	@Override
-	public Dimension getPreferredSize() {
+	/**
+	 * Set size to width x height
+	 * @return dimension width x height
+	 */
+	@Override public Dimension getPreferredSize() {
 		return new Dimension(width, height);
 	}
 
-	@Override
-	public void paintComponent(Graphics graphics) {
+	/**
+	 * Paints component with graphics
+	 * @param graphics graphics object to paint with
+	 */
+	@Override public void paintComponent(Graphics graphics) {
 		Graphics2D g = (Graphics2D) graphics;
 
 		width = getParent().getWidth();

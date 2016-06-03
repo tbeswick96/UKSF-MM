@@ -117,8 +117,7 @@ public class CustomButtonText extends JPanel implements MouseListener {
      * Paints button with custom string
      * @param graphics graphics object
      */
-    @Override
-    public void paintComponent(Graphics graphics) {
+    @Override public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 		g = (Graphics2D) graphics;
 		g.setFont(font);
@@ -160,15 +159,13 @@ public class CustomButtonText extends JPanel implements MouseListener {
      * Mouse clicked event
      * @param e event
      */
-    @Override
-    public void mouseClicked(MouseEvent e) {}
+    @Override public void mouseClicked(MouseEvent e) {}
 
     /**
      * Mouse pressed event
      * @param e event
      */
-    @Override
-    public void mousePressed(MouseEvent e) {
+    @Override public void mousePressed(MouseEvent e) {
 		pressed = true;
 		repaint();
 	}
@@ -177,8 +174,7 @@ public class CustomButtonText extends JPanel implements MouseListener {
      * Mouse released event
      * @param e event
      */
-    @Override
-    public void mouseReleased(MouseEvent e) {
+    @Override public void mouseReleased(MouseEvent e) {
 		pressed = false;
 		repaint();
 		if(isEnabled()) {
@@ -198,8 +194,7 @@ public class CustomButtonText extends JPanel implements MouseListener {
      * Mouse entered event
      * @param e event
      */
-    @Override
-    public void mouseEntered(MouseEvent e) {
+    @Override public void mouseEntered(MouseEvent e) {
         hovered = true;
         repaint();
     }
@@ -208,8 +203,7 @@ public class CustomButtonText extends JPanel implements MouseListener {
      * Mouse exited event
      * @param e event
      */
-    @Override
-    public void mouseExited(MouseEvent e) {
+    @Override public void mouseExited(MouseEvent e) {
         hovered = false;
         repaint();
     }

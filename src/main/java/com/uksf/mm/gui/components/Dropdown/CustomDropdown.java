@@ -22,8 +22,7 @@ class CustomDropdown extends JComboBox {
 		setOpaque(false);
 		setBackground(COLOUR_TRANSPARENT);
 	}
-	@Override
-	public Dimension getPreferredSize() {
+	@Override public Dimension getPreferredSize() {
 		return new Dimension(150, getHeight());
 	}
 }

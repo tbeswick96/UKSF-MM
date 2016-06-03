@@ -30,9 +30,9 @@ public class LogHandler {
      * Log handler. Prints internal program outputs to log file
      */
     public LogHandler() {
-        createLogFile();
-        logSeverity(INFO, "Log Created");
-        LogHandler.logNoTime(HASHSPACE);
+		createLogFile();
+		logSeverity(INFO, "Log Created");
+		LogHandler.logNoTime(HASHSPACE);
     }
 
     /**
@@ -62,9 +62,11 @@ public class LogHandler {
      * @param log message to print
      */
     public static void log(String log) {
-        log = TIMEFORMAT.format(DATE) + " " + log;
-        System.out.println(log);
-        toFile(log);
+		if(LOGS_ENABLED) {
+			log = TIMEFORMAT.format(DATE) + " " + log;
+			System.out.println(log);
+			toFile(log);
+		}
     }
 
     /**
@@ -73,9 +75,11 @@ public class LogHandler {
      * @param log message to print
      */
     public static void logSeverity(Severity severity, String log) {
-        log = TIMEFORMAT.format(DATE) + " " + severity + ": " + log;
-        System.out.println(log);
-        toFile(log);
+		if(LOGS_ENABLED) {
+			log = TIMEFORMAT.format(DATE) + " " + severity + ": " + log;
+			System.out.println(log);
+			toFile(log);
+		}
     }
 
     /**
@@ -83,8 +87,10 @@ public class LogHandler {
      * @param log message to print
      */
     public static void logNoTime(String log) {
-        System.out.println(log);
-        toFile(log);
+		if(LOGS_ENABLED) {
+			System.out.println(log);
+			toFile(log);
+		}
     }
 
     /**
@@ -107,8 +113,10 @@ public class LogHandler {
      */
     @SuppressWarnings("ResultOfMethodCallIgnored")
 	public static void closeLog() {
-        LogHandler.logNoTime(HASHSPACE);
-        logSeverity(INFO, "Log Closing");
+		if(LOGS_ENABLED) {
+			LogHandler.logNoTime(HASHSPACE);
+			logSeverity(INFO, "Log Closing");
+		}
     }
 
     /**

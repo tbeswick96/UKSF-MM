@@ -15,6 +15,10 @@ import javax.swing.*;
  * @author Tim
  */
 public class Run {
+	/**
+	 * Starts program
+	 * @param args command line arguments
+	 */
     public static void main(String args[]) {
 		//Check windows and java version
 		if(checkWindows() && checkJava()) {
@@ -33,6 +37,10 @@ public class Run {
 		});
     }
 
+	/**
+	 * Checks if OS is windows. Incompatible with OSX, linux etc
+	 * @return true if OS is windows
+	 */
 	private static boolean checkWindows() {
 		String os = System.getProperty("os.name").toUpperCase();
 		if(!os.contains("WIN")) {
@@ -42,6 +50,10 @@ public class Run {
 		return true;
 	}
 
+	/**
+	 * Checks java version. Only compatible with 1.8
+	 * @return true if java is 1.8
+	 */
 	private static boolean checkJava() {
 		String java = System.getProperty("java.specification.version");
 		if(!java.equals("1.8")) {
