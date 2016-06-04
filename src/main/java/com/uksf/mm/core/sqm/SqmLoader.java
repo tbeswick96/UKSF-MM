@@ -28,8 +28,8 @@ public class SqmLoader {
 	 * @return true if load worked, false if an error occurred
 	 */
 	public static boolean loadMission() {
-		LogHandler.logSeverity(INFO, "Loading mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "'");
 		try {
+			LogHandler.logSeverity(INFO, "Loading mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "'");
 			int state = readSqm();
 			switch(state) {
 				case 0:

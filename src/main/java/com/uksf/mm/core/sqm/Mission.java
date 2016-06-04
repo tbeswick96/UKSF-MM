@@ -27,6 +27,13 @@ public class Mission {
 	public SqmList editorData, addons, addonsMeta, scenarioData, missionIntel, missionData;
 
 	/**
+	 * Original mission SQM data
+	 */
+	public String originalBinarized, originalAuthor;
+	public SqmList originalAddons, originalAddonsMeta;
+	public ArrayList<String> originalIntel;
+
+	/**
 	 * Parsed SQM data
 	 */
 	public String author = DEFAULT_AUTHOR;
@@ -40,6 +47,7 @@ public class Mission {
 	public Mission(String name, String path) {
 		this.name = name;
 		this.path = path;
+		System.out.println(name + ", " + path);
 		originalPath = path;
 	}
 
@@ -57,7 +65,7 @@ public class Mission {
 	 */
 	public void setName(String newName) {
 		name = newName;
-		path = FOLDER_MISSIONS + "/" + name + "." + path.split("\\.")[1];
+		path = FOLDER_MISSIONS + "/" + name + path.substring(path.lastIndexOf("."), path.length());
 	}
 
 	/**

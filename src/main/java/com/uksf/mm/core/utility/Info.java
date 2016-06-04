@@ -80,6 +80,8 @@ public class Info {
 	public static ImageIcon ICON_CLOSE_HOVER;
 	public static ImageIcon ICON_REFRESH;
 	public static ImageIcon ICON_REFRESH_HOVER;
+	public static ImageIcon ICON_ADDONS;
+	public static ImageIcon ICON_ADDONS_HOVER;
 	public static ImageIcon FEELSBADMAN;
 
     //Fonts
@@ -113,78 +115,78 @@ public class Info {
 	public static String DEFAULT_SEED = "randomSeed=12623053;";
 	public static String DEFAULT_AUTHOR = "UKSF";
 	public static SqmList DEFAULT_EDITORDATA = new SqmList(Arrays.asList(
-			"class EditorData\n",
-			"{\n",
-			"\tmoveGridStep=0.25;\n",
-			"\tangleGridStep=1.5707964;\n",
-			"\tscaleGridStep=1;\n",
-			"\tautoGroupingDist=10;\n",
-			"\ttoggles=37;\n",
-			"\tclass ItemIDProvider\n",
-			"\t{\n",
-			"\t\tnextID=0;\n",
-			"\t};\n",
-			"\tclass MarkerIDProvider\n",
-			"\t{\n",
-			"\t\tnextID=0;\n",
-			"\t};\n",
-			"\tclass Camera\n",
-			"\t{\n",
-			"\t\tpos[]={0,0,0};\n",
-			"\t\tdir[]={0,0,0};\n",
-			"\t\tup[]={0,0,0};\n",
-			"\t\taside[]={0,0,0};\n",
-			"\t};\n",
+			"class EditorData",
+			"{",
+			"\tmoveGridStep=0.25;",
+			"\tangleGridStep=1.5707964;",
+			"\tscaleGridStep=1;",
+			"\tautoGroupingDist=10;",
+			"\ttoggles=37;",
+			"\tclass ItemIDProvider",
+			"\t{",
+			"\t\tnextID=0;",
+			"\t};",
+			"\tclass MarkerIDProvider",
+			"\t{",
+			"\t\tnextID=0;",
+			"\t};",
+			"\tclass Camera",
+			"\t{",
+			"\t\tpos[]={0,0,0};",
+			"\t\tdir[]={0,0,0};",
+			"\t\tup[]={0,0,0};",
+			"\t\taside[]={0,0,0};",
+			"\t};",
 			"};"
 	));
 	public static SqmList DEFAULT_ADDONS = new SqmList(Arrays.asList(
-			"addons[]=\n",
+			"addons[]=",
 			"{\n",
 			"};"
 	));
 	public static SqmList DEFAULT_ADDONSMETA = new SqmList(Arrays.asList(
-			"class AddonsMetaData\n",
-			"{\n",
-			"\tclass List\n",
-			"\t{\n",
-			"\t\titems=0;\n",
-			"\t};\n",
+			"class AddonsMetaData",
+			"{",
+			"\tclass List",
+			"\t{",
+			"\t\titems=0;",
+			"\t};",
 			"};"
 	));
 	public static SqmList DEFAULT_SCENARIODATA = new SqmList(Arrays.asList(
-			"class ScenarioData\n",
-			"{\n",
-			"\tauthor=" + DEFAULT_AUTHOR + ";\n",
+			"class ScenarioData",
+			"{",
+			"\tauthor=" + DEFAULT_AUTHOR + ";",
 			"};"
 	));
 	public static SqmList DEFAULT_INTEL = new SqmList(Arrays.asList(
-			"class Intel\n",
-			"\t{\n",
-			"\t\ttimeOfChanges=1800;\n",
-			"\t\tstartWeather=0;\n",
-			"\t\tstartWind=0.1;\n",
-			"\t\tstartWaves=0.1;\n",
-			"\t\tforecastWeather=0;\n",
-			"\t\tforecastWind=0.1;\n",
-			"\t\tforecastWaves=0.1;\n",
-			"\t\tforecastLightnings=0.1;\n",
-			"\t\tyear=2035;\n",
-			"\t\tmonth=7;\n",
-			"\t\tday=6;\n",
-			"\t\thour=11;\n" ,
-			"\t\tminute=-2;\n",
-			"\t\tstartFogDecay=0.01;\n",
-			"\t\tforecastFogDecay=0.01;\n",
-			"\t\tclass CustomAttributes\n",
-			"\t\t{\n",
-			"\t\t\tnAttributes=0;\n",
-			"\t\t};\n",
+			"class Intel",
+			"\t{",
+			"\t\ttimeOfChanges=1800;",
+			"\t\tstartWeather=0;",
+			"\t\tstartWind=0.1;",
+			"\t\tstartWaves=0.1;",
+			"\t\tforecastWeather=0;",
+			"\t\tforecastWind=0.1;",
+			"\t\tforecastWaves=0.1;",
+			"\t\tforecastLightnings=0.1;",
+			"\t\tyear=2035;",
+			"\t\tmonth=7;",
+			"\t\tday=6;",
+			"\t\thour=11;" ,
+			"\t\tminute=-2;",
+			"\t\tstartFogDecay=0.01;",
+			"\t\tforecastFogDecay=0.01;",
+			"\t\tclass CustomAttributes",
+			"\t\t{",
+			"\t\t\tnAttributes=0;",
+			"\t\t};",
 			"\t};"
 	));
 	public static SqmList DEFAULT_MISSIONDATA = new SqmList(Arrays.asList(
-			"class Entities\n",
-			"\t{\n",
-			"\t\titems=0;\n",
+			"class Entities",
+			"\t{",
+			"\t\titems=0;",
 			"\t};"
 	));
 }

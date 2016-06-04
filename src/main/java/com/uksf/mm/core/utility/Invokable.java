@@ -12,6 +12,9 @@ import com.uksf.mm.core.utility.loaders.MissionLoad;
 
 import javax.swing.*;
 
+import static com.uksf.mm.core.utility.Info.*;
+import static com.uksf.mm.core.utility.LogHandler.Severity.ERROR;
+
 /**
  * @author Tim
  */
@@ -57,7 +60,9 @@ public class Invokable {
 	 * Loads the selected mission
 	 */
 	public void loadSelectedMission() {
-		Core.getInstanceUI().loadSelectedMission();
+		if(!Core.getInstanceUI().loadSelectedMission()) {
+			LogHandler.logSeverity(ERROR, "Failed to load selected mission");
+		}
 	}
 
 	/**
@@ -65,6 +70,14 @@ public class Invokable {
 	 */
 	public void saveSelectedMission() {
 		Core.getInstanceUI().saveSelectedMission();
+	}
+
+	/**
+	 * Saves the selected mission
+	 */
+	public void clearAddons() {
+		MISSION_SELECTED.addons = DEFAULT_ADDONS;
+		MISSION_SELECTED.addonsMeta = DEFAULT_ADDONSMETA;
 	}
 
 	/**

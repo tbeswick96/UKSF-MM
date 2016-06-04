@@ -62,7 +62,7 @@ public class MissionDropdown extends CustomDropdown {
 					addItem(index);
 					index++;
 				} else if(mapName.toLowerCase().equals(name.toLowerCase())) {
-					names[index] = (missionName.split("\\.")[0]);
+					names[index] = missionName;
 					addItem(index);
 					index++;
 				}

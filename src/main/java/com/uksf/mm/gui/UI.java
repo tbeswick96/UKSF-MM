@@ -214,6 +214,7 @@ public class UI extends JFrame implements MouseInputListener {
 	 */
 	public boolean loadSelectedMission() {
 		MISSION_SELECTED = homePanel.getSelectedMission();
+		if(MISSION_SELECTED == null) return false;
 		boolean state = SqmLoader.loadMission();
 		state = state && ParserAuthor.getAuthor();
 		state = state && ParserIntel.getIntel();

@@ -50,6 +50,10 @@ public class Core {
         //Set look and feel to OS default, and load resources
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			UIManager.put("ScrollBar.thumbHighlight", COLOUR_FOREGROUND);
+			UIManager.put("ScrollBar.thumbDarkShadow", COLOUR_FOREGROUND);
+			UIManager.put("ScrollBar.highlight", COLOUR_FOREGROUND);
+			UIManager.put("ScrollBar.trackHighlight", COLOUR_FOREGROUND);
             LogHandler.logSeverity(INFO, "Look & Feel set to :" + UIManager.getSystemLookAndFeelClassName());
             FontLoad.instance.loadFonts();
 			ImageLoad.instance.loadImages();

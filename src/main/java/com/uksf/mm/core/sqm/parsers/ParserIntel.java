@@ -6,11 +6,9 @@
 
 package com.uksf.mm.core.sqm.parsers;
 
-import com.uksf.mm.core.sqm.SqmList;
 import com.uksf.mm.core.utility.LogHandler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,25 +24,6 @@ public class ParserIntel {
 	public static boolean getIntel() {
 		LogHandler.logSeverity(INFO, "Reading mission intel");
 		String all = "";
-		if(MISSION_SELECTED.missionIntel == null || !MISSION_SELECTED.missionIntel.toString().contains("=")) {
-			MISSION_SELECTED.missionIntel = new SqmList(Arrays.asList("\tclass Intel", "\t{" ,
-					"\t\ttimeOfChanges=1800;",
-					"\t\tstartWeather=0;",
-					"\t\tstartWind=0.1;",
-					"\t\tstartWaves=0.1;",
-					"\t\tforecastWeather=0;",
-					"\t\tforecastWind=0.1;",
-					"\t\tforecastWaves=0.1;",
-					"\t\tforecastLightnings=0.1;",
-					"\t\tyear=2016;",
-					"\t\tmonth=3;",
-					"\t\tday=1;",
-					"\t\thour=8;",
-					"\t\tminute=0;",
-					"\t\tstartFogDecay=0.013;",
-					"\t\tforecastFogDecay=0.013;",
-					"\t};"));
-		}
 		for(String line : MISSION_SELECTED.missionIntel) {
 			all += line;
 		}

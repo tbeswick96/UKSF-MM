@@ -51,6 +51,8 @@ public class ImageLoad {
 		ICON_CLOSE_HOVER = changeImageColour(ICON_CLOSE, COLOUR_FOREGROUND_DARK.getRGB());
 		ICON_REFRESH = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "refresh.png")));
 		ICON_REFRESH_HOVER = changeImageColour(ICON_REFRESH, COLOUR_FOREGROUND_DARK.getRGB());
+		ICON_ADDONS = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "addons.png")));
+		ICON_ADDONS_HOVER = changeImageColour(ICON_ADDONS, COLOUR_FOREGROUND_DARK.getRGB());
 		FEELSBADMAN = new ImageIcon(toByteArray(getClass().getResourceAsStream(ICONS + "fbm64.png")));
         LogHandler.logSeverity(INFO, "Images loaded");
     }

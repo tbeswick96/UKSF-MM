@@ -38,7 +38,7 @@ public class SqmSaver {
 	 */
 	public static void saveMission() {
 		if(MISSION_SELECTED == null || MISSION_SELECTED.version == null) {
-			if(! Core.getInstanceUI().loadSelectedMission()) return;
+			if(!Core.getInstanceUI().loadSelectedMission()) return;
 		}
 		LogHandler.logSeverity(INFO, "Saving mission '" + MISSION_SELECTED.name + "' at '" + MISSION_SELECTED.path + "'");
 		makeFile();
