@@ -44,6 +44,7 @@ public class Core {
     public Core() {
         instance = this;
 
+		LogHandler.logNoTime(HASHSPACE);
         LogHandler.logSeverity(INFO, "Started");
 
         //Set look and feel to OS default, and load resources
@@ -65,7 +66,7 @@ public class Core {
      */
     private void initialise() {
         //Get program settings
-        Settings.init();
+        Settings.loadSettings();
 
 		//Set default author
 		defaultAuthor();

@@ -30,18 +30,21 @@ public class Settings {
     /**
      * Check if program has run before and handle settings accordingly
      */
-    static void init() {
+    public static void init() {
         preferences = Preferences.userRoot().node("uksf-mm");
-        LogHandler.logNoTime(HASHSPACE);
-        LogHandler.logSeverity(INFO, "Settings loaded: " + preferences.absolutePath());
-
-        HAS_SETUP = preferences.getBoolean("has_setup", false);
-        LogHandler.logSeverity(INFO, TAB + "Setup? " + HAS_SETUP);
-        if(!HAS_SETUP) {
-			setSettings();
-        }
-		getSettings();
+		LOGS_ENABLED = preferences.getBoolean("logs_enabled", true);
     }
+
+	static void loadSettings() {
+		LogHandler.logNoTime(HASHSPACE);
+		LogHandler.logSeverity(INFO, "Settings loaded: " + preferences.absolutePath());
+		HAS_SETUP = preferences.getBoolean("has_setup", false);
+		LogHandler.logSeverity(INFO, TAB + "Setup? " + HAS_SETUP);
+		if(!HAS_SETUP) {
+			setSettings();
+		}
+		getSettings();
+	}
 
     /**
      * If program has run before, get settings

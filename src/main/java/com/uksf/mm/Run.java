@@ -7,6 +7,7 @@
 package com.uksf.mm;
 
 import com.uksf.mm.core.Core;
+import com.uksf.mm.core.Settings;
 import com.uksf.mm.core.utility.LogHandler;
 
 import javax.swing.*;
@@ -22,7 +23,8 @@ public class Run {
     public static void main(String args[]) {
 		//Check windows and java version
 		if(checkWindows() && checkJava()) {
-			//Create log handler and start program
+			//Initialise settings, create log handler, and start program
+			Settings.init();
 			new LogHandler();
 			new Core();
 		} else {

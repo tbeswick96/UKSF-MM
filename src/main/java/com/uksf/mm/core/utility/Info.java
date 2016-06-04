@@ -22,12 +22,13 @@ import java.util.Date;
  */
 
 public class Info {
-    //Program settings
+    //Program
     public static final String VERSION = "0.1";
+	public static boolean LOG_CREATED = false;
 
     //Directories
 	static File APPDATA = new File(System.getenv("LOCALAPPDATA"));
-	static File LOGS = new File(APPDATA + "/UKSF-MM/");
+	public static File LOGS = new File(APPDATA + "/UKSF-MM/");
 	public static String ICONS = "/assets/icons/";
 	public static String LOGOS = "/assets/logos/";
 	public static String FONTS = "/assets/fonts/";
@@ -51,7 +52,7 @@ public class Info {
     public static final Color COLOUR_FOREGROUND = new Color(222, 154, 37);
     public static final Color COLOUR_FOREGROUND_DARK = new Color(222, 106, 20);
 
-    //Window settings
+    //Window
     public static final Dimension WINDOW_SIZE = new Dimension(1240, 640);
     public static final Dimension WINDOW_SIZE_MIN = new Dimension(800, 300);
     public static final String WINDOW_TITLE = "UKSF Mission Manager";

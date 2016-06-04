@@ -21,6 +21,8 @@ import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
  */
 public class LogHandler {
 
+	public static LogHandler instance;
+
     /**
      * Log File
      */
@@ -30,15 +32,21 @@ public class LogHandler {
      * Log handler. Prints internal program outputs to log file
      */
     public LogHandler() {
-		createLogFile();
-		logSeverity(INFO, "Log Created");
-		LogHandler.logNoTime(HASHSPACE);
+		instance = this;
+		startLogging();
     }
+
+	public void startLogging() {
+		if(LOGS_ENABLED) {
+			createLogFile();
+		}
+	}
 
     /**
      * First checks if there are already 10 log files, if so, deletes the oldest, then creates the new log file
      */
     private void createLogFile() {
+		if(LOG_CREATED) return;
         File[] logs = LOGS.listFiles((FileFilter) FileFileFilter.FILE);
         Arrays.sort(logs, LastModifiedFileComparator.LASTMODIFIED_COMPARATOR);
         if(logs.length > 9) {
@@ -55,6 +63,8 @@ public class LogHandler {
             error(e);
         }
         System.out.println(logFile.getAbsolutePath());
+		LOG_CREATED = true;
+		logSeverity(INFO, "Log Created");
     }
 
     /**

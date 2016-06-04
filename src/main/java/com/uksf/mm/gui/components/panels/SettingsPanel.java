@@ -94,8 +94,8 @@ public class SettingsPanel extends JPanel {
         GenericPanel programSettings = new GenericPanel("", "5[]20[]5", "5[]5", false, COLOUR_TRANSPARENT);
         programSettings.setBorder(BORDER_STANDARD);
 
-		CustomLabel logs = new CustomLabel("Logs Enabled", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, log files will be saved to AppData");
-		logsEnabled = new CustomCheckbox("", LOGS_ENABLED, 16, true, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, log files will be saved to AppData");
+		CustomLabel logs = new CustomLabel("Logs Enabled", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, log files will be saved to:\n" + LOGS.getAbsolutePath());
+		logsEnabled = new CustomCheckbox("", LOGS_ENABLED, 16, true, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, log files will be saved to:\n" + LOGS.getAbsolutePath());
 
 		programSettings.add(logs, "cell 0 0"); programSettings.add(logsEnabled, "cell 1 0");
 
@@ -108,7 +108,7 @@ public class SettingsPanel extends JPanel {
 	private void credits() {
 		creditsPanel = new GenericPanel("fill", "5[]5", "5[]0[]0[]5", false, COLOUR_TRANSPARENT);
 
-		CustomLabel author = new CustomLabel("Tim Beswick www.uk-sf.com", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Dev Glub");
+		CustomLabel author = new CustomLabel("Tim Beswick - www.uk-sf.com", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Dev Glub");
 		CustomLabel copyright = new CustomLabel("Copyright (c) Tim UKSF 2016", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Don't steal mah stuff :(");
 		CustomLabel license = new CustomLabel("This program is released under GPLv3", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Plz comply");
 
@@ -137,10 +137,17 @@ public class SettingsPanel extends JPanel {
 	 */
 	private void settingsProgram() {
 		logsEnabled.addActionListener(e -> {
-			LogHandler.logSeverity(INFO, logsEnabled.isSelected() ? "Logging enabled, starting" : "Logging disabled, stopping");
-			LOGS_ENABLED = logsEnabled.isSelected();
-			LogHandler.logSeverity(INFO, logsEnabled.isSelected() ? "Logging enabled, starting" : "Logging disabled, stopping");
-			Settings.set("logs_enabled", logsEnabled.isSelected());
+			boolean log = logsEnabled.isSelected();
+			if(log) {
+				LOGS_ENABLED = true;
+				LogHandler.instance.startLogging();
+				LogHandler.logNoTime(HASHSPACE);
+				LogHandler.logSeverity(INFO, "Logging enabled, starting");
+			} else {
+				LogHandler.logNoTime(HASHSPACE);
+				LogHandler.logSeverity(INFO, "Logging disabled, stopping");
+			}
+			Settings.set("logs_enabled", log);
 		});
 	}
 
