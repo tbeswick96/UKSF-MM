@@ -94,7 +94,7 @@ public class HomePanel extends JPanel {
 	 * Adds mission panel to view, replacing old
 	 */
 	public void addMission() {
-		remove(missionPanel);
+		if(missionPanel != null) remove(missionPanel);
 		missionPanel = new MissionPanel();
 		add(missionPanel, "grow");
 	}

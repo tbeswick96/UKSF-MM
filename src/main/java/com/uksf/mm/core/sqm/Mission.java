@@ -23,7 +23,7 @@ public class Mission {
 	/**
 	 * Mission SQM data
 	 */
-	public String version = DEFAULT_VERSION, binarized = DEFAULT_BINARIZED, randomSeed = DEFAULT_SEED;
+	public String version, binarized, randomSeed;
 	public SqmList editorData, addons, addonsMeta, scenarioData, missionIntel, missionData;
 
 	/**

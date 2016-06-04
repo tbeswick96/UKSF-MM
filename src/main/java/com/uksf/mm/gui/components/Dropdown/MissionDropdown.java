@@ -75,7 +75,7 @@ public class MissionDropdown extends CustomDropdown {
 	public Mission getSelectedMission() {
 		String name = names[getSelectedIndex()];
 		for(Mission mission : MISSIONS) {
-			if(mission.name.toLowerCase().contains(name.toLowerCase())) {
+			if(mission.name.equalsIgnoreCase(name.toLowerCase())) {
 				return mission;
 			}
 		}

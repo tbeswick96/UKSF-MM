@@ -6,14 +6,13 @@
 
 package com.uksf.mm.core.sqm.parsers;
 
-import com.uksf.mm.core.sqm.SqmList;
 import com.uksf.mm.core.utility.LogHandler;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.uksf.mm.core.utility.Info.DEFAULT_AUTHOR;
 import static com.uksf.mm.core.utility.Info.MISSION_SELECTED;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 
@@ -26,9 +25,6 @@ public class ParserAuthor {
 		LogHandler.logSeverity(INFO, "Reading mission author");
 		String author;
 		String all = "";
-		if(MISSION_SELECTED.scenarioData == null) {
-			MISSION_SELECTED.scenarioData = new SqmList(Arrays.asList("class ScenarioData", "{" ,"author=\"UKSF\"", "};"));
-		}
 		for(String line : MISSION_SELECTED.scenarioData) {
 			all += line;
 		}
@@ -38,6 +34,10 @@ public class ParserAuthor {
 			if(!Objects.equals(author, "")) {
 				MISSION_SELECTED.author = author;
 				LogHandler.logSeverity(INFO, "Read mission author as '" + MISSION_SELECTED.author + "'");
+				return true;
+			} else {
+				MISSION_SELECTED.author = DEFAULT_AUTHOR;
+				LogHandler.logSeverity(INFO, "Read mission author as default author'" + MISSION_SELECTED.author + "'");
 				return true;
 			}
 		}

@@ -63,7 +63,9 @@ public class Invokable {
 	/**
 	 * Saves the selected mission
 	 */
-	public void saveSelectedMission() { Core.getInstanceUI().saveSelectedMission(); }
+	public void saveSelectedMission() {
+		Core.getInstanceUI().saveSelectedMission();
+	}
 
 	/**
 	 * Closes program

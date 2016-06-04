@@ -12,6 +12,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 
+import static com.uksf.mm.core.utility.Info.DEFAULT_AUTHOR;
 import static com.uksf.mm.core.utility.Info.MISSION_SELECTED;
 import static com.uksf.mm.core.utility.Info.SQM_BACKUP;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
@@ -74,8 +75,12 @@ public class SqmSaver {
 		File newFolder = new File(MISSION_SELECTED.path);
 		try {
 			FileUtils.copyDirectory(original, newFolder);
-			File oldSqm = new File(MISSION_SELECTED.originalPath + "/mission.sqm");
-			oldSqm.delete();
+			File[] files = original.listFiles();
+			assert files != null;
+			for(File file : files) {
+				file.delete();
+			}
+			original.delete();
 		} catch(IOException e) {
 			LogHandler.logSeverity(WARNING, "Copying files failed.");
 		}
@@ -132,7 +137,6 @@ public class SqmSaver {
 		for(String line : MISSION_SELECTED.addons) {
 			writer.append("\r\n").append(line);
 		}
-		System.out.println(MISSION_SELECTED.addonsMeta);
 		for(String line : MISSION_SELECTED.addonsMeta) {
 			writer.append("\r\n").append(line);
 		}
@@ -146,7 +150,7 @@ public class SqmSaver {
 	private static void saveScenarioData() throws IOException {
 		for(String line : MISSION_SELECTED.scenarioData) {
 			if(line.contains("author")) {
-				writer.append("\r\n\t").append("author=\"").append(MISSION_SELECTED.author).append("\";");
+				writer.append("\r\n\t").append("author=\"").append(!MISSION_SELECTED.author.equals("") ? MISSION_SELECTED.author : DEFAULT_AUTHOR).append("\";");
 			} else {
 				writer.append("\r\n").append(line);
 			}

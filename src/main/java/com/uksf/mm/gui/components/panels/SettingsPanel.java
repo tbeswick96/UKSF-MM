@@ -16,6 +16,7 @@ import com.uksf.mm.core.utility.loaders.MissionLoad;
 import com.uksf.mm.gui.components.buttons.CustomButtonText;
 import com.uksf.mm.gui.components.buttons.CustomCheckbox;
 import com.uksf.mm.gui.components.labels.CustomLabel;
+import com.uksf.mm.gui.components.labels.CustomLabelLink;
 import com.uksf.mm.gui.components.labels.CustomTextField;
 import net.miginfocom.swing.MigLayout;
 
@@ -65,7 +66,7 @@ public class SettingsPanel extends JPanel {
 	 * Make mission folder settings
 	 */
 	private void folderSettings() {
-		GenericPanel folderSettings = new GenericPanel("", "5[]20[]5[]5", "5[]5[]5", false, COLOUR_TRANSPARENT);
+		GenericPanel folderSettings = new GenericPanel("", "5[110]20[]5[]5", "5[]5[]5", false, COLOUR_TRANSPARENT);
 		folderSettings.setBorder(BORDER_STANDARD);
 
 		CustomLabel folder = new CustomLabel("Mission Folder", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Missions are loaded from this folder");
@@ -91,13 +92,13 @@ public class SettingsPanel extends JPanel {
 	 * Make program settings
 	 */
     private void programSettings() {
-        GenericPanel programSettings = new GenericPanel("", "5[]20[]5", "5[]5", false, COLOUR_TRANSPARENT);
+        GenericPanel programSettings = new GenericPanel("", "5[110]20[]5", "5[]5", false, COLOUR_TRANSPARENT);
         programSettings.setBorder(BORDER_STANDARD);
 
 		CustomLabel logs = new CustomLabel("Logs Enabled", Font.PLAIN, 16, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, log files will be saved to:\n" + LOGS.getAbsolutePath());
 		logsEnabled = new CustomCheckbox("", LOGS_ENABLED, 16, true, COLOUR_TRANSPARENT, COLOUR_WHITE, "When enabled, log files will be saved to:\n" + LOGS.getAbsolutePath());
 
-		programSettings.add(logs, "cell 0 0"); programSettings.add(logsEnabled, "cell 1 0");
+		programSettings.add(logs, "grow, cell 0 0"); programSettings.add(logsEnabled, "cell 1 0");
 
 		mainSettingsPanel.add(programSettings, "al center center, grow, cell 0 1");
     }
@@ -106,15 +107,18 @@ public class SettingsPanel extends JPanel {
 	 * Create credits area
 	 */
 	private void credits() {
-		creditsPanel = new GenericPanel("fill", "5[]5", "5[]0[]0[]5", false, COLOUR_TRANSPARENT);
+		creditsPanel = new GenericPanel("fill", "5[]0[]5", "5[]0[]0[]5", false, COLOUR_TRANSPARENT);
+		GenericPanel creditsSubPanel = new GenericPanel("fill", "0[]0[]0", "0[]0", false, COLOUR_TRANSPARENT);
 
-		CustomLabel author = new CustomLabel("Tim Beswick - www.uk-sf.com", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Dev Glub");
+		CustomLabel author = new CustomLabel("Tim Beswick - ", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Dev Glub");
+		CustomLabelLink website = new CustomLabelLink("www.uk-sf.com", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "United Kingdom Special Forces - ArmA 3 Milsim Unit");
 		CustomLabel copyright = new CustomLabel("Copyright (c) Tim UKSF 2016", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Don't steal mah stuff :(");
 		CustomLabel license = new CustomLabel("This program is released under GPLv3", Font.PLAIN, 10, false, COLOUR_TRANSPARENT, COLOUR_WHITE, "Plz comply");
 
-		creditsPanel.add(author, "center, cell 0 0");
-		creditsPanel.add(copyright, "center, cell 0 1");
-		creditsPanel.add(license, "center, cell 0 2");
+		creditsSubPanel.add(author, "right, cell 0 0"); creditsSubPanel.add(website, "cell 1 0");
+		creditsPanel.add(creditsSubPanel, "center, growx, push, cell 0 0");
+		creditsPanel.add(copyright, "center, cell 0 1, span 2");
+		creditsPanel.add(license, "center, cell 0 2, span 2");
 	}
 
 	/**

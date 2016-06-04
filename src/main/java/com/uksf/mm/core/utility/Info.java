@@ -7,6 +7,7 @@
 package com.uksf.mm.core.utility;
 
 import com.uksf.mm.core.sqm.Mission;
+import com.uksf.mm.core.sqm.SqmList;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -104,8 +106,85 @@ public class Info {
 	//Mission
 	public static Mission MISSION_SELECTED;
 	public static String SQM_VERSION = "52";
+
+	//Mission Defaults
 	public static String DEFAULT_VERSION = "version=52;";
 	public static String DEFAULT_BINARIZED = "binarizationWanted=0;";
 	public static String DEFAULT_SEED = "randomSeed=12623053;";
 	public static String DEFAULT_AUTHOR = "UKSF";
+	public static SqmList DEFAULT_EDITORDATA = new SqmList(Arrays.asList(
+			"class EditorData\n",
+			"{\n",
+			"\tmoveGridStep=0.25;\n",
+			"\tangleGridStep=1.5707964;\n",
+			"\tscaleGridStep=1;\n",
+			"\tautoGroupingDist=10;\n",
+			"\ttoggles=37;\n",
+			"\tclass ItemIDProvider\n",
+			"\t{\n",
+			"\t\tnextID=0;\n",
+			"\t};\n",
+			"\tclass MarkerIDProvider\n",
+			"\t{\n",
+			"\t\tnextID=0;\n",
+			"\t};\n",
+			"\tclass Camera\n",
+			"\t{\n",
+			"\t\tpos[]={0,0,0};\n",
+			"\t\tdir[]={0,0,0};\n",
+			"\t\tup[]={0,0,0};\n",
+			"\t\taside[]={0,0,0};\n",
+			"\t};\n",
+			"};"
+	));
+	public static SqmList DEFAULT_ADDONS = new SqmList(Arrays.asList(
+			"addons[]=\n",
+			"{\n",
+			"};"
+	));
+	public static SqmList DEFAULT_ADDONSMETA = new SqmList(Arrays.asList(
+			"class AddonsMetaData\n",
+			"{\n",
+			"\tclass List\n",
+			"\t{\n",
+			"\t\titems=0;\n",
+			"\t};\n",
+			"};"
+	));
+	public static SqmList DEFAULT_SCENARIODATA = new SqmList(Arrays.asList(
+			"class ScenarioData\n",
+			"{\n",
+			"\tauthor=" + DEFAULT_AUTHOR + ";\n",
+			"};"
+	));
+	public static SqmList DEFAULT_INTEL = new SqmList(Arrays.asList(
+			"class Intel\n",
+			"\t{\n",
+			"\t\ttimeOfChanges=1800;\n",
+			"\t\tstartWeather=0;\n",
+			"\t\tstartWind=0.1;\n",
+			"\t\tstartWaves=0.1;\n",
+			"\t\tforecastWeather=0;\n",
+			"\t\tforecastWind=0.1;\n",
+			"\t\tforecastWaves=0.1;\n",
+			"\t\tforecastLightnings=0.1;\n",
+			"\t\tyear=2035;\n",
+			"\t\tmonth=7;\n",
+			"\t\tday=6;\n",
+			"\t\thour=11;\n" ,
+			"\t\tminute=-2;\n",
+			"\t\tstartFogDecay=0.01;\n",
+			"\t\tforecastFogDecay=0.01;\n",
+			"\t\tclass CustomAttributes\n",
+			"\t\t{\n",
+			"\t\t\tnAttributes=0;\n",
+			"\t\t};\n",
+			"\t};"
+	));
+	public static SqmList DEFAULT_MISSIONDATA = new SqmList(Arrays.asList(
+			"class Entities\n",
+			"\t{\n",
+			"\t\titems=0;\n",
+			"\t};"
+	));
 }

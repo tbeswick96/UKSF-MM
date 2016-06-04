@@ -14,8 +14,7 @@ import javax.swing.*;
 import java.io.File;
 import java.util.Stack;
 
-import static com.uksf.mm.core.utility.Info.MISSION_SELECTED;
-import static com.uksf.mm.core.utility.Info.SQM_VERSION;
+import static com.uksf.mm.core.utility.Info.*;
 import static com.uksf.mm.core.utility.LogHandler.Severity.INFO;
 import static com.uksf.mm.core.utility.LogHandler.Severity.WARNING;
 
@@ -55,7 +54,7 @@ public class SqmLoader {
 			}
 
 		} catch(Exception e) {
-			Core.error(e);
+			Core.nonFatalError(e);
 		}
 		return false;
 	}
@@ -95,6 +94,7 @@ public class SqmLoader {
 		MISSION_SELECTED.scenarioData = getData(rawSqm, "scenariodata");
 		MISSION_SELECTED.missionIntel = getData(rawSqm, "intel");
 		MISSION_SELECTED.missionData = getData(rawSqm, "entities");
+		defaultCheck();
 		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' read successfully");
 
 		return 0;
@@ -111,7 +111,7 @@ public class SqmLoader {
 		SqmList data = new SqmList();
 		int index = 0;
 		while(true) {
-			if(index >= raw.size()) return data;
+			if(index >= raw.size()) return new SqmList();
 			String line = raw.get(index);
 			if(line.toLowerCase().contains(key)) {
 				break;
@@ -126,6 +126,7 @@ public class SqmLoader {
 		data.add(opening);
 		index += 1;
 		while(!stack.isEmpty()) {
+			if(index >= raw.size()) return new SqmList();
 			String line = raw.get(index);
 			String test = line.replace("\t", "");
 			if(test.equals("{")) {
@@ -151,11 +152,24 @@ public class SqmLoader {
 		if(!raw.contains(key)) return "";
 		int index = 0;
 		while(true) {
+			if(index >= raw.size()) return "";
 			String line = raw.get(index);
 			if(line.toLowerCase().contains(key)) {
 				return line;
 			}
 			index++;
 		}
+	}
+
+	private static void defaultCheck() {
+		MISSION_SELECTED.version = (MISSION_SELECTED.version.equals("")) ? DEFAULT_VERSION : MISSION_SELECTED.version;
+		MISSION_SELECTED.editorData = (MISSION_SELECTED.editorData.size() == 0) ? DEFAULT_EDITORDATA : MISSION_SELECTED.editorData;
+		MISSION_SELECTED.binarized = (MISSION_SELECTED.binarized.equals("")) ? DEFAULT_BINARIZED : MISSION_SELECTED.binarized;
+		MISSION_SELECTED.addons = (MISSION_SELECTED.addons.size() == 0) ? DEFAULT_ADDONS : MISSION_SELECTED.addons;
+		MISSION_SELECTED.addonsMeta = (MISSION_SELECTED.addonsMeta.size() == 0) ? DEFAULT_ADDONSMETA : MISSION_SELECTED.addonsMeta;
+		MISSION_SELECTED.randomSeed = (MISSION_SELECTED.randomSeed.equals("")) ? DEFAULT_SEED : MISSION_SELECTED.randomSeed;
+		MISSION_SELECTED.scenarioData = (MISSION_SELECTED.scenarioData.size() == 0) ? DEFAULT_SCENARIODATA : MISSION_SELECTED.scenarioData;
+		MISSION_SELECTED.missionIntel = (MISSION_SELECTED.missionIntel.size() == 0) ? DEFAULT_INTEL : MISSION_SELECTED.missionIntel;
+		MISSION_SELECTED.missionData = (MISSION_SELECTED.missionData.size() == 0) ? DEFAULT_MISSIONDATA : MISSION_SELECTED.missionData;
 	}
 }
