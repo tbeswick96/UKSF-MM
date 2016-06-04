@@ -61,7 +61,7 @@ public class SqmLoader {
 
 	/**
 	 * Reads sqm and stores in mission object
-	 * @return return state: 0 = ok, 1 = no sqm, 2 = empty sqm, 3 = binarized sqm
+	 * @return return state: 0 = ok, 1 = no sqm, 2 = empty sqm, 3 = incorrect sqm version, 4 = binarized sqm
 	 * @throws Exception
 	 */
 	private static int readSqm() throws Exception {
@@ -104,7 +104,7 @@ public class SqmLoader {
 	 * Get list data from key
 	 * @param raw raw sqm as list
 	 * @param key name of data to find
-	 * @return list with data from key
+	 * @return list with data from key, or empty list
 	 */
 	private static SqmList getData(SqmList raw, String key) {
 		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.name + "'");
@@ -145,7 +145,7 @@ public class SqmLoader {
 	 * Get single line data from key
 	 * @param raw raw sqm as list
 	 * @param key name of data to find
-	 * @return string with data from key
+	 * @return string with data from key, or empty string
 	 */
 	private static String getSingleData(SqmList raw, String key) {
 		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.name + "'");
@@ -161,6 +161,9 @@ public class SqmLoader {
 		}
 	}
 
+	/**
+	 * Checks read data, and if none can be found, sets data as default
+	 */
 	private static void defaultCheck() {
 		MISSION_SELECTED.version = (MISSION_SELECTED.version.equals("")) ? DEFAULT_VERSION : MISSION_SELECTED.version;
 		MISSION_SELECTED.editorData = (MISSION_SELECTED.editorData.size() == 0) ? DEFAULT_EDITORDATA : MISSION_SELECTED.editorData;
