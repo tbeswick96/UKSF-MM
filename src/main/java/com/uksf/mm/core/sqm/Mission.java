@@ -27,13 +27,6 @@ public class Mission {
 	public SqmList editorData, addons, addonsMeta, scenarioData, missionIntel, missionData;
 
 	/**
-	 * Original mission SQM data
-	 */
-	public String originalBinarized, originalAuthor;
-	public SqmList originalAddons, originalAddonsMeta;
-	public ArrayList<String> originalIntel;
-
-	/**
 	 * Parsed SQM data
 	 */
 	public String author = DEFAULT_AUTHOR;
