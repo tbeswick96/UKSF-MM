@@ -84,7 +84,7 @@ public class SqmLoader {
 			return 4;
 		}
 
-		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' is valid. Reading data...");
+		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' is valid. Loading data...");
 		MISSION_SELECTED.version = getSingleData(rawSqm, "version");
 		MISSION_SELECTED.editorData = getData(rawSqm, "editordata");
 		MISSION_SELECTED.binarized = getSingleData(rawSqm, "binarization");
@@ -95,7 +95,7 @@ public class SqmLoader {
 		MISSION_SELECTED.missionIntel = getData(rawSqm, "intel");
 		MISSION_SELECTED.missionData = getData(rawSqm, "entities");
 		defaultCheck();
-		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' read successfully");
+		LogHandler.logSeverity(INFO, "SQM for mission '" + MISSION_SELECTED.name + "' loaded successfully");
 
 		return 0;
 	}
@@ -107,7 +107,7 @@ public class SqmLoader {
 	 * @return list with data from key, or empty list
 	 */
 	private static SqmList getData(SqmList raw, String key) {
-		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.name + "'");
+		LogHandler.logSeverity(INFO, "Loading " + key + " for mission '" + MISSION_SELECTED.name + "'");
 		SqmList data = new SqmList();
 		int index = 0;
 		while(true) {
@@ -148,7 +148,7 @@ public class SqmLoader {
 	 * @return string with data from key, or empty string
 	 */
 	private static String getSingleData(SqmList raw, String key) {
-		LogHandler.logSeverity(INFO, "Reading " + key + " for mission '" + MISSION_SELECTED.name + "'");
+		LogHandler.logSeverity(INFO, "Loading " + key + " for mission '" + MISSION_SELECTED.name + "'");
 		if(!raw.contains(key)) return "";
 		int index = 0;
 		while(true) {
