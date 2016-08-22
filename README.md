@@ -15,7 +15,7 @@
         <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
     </a>
     <a href="https://travis-ci.com/tbeswick96/UKSF-MM">
-        <img src="https://travis-ci.com/tbeswick96/UKSF-MM.svg?token=wxSxzZ46zhxtjEDToC7G&style=flat-square&label=Build" alt="Build Status">
+        <img src="https://travis-ci.com/tbeswick96/UKSF-MM.svg?token=wxSxzZ46zhxtjEDToC7G?style=flat-square&label=Build" alt="Build Status">
     </a>
 </p>
 # UKSF Mission Manager
