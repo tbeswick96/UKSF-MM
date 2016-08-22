@@ -14,7 +14,7 @@
     <a href="https://github.com/tbeswick96/UKSF-MM/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
     </a>
-    <a href="https://travis-ci.org/tbeswick96/UKSF-MM">
+    <a href="https://travis-ci.com/tbeswick96/UKSF-MM">
         <img src="https://img.shields.io/travis/tbeswick96/UKSF-MM.svg?style=flat-square&label=Build" alt="Build Status">
     </a>
 </p>
